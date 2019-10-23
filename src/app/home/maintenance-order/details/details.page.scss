@@ -1,0 +1,117 @@
+ion-content {
+    --background: url('/assets/img/logoDuasRodasOpacity.png') no-repeat center;
+    --background-attachment: fixed;
+}
+.divHeader{
+    opacity: 0.5;
+}
+.imgFundo{
+    width: 50%;
+    height: 25%;    
+}
+
+.labelFields{
+    color: #A40003;
+    margin-left: 5%;
+    font-size: 0.9em;
+}
+.labelFieldss{
+    color: #A40003;
+    margin-left: 2.5%;
+    font-size: 0.9em;
+}
+.labelFieldsss{
+    color: #A40003;
+    margin-left: 28.6%;
+    font-size: 0.9em;
+}
+
+.IonIconSeta{
+    float: right;
+}
+
+.IonCardAssinaturas{
+    text-align: center;
+    width: 50%;
+    height: 80%;
+}
+.divCardAssinaturas{
+    text-align: center;
+}
+
+.divImgFundo{
+    text-align: center;
+}
+
+.nameOM{
+    color: #A40003;
+}
+
+.divCabecalho{
+    text-align: center;
+    margin-right: 22%;
+}
+
+.pResumoDetalhado{
+    text-align: center;
+    color: #A40003;
+    margin: 5%;
+}
+.pAssinaturas{
+    text-align: center;
+    color: #A40003;
+    margin: 2%;
+}
+.pAssinaturasSubTitles{
+    text-align: center;
+    color: black;
+    margin: 2%;
+    font-style: bold;
+    // font-family: Arial, Helvetica, sans-serif;
+}
+.h4DadosOperacao{
+    margin-left: 12%;
+    text-align: center;
+    color: #A40003;
+}
+
+.h5TipoOrdem{
+    color: #797777;
+}
+
+ion-button{
+    width: 100%;
+    --border-color: black !important;
+    --border-width: 1px !important;
+    --border-style: solid;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+    margin-top: -5%;    
+}
+.footerIniciarButton{
+    padding: 1%;
+    --border-color: #A40003;
+    --border-style: solid;
+    --border-width: 0px;
+}
+.row{
+    border: 0.5px solid #A40003;
+    margin: 2%;
+}
+
+ion-col{
+    border: 0.5px solid black;
+}
+.ionIconAdicionarOperacao{
+    color: black;
+    float: right;
+    margin-right: 5%;
+    width: 30px;
+    height: 30px;
+    margin-top: -2%;
+}
+
+.confirmarAssinaturaButton{
+    margin: 5%;
+}
+

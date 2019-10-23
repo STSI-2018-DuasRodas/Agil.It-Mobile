@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <div class="divCabecalho">
+      <h3 class="nameOM">Ordem {{detalhesOrdem?.orderNumber}}</h3>
+      <h5 class="h5TipoOrdem">{{detalhesOrdem?.maintenanceType}}</h5>
+    </div>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-title class="pResumoDetalhado">Resumo detalhado</ion-card-title>
+
+    <ion-list class="divHeader">
+
+      <ion-label class="labelFields">Local da manutenção</ion-label>
+      <ion-label class="labelFieldss">Equipamento</ion-label>
+      <ion-item lines="none">
+        <ion-button color="light" strong disabled item-left>{{detalhesOrdem?.maintenanceSpot}}</ion-button>
+        <ion-button color="light" strong disabled item-right>{{detalhesOrdem?.equipment.description}}</ion-button>
+      </ion-item>
+
+      <ion-label class="labelFields">Setor</ion-label>
+      <ion-item lines="none">
+        <ion-button color="light" strong disabled>{{detalhesOrdem?.equipment.sector.description}}</ion-button>
+      </ion-item>
+
+      <ion-label class="labelFields">Responsável pela manutenção</ion-label>
+      <ion-item lines="none">
+        <ion-button color="light" strong disabled>{{detalhesOrdem?.responsible.name}}</ion-button>
+      </ion-item>
+
+      <ion-label class="labelFields">Hora Final</ion-label>
+      <ion-label class="labelFieldsss">Fim Inicial</ion-label>
+      <ion-item lines="none">
+        <ion-button color="light" strong disabled item-left>{{tratarData(detalhesOrdem?.programmedStart)}}</ion-button>
+        <ion-button color="light" strong disabled item-right>{{tratarData(detalhesOrdem?.programmedFinish)}}</ion-button>
+      </ion-item>
+
+      <ion-label class="labelFields">Prioridade</ion-label>
+      <ion-item lines="none">
+        <ion-button color="light" strong disabled>{{detalhesOrdem?.priority}}</ion-button>
+      </ion-item>
+
+    </ion-list>
+  </ion-card>
+  <ion-card>
+    <h4 class="h4DadosOperacao">Dados operação
+      <ion-icon name="add-circle" (click)="adicionarOperacao()" class="ionIconAdicionarOperacao"></ion-icon>
+    </h4>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2">
+          Op.
+        </ion-col>
+        <ion-col size="10">
+          Resumo do Problema
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let operation of detalhesOrdem.operations" (click)="abrirTelaProblema(operation.id)">
+        <ion-col size="2">
+          {{operation?.sequence}}
+        </ion-col>
+        <ion-col size="10">
+          {{operation?.description}}
+          <ion-icon class="IonIconSeta" name="arrow-dropright"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-card-title class="pAssinaturas">Assinaturas</ion-card-title>
+    <ion-list>
+      <ion-item lines="none">
+        <ion-card class="IonCardAssinaturas">
+          <ion-card-subtitle class="pAssinaturasSubTitles">Solicitante</ion-card-subtitle>
+          <ion-checkbox (click)="assinatura(detalhesOrdem?.id)" style="margin: 0 auto;" color="primary" checked="true" disabled="true"></ion-checkbox>
+        </ion-card>
+        <ion-card class="IonCardAssinaturas">
+            <ion-card-subtitle class="pAssinaturasSubTitles">Técnico</ion-card-subtitle>
+          <ion-checkbox (click)="assinatura(detalhesOrdem?.id)" style="margin: 0 auto;" color="primary"></ion-checkbox>
+        </ion-card>
+        <ion-card class="IonCardAssinaturas">
+            <ion-card-subtitle class="pAssinaturasSubTitles">Líder</ion-card-subtitle>
+          <ion-checkbox (click)="assinatura(detalhesOrdem?.id)" style="margin: 0 auto;" color="primary" disabled="true"></ion-checkbox>
+        </ion-card>
+      </ion-item>
+    </ion-list>
+    <ion-button (click)="OrdemAcao()" class="confirmarAssinaturaButton" full>Confirmar assinatura</ion-button>
+  </ion-card><br>
+</ion-content>
+
+<ion-footer>    
+</ion-footer>
