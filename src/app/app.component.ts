@@ -17,6 +17,21 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Ordem de Manutenção',
+      url: '/resume',
+      icon: 'build'
+    },
+    {
+      title: 'Notificações',
+      url: '/notification',
+      icon: 'notifications'
+    },
+    {
+      title: 'Configurações',
+      url: '/configuration',
+      icon: 'settings'
+    },
+    {
       title: 'LogOut',
       url: '/login',
       icon: 'wallet'

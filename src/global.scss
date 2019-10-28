@@ -24,3 +24,48 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.logoUser{
+  width: 4em;
+  margin: 0 auto;
+}
+
+.align-center{
+  text-align: center;
+}
+
+.align-left{
+  text-align: left;
+}
+
+.align-right{
+  text-align: right;
+}
+
+.font-arial{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.color-white{
+  color: white;
+}
+
+.font-style-bold{
+  font-weight: bold;
+}
+
+.font-size-mini{
+  font-size: 0.8em;
+}
+
+.font-size-small{
+  font-size: 1em;
+}
+
+.font-size-medium{
+  font-size: 1.2em;
+}
+
+.font-size-large{
+  font-size: 1.4em;
+}
