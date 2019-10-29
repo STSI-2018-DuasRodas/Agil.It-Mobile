@@ -12,10 +12,10 @@ export class HomePage {
   public tabs : any = this.obterTabs();
   // public notificationPage = NotificationPage;
 
-  public obterTabs(){    
+  public obterTabs(){
     return [
       {
-        route : "ordem-manutencao",
+        route : "monitor",
         icon : "filing",
         name : "Ordens",
         notification : ""
@@ -26,7 +26,6 @@ export class HomePage {
         name : "Notificação",
         notification : "2"
       }
-    ] 
+    ]
   }
-  
 }

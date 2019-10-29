@@ -2,21 +2,41 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { MonitorPageModule } from './monitor.module';
+import { NotificationPageModule } from './notification.module';
 
+const routes : Routes = [
+  {
+    path: "home",
+    component: HomePage,
+    children: [
+      {
+        path: "monitor",
+        loadChildren: "./monitor.module#MonitorPageModule"
+      },
+      {
+        path: "notification",
+        loadChildren: "./notification.module#NotificationPageModule"
+      },
+      {
+        path: "",
+        redirectTo: "monitor",
+        pathMatch: "full"
+      }
+    ]
+  },
+]
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
+    MonitorPageModule,
+    NotificationPageModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [HomePage]
 })

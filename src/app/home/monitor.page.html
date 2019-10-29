@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col size="10" class="align-center">
+        <ion-title>
+          Monitor de Ordens
+        </ion-title>
+      </ion-col>
+      <ion-col size="2" class="align-center" (click)="changeVisualizationMode()">
+        <ion-icon *ngIf="listView"  name="grid"    style="width: 1.7em; height: 1.7em;"></ion-icon>
+        <ion-icon *ngIf="!listView" name="options" style="width: 1.7em; height: 1.7em;"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="!listView">
+    <ion-col size="6">
+      <ion-card>
+        <ion-card-header>
+          <label class="font-style-bold font-size-small">OM-2445492/DJ0449</label>
+        </ion-card-header>
+        <ion-card-content>
+          <label class="font-size-medium">Preventiva</label>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col size="6">
+        <ion-card>
+          <ion-card-header>
+            <label class="font-style-bold font-size-small">OM-2445492/DJ0449</label>
+          </ion-card-header>
+          <ion-card-content>
+            <label class="font-size-medium">Preventiva</label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+  </ion-row>
+
+  <ion-list *ngIf="listView">
+    <ion-item>
+      <ion-label>Pokémon Yellow</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
