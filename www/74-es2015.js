@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_ca0488fc_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core-ca0488fc.js */ "./node_modules/@ionic/core/dist/esm/core-ca0488fc.js");
 /* harmony import */ var _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./config-3c7f3790.js */ "./node_modules/@ionic/core/dist/esm/config-3c7f3790.js");
 /* harmony import */ var _helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers-46f4a262.js */ "./node_modules/@ionic/core/dist/esm/helpers-46f4a262.js");
-/* harmony import */ var _animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./animation-7ed5bc6a.js */ "./node_modules/@ionic/core/dist/esm/animation-7ed5bc6a.js");
+/* harmony import */ var _animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./animation-af478fe9.js */ "./node_modules/@ionic/core/dist/esm/animation-af478fe9.js");
 /* harmony import */ var _overlays_10640d86_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./overlays-10640d86.js */ "./node_modules/@ionic/core/dist/esm/overlays-10640d86.js");
 /* harmony import */ var _theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./theme-18cbe2cc.js */ "./node_modules/@ionic/core/dist/esm/theme-18cbe2cc.js");
 /* harmony import */ var _index_3476b023_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./index-3476b023.js */ "./node_modules/@ionic/core/dist/esm/index-3476b023.js");
@@ -29,8 +29,8 @@ __webpack_require__.r(__webpack_exports__);
  * iOS Toast Enter Animation
  */
 const iosEnterAnimation = (baseEl, position) => {
-    const baseAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-    const wrapperAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const baseAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const wrapperAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
     const hostEl = baseEl.host || baseEl;
     const wrapperEl = baseEl.querySelector('.toast-wrapper');
     const bottom = `calc(-10px - var(--ion-safe-area-bottom, 0px))`;
@@ -60,8 +60,8 @@ const iosEnterAnimation = (baseEl, position) => {
  * iOS Toast Leave Animation
  */
 const iosLeaveAnimation = (baseEl, position) => {
-    const baseAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-    const wrapperAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const baseAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const wrapperAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
     const hostEl = baseEl.host || baseEl;
     const wrapperEl = baseEl.querySelector('.toast-wrapper');
     const bottom = `calc(-10px - var(--ion-safe-area-bottom, 0px))`;
@@ -89,8 +89,8 @@ const iosLeaveAnimation = (baseEl, position) => {
  * MD Toast Enter Animation
  */
 const mdEnterAnimation = (baseEl, position) => {
-    const baseAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-    const wrapperAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const baseAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const wrapperAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
     const hostEl = baseEl.host || baseEl;
     const wrapperEl = baseEl.querySelector('.toast-wrapper');
     const bottom = `calc(8px + var(--ion-safe-area-bottom, 0px))`;
@@ -122,8 +122,8 @@ const mdEnterAnimation = (baseEl, position) => {
  * md Toast Leave Animation
  */
 const mdLeaveAnimation = (baseEl) => {
-    const baseAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
-    const wrapperAnimation = Object(_animation_7ed5bc6a_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const baseAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
+    const wrapperAnimation = Object(_animation_af478fe9_js__WEBPACK_IMPORTED_MODULE_3__["c"])();
     const hostEl = baseEl.host || baseEl;
     const wrapperEl = baseEl.querySelector('.toast-wrapper');
     wrapperAnimation

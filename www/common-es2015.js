@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
-/***/ "./node_modules/@ionic/core/dist/esm/cubic-bezier-fc4a068b.js":
+/***/ "./node_modules/@ionic/core/dist/esm/cubic-bezier-2812fda3.js":
 /*!********************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/cubic-bezier-fc4a068b.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/cubic-bezier-2812fda3.js ***!
   \********************************************************************/
 /*! exports provided: P, g */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -31,6 +31,9 @@ class Point {
  * P1: (0.32, 0.72)
  * P2: (0, 1)
  * P3: (1, 1)
+ *
+ * If you give a cubic bezier curve that never reaches the
+ * provided progression, this function will return NaN.
  */
 const getTimeGivenProgression = (p0, p1, p2, p3, progression) => {
     const tValues = solveCubicBezier(p0.y, p1.y, p2.y, p3.y, progression);
@@ -341,16 +344,17 @@ const blockedTags = ['script', 'style', 'iframe', 'meta', 'link', 'object', 'emb
 
 /***/ }),
 
-/***/ "./node_modules/@ionic/core/dist/esm/index-35276576.js":
+/***/ "./node_modules/@ionic/core/dist/esm/index-6826f2f6.js":
 /*!*************************************************************!*\
-  !*** ./node_modules/@ionic/core/dist/esm/index-35276576.js ***!
+  !*** ./node_modules/@ionic/core/dist/esm/index-6826f2f6.js ***!
   \*************************************************************/
-/*! exports provided: d, l, s, t */
+/*! exports provided: d, g, l, s, t */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return deepReady; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getIonPageElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return lifecycle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return setPageHidden; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return transition; });
@@ -359,8 +363,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const iosTransitionAnimation = () => __webpack_require__.e(/*! import() | ios-transition-836e46fb-js */ "ios-transition-836e46fb-js").then(__webpack_require__.bind(null, /*! ./ios.transition-836e46fb.js */ "./node_modules/@ionic/core/dist/esm/ios.transition-836e46fb.js"));
-const mdTransitionAnimation = () => __webpack_require__.e(/*! import() | md-transition-5091809d-js */ "md-transition-5091809d-js").then(__webpack_require__.bind(null, /*! ./md.transition-5091809d.js */ "./node_modules/@ionic/core/dist/esm/md.transition-5091809d.js"));
+const iosTransitionAnimation = () => __webpack_require__.e(/*! import() | ios-transition-071bd421-js */ "ios-transition-071bd421-js").then(__webpack_require__.bind(null, /*! ./ios.transition-071bd421.js */ "./node_modules/@ionic/core/dist/esm/ios.transition-071bd421.js"));
+const mdTransitionAnimation = () => __webpack_require__.e(/*! import() | md-transition-15a81b08-js */ "md-transition-15a81b08-js").then(__webpack_require__.bind(null, /*! ./md.transition-15a81b08.js */ "./node_modules/@ionic/core/dist/esm/md.transition-15a81b08.js"));
 const transition = (opts) => {
     return new Promise((resolve, reject) => {
         Object(_core_ca0488fc_js__WEBPACK_IMPORTED_MODULE_0__["w"])(() => {
@@ -554,6 +558,17 @@ const setZIndex = (enteringEl, leavingEl, direction) => {
     if (leavingEl !== undefined) {
         leavingEl.style.zIndex = '100';
     }
+};
+const getIonPageElement = (element) => {
+    if (element.classList.contains('ion-page')) {
+        return element;
+    }
+    const ionPage = element.querySelector(':scope > .ion-page, :scope > ion-nav, :scope > ion-tabs');
+    if (ionPage) {
+        return ionPage;
+    }
+    // idk, return the original element so at least something animates and we don't have a null pointer
+    return element;
 };
 
 

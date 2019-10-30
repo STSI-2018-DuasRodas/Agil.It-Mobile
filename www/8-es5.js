@@ -24,8 +24,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_3c3e1099_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants-3c3e1099.js */ "./node_modules/@ionic/core/dist/esm-es5/constants-3c3e1099.js");
 /* harmony import */ var _theme_18cbe2cc_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./theme-18cbe2cc.js */ "./node_modules/@ionic/core/dist/esm-es5/theme-18cbe2cc.js");
 /* harmony import */ var _framework_delegate_c2e2e1f4_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./framework-delegate-c2e2e1f4.js */ "./node_modules/@ionic/core/dist/esm-es5/framework-delegate-c2e2e1f4.js");
-/* harmony import */ var _index_35276576_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./index-35276576.js */ "./node_modules/@ionic/core/dist/esm-es5/index-35276576.js");
-/* harmony import */ var _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cubic-bezier-fc4a068b.js */ "./node_modules/@ionic/core/dist/esm-es5/cubic-bezier-fc4a068b.js");
+/* harmony import */ var _index_6826f2f6_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./index-6826f2f6.js */ "./node_modules/@ionic/core/dist/esm-es5/index-6826f2f6.js");
+/* harmony import */ var _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./cubic-bezier-2812fda3.js */ "./node_modules/@ionic/core/dist/esm-es5/cubic-bezier-2812fda3.js");
 
 
 
@@ -496,18 +496,12 @@ var createHeaderIndex = function (headerEl) {
         }) || [[]]
     };
 };
-var handleContentScroll = function (scrollEl, mainHeaderIndex, scrollHeaderIndex, remainingHeight) {
-    if (remainingHeight === void 0) { remainingHeight = 0; }
+var handleContentScroll = function (scrollEl, scrollHeaderIndex) {
     Object(_core_ca0488fc_js__WEBPACK_IMPORTED_MODULE_1__["f"])(function () {
         var scrollTop = scrollEl.scrollTop;
-        var lastMainToolbar = mainHeaderIndex.toolbars[mainHeaderIndex.toolbars.length - 1];
         var scale = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_3__["c"])(1, 1 + (-scrollTop / 500), 1.1);
-        var borderOpacity = Object(_helpers_46f4a262_js__WEBPACK_IMPORTED_MODULE_3__["c"])(0, (scrollTop - remainingHeight) / lastMainToolbar.el.clientHeight, 1);
-        var maxOpacity = 1;
-        var scaledOpacity = borderOpacity * maxOpacity;
         Object(_core_ca0488fc_js__WEBPACK_IMPORTED_MODULE_1__["w"])(function () {
             scaleLargeTitles(scrollHeaderIndex.toolbars, scale);
-            setToolbarBackgroundOpacity(mainHeaderIndex.toolbars[0], (scaledOpacity === 1) ? undefined : scaledOpacity);
         });
     });
 };
@@ -519,6 +513,13 @@ var setToolbarBackgroundOpacity = function (toolbar, opacity) {
         toolbar.background.style.setProperty('--opacity', opacity.toString());
     }
 };
+var handleToolbarBorderIntersection = function (ev, mainHeaderIndex) {
+    if (!ev[0].isIntersecting) {
+        return;
+    }
+    var scale = ((1 - ev[0].intersectionRatio) * 100) / 75;
+    setToolbarBackgroundOpacity(mainHeaderIndex.toolbars[0], (scale === 1) ? undefined : scale);
+};
 /**
  * If toolbars are intersecting, hide the scrollable toolbar content
  * and show the primary toolbar content. If the toolbars are not intersecting,
@@ -526,6 +527,7 @@ var setToolbarBackgroundOpacity = function (toolbar, opacity) {
  */
 var handleToolbarIntersection = function (ev, mainHeaderIndex, scrollHeaderIndex) {
     Object(_core_ca0488fc_js__WEBPACK_IMPORTED_MODULE_1__["w"])(function () {
+        handleToolbarBorderIntersection(ev, mainHeaderIndex);
         var event = ev[0];
         var intersection = event.intersectionRect;
         var intersectionArea = intersection.width * intersection.height;
@@ -554,6 +556,7 @@ var handleToolbarIntersection = function (ev, mainHeaderIndex, scrollHeaderIndex
             if (hasValidIntersection) {
                 setHeaderActive(mainHeaderIndex);
                 setHeaderActive(scrollHeaderIndex, false);
+                setToolbarBackgroundOpacity(mainHeaderIndex.toolbars[0], 1);
             }
         }
     });
@@ -567,7 +570,6 @@ var setHeaderActive = function (headerIndex, active) {
         else {
             headerIndex.el.classList.add('header-collapse-condense-inactive');
         }
-        setToolbarBackgroundOpacity(headerIndex.toolbars[0], (active) ? undefined : 0);
     });
 };
 var scaleLargeTitles = function (toolbars, scale, transition) {
@@ -628,7 +630,7 @@ var Header = /** @class */ (function () {
     };
     class_2.prototype.checkCollapsibleHeader = function () {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function () {
-            var hasCollapse, canCollapse, tabs, page, pageEl, contentEl;
+            var hasCollapse, canCollapse, pageEl, contentEl;
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"])(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -639,9 +641,7 @@ var Header = /** @class */ (function () {
                         return [3 /*break*/, 3];
                     case 1:
                         if (!(canCollapse && !this.collapsibleHeaderInitialized)) return [3 /*break*/, 3];
-                        tabs = this.el.closest('ion-tabs');
-                        page = this.el.closest('ion-app,ion-page,.ion-page,page-inner');
-                        pageEl = (tabs) ? tabs : (page) ? page : null;
+                        pageEl = this.el.closest('ion-app,ion-page,.ion-page,page-inner');
                         contentEl = (pageEl) ? pageEl.querySelector('ion-content') : null;
                         return [4 /*yield*/, this.setupCollapsibleHeader(contentEl, pageEl)];
                     case 2:
@@ -689,19 +689,16 @@ var Header = /** @class */ (function () {
                                 return;
                             }
                             setHeaderActive(mainHeaderIndex, false);
-                            // TODO: Find a better way to do this
-                            var remainingHeight = 0;
-                            for (var i = 1; i <= scrollHeaderIndex.toolbars.length - 1; i++) {
-                                remainingHeight += scrollHeaderIndex.toolbars[i].el.clientHeight;
-                            }
-                            /**
-                             * Handle interaction between toolbar collapse and
-                             * showing/hiding content in the primary ion-header
-                             */
-                            var toolbarIntersection = function (ev) { handleToolbarIntersection(ev, mainHeaderIndex, scrollHeaderIndex); };
                             Object(_core_ca0488fc_js__WEBPACK_IMPORTED_MODULE_1__["f"])(function () {
                                 var mainHeaderHeight = mainHeaderIndex.el.clientHeight;
-                                _this.intersectionObserver = new IntersectionObserver(toolbarIntersection, { threshold: 0.25, rootMargin: "-" + mainHeaderHeight + "px 0px 0px 0px" });
+                                /**
+                                 * Handle interaction between toolbar collapse and
+                                 * showing/hiding content in the primary ion-header
+                                 * as well as progressively showing/hiding the main header
+                                 * border as the top-most toolbar collapses or expands.
+                                 */
+                                var toolbarIntersection = function (ev) { handleToolbarIntersection(ev, mainHeaderIndex, scrollHeaderIndex); };
+                                _this.intersectionObserver = new IntersectionObserver(toolbarIntersection, { threshold: [0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1], rootMargin: "-" + mainHeaderHeight + "px 0px 0px 0px" });
                                 _this.intersectionObserver.observe(scrollHeaderIndex.toolbars[0].el);
                             });
                             /**
@@ -709,7 +706,7 @@ var Header = /** @class */ (function () {
                              * showing/hiding border on last toolbar
                              * in primary header
                              */
-                            _this.contentScrollCallback = function () { handleContentScroll(_this.scrollEl, mainHeaderIndex, scrollHeaderIndex, remainingHeight); };
+                            _this.contentScrollCallback = function () { handleContentScroll(_this.scrollEl, scrollHeaderIndex); };
                             _this.scrollEl.addEventListener('scroll', _this.contentScrollCallback);
                         });
                         Object(_core_ca0488fc_js__WEBPACK_IMPORTED_MODULE_1__["w"])(function () {
@@ -799,10 +796,10 @@ var RouterOutlet = /** @class */ (function () {
                                  */
                                 if (!shouldComplete) {
                                     _this.ani.easing('cubic-bezier(1, 0, 0.68, 0.28)');
-                                    newStepValue += Object(_cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["g"])(new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](0, 0), new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](1, 0), new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](0.68, 0.28), new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](1, 1), step);
+                                    newStepValue += Object(_cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["g"])(new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](0, 0), new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](1, 0), new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](0.68, 0.28), new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](1, 1), step);
                                 }
                                 else {
-                                    newStepValue += Object(_cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["g"])(new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](0, 0), new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](0.32, 0.72), new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](0, 1), new _cubic_bezier_fc4a068b_js__WEBPACK_IMPORTED_MODULE_8__["P"](1, 1), step);
+                                    newStepValue += Object(_cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["g"])(new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](0, 0), new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](0.32, 0.72), new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](0, 1), new _cubic_bezier_2812fda3_js__WEBPACK_IMPORTED_MODULE_8__["P"](1, 1), step);
                                 }
                                 _this.ani.progressEnd(shouldComplete ? 1 : 0, newStepValue, dur);
                             }
@@ -927,7 +924,7 @@ var RouterOutlet = /** @class */ (function () {
                         _a = this, el = _a.el, mode = _a.mode;
                         animated = this.animated && _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_2__["b"].getBoolean('animated', true);
                         animationBuilder = this.animation || opts.animationBuilder || _config_3c7f3790_js__WEBPACK_IMPORTED_MODULE_2__["b"].get('navAnimation');
-                        return [4 /*yield*/, Object(_index_35276576_js__WEBPACK_IMPORTED_MODULE_7__["t"])(Object.assign({ mode: mode,
+                        return [4 /*yield*/, Object(_index_6826f2f6_js__WEBPACK_IMPORTED_MODULE_7__["t"])(Object.assign({ mode: mode,
                                 animated: animated,
                                 animationBuilder: animationBuilder,
                                 enteringEl: enteringEl,
