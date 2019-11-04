@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -18,40 +18,73 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="swipRefresh($event)">
+    <ion-refresher-content refreshingText="Carregando..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-segment color="secondary" (ionChange)="segmentChanged($event)" value="userOrders">
+    <ion-segment-button value="allOrders">
+      <ion-label>TODAS</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="userOrders">
+      <ion-label>MINHAS ORDENS</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
   <ion-row *ngIf="!listView">
-    <ion-col size="6">
-      <ion-card>
-        <ion-card-header>
-          <label class="font-style-bold font-size-small">OM-2445492/DJ0449</label>
+    <ion-col size="6" *ngFor="let order of orders">
+      <ion-card (click)="openOrder()">
+        <ion-card-header class="align-center">
+          <ion-label class="font-style-bold font-size-mini" color="dark">{{order.orderNumber}}</ion-label>
         </ion-card-header>
         <ion-card-content>
-          <label class="font-size-medium">Preventiva</label>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-    <ion-col size="6">
-      <ion-card>
-        <ion-card-header>
-          <label class="font-style-bold font-size-small">OM-2445492/DJ0449</label>
-        </ion-card-header>
-        <ion-card-content>
-          <label class="font-size-medium">Preventiva</label>
+          <div class="align-center">
+            <ion-row>
+              <ion-col size="10" class="align-center">
+                <ion-label class="font-size-small font-to-upper font-style-bold" color="secondary">{{order.type}}</ion-label>
+              </ion-col>
+              <ion-col size="2">
+                <ion-icon *ngIf="order.orderTypeId == 0" style="font-size: 6.5vw;" name="bookmark" color="primary"></ion-icon>
+                <ion-icon *ngIf="order.orderTypeId == 1" style="font-size: 6.5vw;" name="bookmark" color="warning"></ion-icon>
+                <ion-icon *ngIf="order.orderTypeId == 2" style="font-size: 6.5vw;" name="bookmark" color="medium"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="align-left">
+            <ion-row>
+              <ion-col size="12">
+                <ion-label class="font-size-mini"><b>Equip.:</b> {{order.equipamentName}}</ion-label>
+              </ion-col>
+              <ion-col size="12">
+                <ion-label class="font-size-mini"><b>Prioridade:</b> {{order.priority}}</ion-label>
+              </ion-col>
+              <ion-col size="12">
+                <ion-label class="font-size-mini"><b>Abertura:</b> {{order.createdAt}}</ion-label>
+              </ion-col>
+            </ion-row>
+          </div>
+          <div class="align-center">
+            <ion-button size="small"><ion-icon slot="start" name="star"></ion-icon>Assumir</ion-button>
+          </div>
         </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
 
-  <ion-list *ngIf="listView">
-    <ion-item>
-      <ion-col size="4">
-        <label class="font-size-mini">OM-/DJ0449516156</label>
-      </ion-col>
-      <ion-col size="6">
-        <label class="font-size-mini">DHA03005/007</label>
-      </ion-col>
-      <ion-col size="2">
-        <label class="font-size-mini">Urgente</label>
-      </ion-col>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="listView">
+    <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>
+    <ion-list >
+      <ion-item *ngFor="let order of orders">
+        <ion-col class="align-center" size="4">
+          <label class="font-size-mini">{{order.orderNumber}}</label>
+        </ion-col>
+        <ion-col class="align-center" size="6">
+          <label class="font-size-small">{{order.equipamentName}}</label>
+        </ion-col>
+        <ion-col class="align-right" size="2">
+          <label class="font-size-mini">{{order.priority}}</label>
+        </ion-col>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { LoginRest } from '../rest/loginRest';
+import { LoadingController } from '@ionic/angular';
+import { ViewUtils } from '../utils/viewUtils';
+
 
 @Component({
   selector: 'app-login',
@@ -9,14 +13,14 @@ import { MenuController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private menuCtrl : MenuController) { }
+  constructor(private router: Router, private menuCtrl : MenuController, private loginRest : LoginRest, private viewUtils : ViewUtils) { }
 
   ngOnInit() {
     
   }
 
-  private email : string = "jose@senai.com.br";
-  private senha : string = "jose123";
+  public username : string = "julio_thomazelli-ju1@estudante.sc.senai.br";
+  public password : string = "123";
 
   ionViewWillEnter(){
     this.menuCtrl.enable(false);
@@ -26,7 +30,36 @@ export class LoginPage implements OnInit {
     this.menuCtrl.enable(true);
   }
   
-  public login() : void {
-    this.router.navigateByUrl('/home')
+  async login() {
+    let obj = {
+      username: this.username,
+      password : this.password
+      }
+      
+    await this.viewUtils.showProgressBar();
+
+    this.loginRest.login(obj).subscribe(
+        (data : any) => {
+          this.loginRestSucess(data);
+          this.viewUtils.hideProgressBar();
+        },
+        (error : any) =>{
+          this.viewUtils.hideProgressBar();
+          this.viewUtils.showToast("Algo de errado aconteceu!");
+        }
+      )
+  }
+
+  public loginRestSucess(response) : void{
+    let user = JSON.parse(response._body);
+
+    if (!user.success){
+      this.viewUtils.showToast(user.data);
+
+      return;
+    }
+
+    window.localStorage.setItem("user", JSON.stringify(user.data));
+    this.router.navigateByUrl('/home');
   }
 }

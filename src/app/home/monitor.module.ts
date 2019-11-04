@@ -23,4 +23,5 @@ const routes: Routes = [
   ],
   declarations: [MonitorPage]
 })
+  
 export class MonitorPageModule {}

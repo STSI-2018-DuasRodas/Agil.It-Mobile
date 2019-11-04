@@ -1,5 +1,5 @@
 <ion-header>
-  
+    
 </ion-header>
 
 <ion-content>
@@ -9,15 +9,15 @@
       <ion-list>      
         <ion-item>
           <ion-label position="floating">Email</ion-label>
-          <ion-input type="text" [(ngModel)]="email"></ion-input>
+          <ion-input type="text" [(ngModel)]="username"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Senha</ion-label>
-          <ion-input type="password" [(ngModel)]="senha"></ion-input>
+          <ion-input type="password" [(ngModel)]="password" autocomplete="off"></ion-input>
         </ion-item>
       </ion-list>
       <div class="DivButtonEntrar">
-        <ion-button expand="block" color="danger" (click)="login()">Entrar</ion-button>
+        <ion-button expand="block" color="primary" (click)="login()">Entrar</ion-button>
       </div>
     </div>
   </ion-card>

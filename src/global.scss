@@ -55,17 +55,26 @@
 }
 
 .font-size-mini{
-  font-size: 0.8em;
+  font-size: 3vw;
 }
 
 .font-size-small{
-  font-size: 1em;
+  font-size: 4vw;
 }
 
 .font-size-medium{
-  font-size: 1.2em;
+  font-size: 5vw;
 }
 
 .font-size-large{
-  font-size: 1.4em;
+  font-size: 6vw;
 }
+
+.font-to-upper{
+  text-transform: uppercase;
+}
+
+.font-to-lower{
+  text-transform: lowercase;
+}
+
