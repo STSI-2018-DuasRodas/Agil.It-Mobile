@@ -32,8 +32,8 @@
 
 
   <ion-row *ngIf="!listView">
-    <ion-col size="6" *ngFor="let order of orders">
-      <ion-card (click)="openOrder()">
+    <ion-col size="6" *ngFor="let order of filtredOrders">
+      <ion-card (click)="openOrder(order)">
         <ion-card-header class="align-center">
           <ion-label class="font-style-bold font-size-mini" color="dark">{{order.orderNumber}}</ion-label>
         </ion-card-header>
@@ -74,7 +74,7 @@
   <div *ngIf="listView">
     <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>
     <ion-list >
-      <ion-item *ngFor="let order of orders">
+      <ion-item *ngFor="let order of filtredOrders">
         <ion-col class="align-center" size="4">
           <label class="font-size-mini">{{order.orderNumber}}</label>
         </ion-col>

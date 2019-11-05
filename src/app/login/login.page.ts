@@ -35,19 +35,20 @@ export class LoginPage implements OnInit {
       username: this.username,
       password : this.password
       }
+      this.router.navigateByUrl('/home');
       
-    await this.viewUtils.showProgressBar();
+    // await this.viewUtils.showProgressBar();
 
-    this.loginRest.login(obj).subscribe(
-        (data : any) => {
-          this.loginRestSucess(data);
-          this.viewUtils.hideProgressBar();
-        },
-        (error : any) =>{
-          this.viewUtils.hideProgressBar();
-          this.viewUtils.showToast("Algo de errado aconteceu!");
-        }
-      )
+    // this.loginRest.login(obj).subscribe(
+        // (data : any) => {
+        //   this.loginRestSucess(data);
+        //   this.viewUtils.hideProgressBar();
+        // },
+        // (error : any) =>{
+        //   this.viewUtils.hideProgressBar();
+        //   this.viewUtils.showToast("Algo de errado aconteceu!");
+        // }
+      // )
   }
 
   public loginRestSucess(response) : void{

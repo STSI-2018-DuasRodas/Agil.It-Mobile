@@ -14,7 +14,7 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: 'home/monitor',
       icon: 'home'
     },
     {
@@ -24,12 +24,12 @@ export class AppComponent {
     },
     {
       title: 'Notificações',
-      url: '/notification',
+      url: 'home/notification',
       icon: 'notifications'
     },
     {
       title: 'Configurações',
-      url: '/configuration',
+      url: 'configuration',
       icon: 'settings'
     },
     {

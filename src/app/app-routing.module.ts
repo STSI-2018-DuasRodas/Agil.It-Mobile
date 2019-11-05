@@ -46,6 +46,10 @@ const routes: Routes = [
   { 
     path: 'home/maintenance-order/assignature', 
     loadChildren: () => import('./home/maintenance-order/assignature.module').then(m => m.AssignaturePageModule)
+  },
+  { 
+    path: 'configuration', 
+    loadChildren: './configuration/configuration.module#ConfigurationPageModule' 
   }
 ];
 

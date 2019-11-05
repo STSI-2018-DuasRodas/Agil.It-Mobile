@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewUtils } from '../utils/viewUtils';
 
 @Component({
   selector: 'app-monitor',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MonitorPage implements OnInit {
 
-  listView : boolean = false;
-  orders : any = [{}];
-  allOrders : boolean = false;
-  filter : string;
+  listView          : boolean = false;
+  filtredOrders     : any     = [{}] ;
+  originalOrders    : any     = [{}] ;
+  allOrders         : boolean = false;
+  filter            : string         ;
 
-  constructor() { }
+  constructor(private viewUtils : ViewUtils) { }
 
   ngOnInit() {
     this.loadOrders();
@@ -22,7 +24,7 @@ export class MonitorPage implements OnInit {
     let obj = JSON.parse(window.localStorage.getItem("user"));
 
     if (this.allOrders){
-      this.orders = [
+      this.originalOrders = [
         {
           "id": 1,
           "integrationID" : "1000",
@@ -70,7 +72,7 @@ export class MonitorPage implements OnInit {
         }
       ]
     } else {
-      this.orders = [
+      this.originalOrders = [
         {
           "id": 1,
           "integrationID" : "1000",
@@ -103,6 +105,8 @@ export class MonitorPage implements OnInit {
         }
       ]
     }
+
+    this.filtredOrders = JSON.parse(JSON.stringify(this.originalOrders));
   }
 
   public changeVisualizationMode(){
@@ -122,13 +126,20 @@ export class MonitorPage implements OnInit {
       event.target.complete();
     }, 200);
   }
+  
 
-  public filterOm(){
-    debugger;
-    var filtered;
-    this.orders.forEach(element => {
-      filtered = element.orderNumber.filter(this.filter);
-    });
+  public filterOm(){    
+    this.filtredOrders = JSON.parse(JSON.stringify(this.originalOrders));
     
+    if (this.filter == ''){      
+      return;
+    }
+
+    this.filtredOrders = this.viewUtils.filterArray(this.filtredOrders, 'orderNumber', this.filter);
   }
+
+  public openOrder(){
+    console.log("Testando");
+  }
+  
 }

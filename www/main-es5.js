@@ -8,22 +8,37 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./home/monitor.module": "./src/app/home/monitor.module.ts",
-	"./home/notification.module": "./src/app/home/notification.module.ts",
-	"./login/login.module": "./src/app/login/login.module.ts",
-	"./monitor.module": "./src/app/home/monitor.module.ts",
-	"./notification.module": "./src/app/home/notification.module.ts"
+	"./configuration/configuration.module": [
+		"./src/app/configuration/configuration.module.ts",
+		"configuration-configuration-module"
+	],
+	"./home/monitor.module": [
+		"./src/app/home/monitor.module.ts"
+	],
+	"./home/notification.module": [
+		"./src/app/home/notification.module.ts"
+	],
+	"./login/login.module": [
+		"./src/app/login/login.module.ts"
+	],
+	"./monitor.module": [
+		"./src/app/home/monitor.module.ts"
+	],
+	"./notification.module": [
+		"./src/app/home/notification.module.ts"
+	]
 };
-
 function webpackAsyncContext(req) {
-	return Promise.resolve().then(function() {
-		if(!__webpack_require__.o(map, req)) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
 			var e = new Error("Cannot find module '" + req + "'");
 			e.code = 'MODULE_NOT_FOUND';
 			throw e;
-		}
+		});
+	}
 
-		var id = map[req];
+	var ids = map[req], id = ids[0];
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(id);
 	});
 }
@@ -459,7 +474,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu type=\"overlay\">\n      <ion-header>\n        <ion-toolbar color=\"primary\">\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"3\">\n                <img class=\"logoUser\" src=\"../../assets/img/user.png\">\n              </ion-col>\n              <ion-col size=\"9\">\n                <ion-row>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-small\">Lucas Gonçalves</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"8\">\n                <ion-row>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Cracha: 1231231561561561</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Função: Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"4\"></ion-col>\n            </ion-row>\n          </div>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\" >\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <ion-split-pane>      \n    <ion-menu type=\"overlay\">\n      <ion-header>\n        <ion-toolbar color=\"primary\">\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"3\">\n                <ion-avatar>\n                  <img src=\"../../assets/img/user.png\">\n                </ion-avatar>\n              </ion-col>\n              <ion-col size=\"9\">\n                <ion-row>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-small\">Lucas Gonçalves</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"8\">\n                <ion-row>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Cracha: 1231231561561561</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Função: Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"4\"></ion-col>\n            </ion-row>\n          </div>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\" >\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n"
 
 /***/ }),
 
@@ -470,7 +485,7 @@ module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu type=\"overlay\">
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n</ion-header>\n\n<ion-content>\n  <ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n\n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n        <ion-label>{{tab.name}}</ion-label>\n        <ion-badge>{{tab.notification}}</ion-badge>\n      </ion-tab-button>\n\n    </ion-tab-bar>\n  </ion-tabs>\n\n</ion-content>"
+module.exports = "\n<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n\n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n        <ion-label>{{tab.name}}</ion-label>\n        <ion-badge>{{tab.notification}}</ion-badge>\n      </ion-tab-button>\n\n    </ion-tab-bar>\n  </ion-tabs>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -492,7 +507,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    style=\"width: 1.7em; height: 1.7em;\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" style=\"width: 1.7em; height: 1.7em;\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\">\n      <ion-card>\n        <ion-card-header>\n          <label class=\"font-style-bold font-size-small\">OM-2445492/DJ0449</label>\n        </ion-card-header>\n        <ion-card-content>\n          <label class=\"font-size-medium\">Preventiva</label>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n    <ion-col size=\"6\">\n        <ion-card>\n          <ion-card-header>\n            <label class=\"font-style-bold font-size-small\">OM-2445492/DJ0449</label>\n          </ion-card-header>\n          <ion-card-content>\n            <label class=\"font-size-medium\">Preventiva</label>\n          </ion-card-content>\n        </ion-card>\n      </ion-col>\n  </ion-row>\n\n  <ion-list *ngIf=\"listView\">\n    <ion-item>\n      <ion-label>Pokémon Yellow</ion-label>\n    </ion-item>\n  </ion-list>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    style=\"width: 1.7em; height: 1.7em;\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" style=\"width: 1.7em; height: 1.7em;\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"swipRefresh($event)\">\n    <ion-refresher-content refreshingText=\"Carregando...\"></ion-refresher-content>\n  </ion-refresher>\n  <ion-segment color=\"secondary\" (ionChange)=\"segmentChanged($event)\" value=\"userOrders\">\n    <ion-segment-button value=\"allOrders\">\n      <ion-label>TODAS</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"userOrders\">\n      <ion-label>MINHAS ORDENS</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\" *ngFor=\"let order of filtredOrders\">\n      <ion-card (click)=\"openOrder(order)\">\n        <ion-card-header class=\"align-center\">\n          <ion-label class=\"font-style-bold font-size-mini\" color=\"dark\">{{order.orderNumber}}</ion-label>\n        </ion-card-header>\n        <ion-card-content>\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"10\" class=\"align-center\">\n                <ion-label class=\"font-size-small font-to-upper font-style-bold\" color=\"secondary\">{{order.type}}</ion-label>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-icon *ngIf=\"order.orderTypeId == 0\" style=\"font-size: 6.5vw;\" name=\"bookmark\" color=\"primary\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 1\" style=\"font-size: 6.5vw;\" name=\"bookmark\" color=\"warning\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 2\" style=\"font-size: 6.5vw;\" name=\"bookmark\" color=\"medium\"></ion-icon>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-left\">\n            <ion-row>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Equip.:</b> {{order.equipamentName}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Prioridade:</b> {{order.priority}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Abertura:</b> {{order.createdAt}}</ion-label>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-center\">\n            <ion-button size=\"small\"><ion-icon slot=\"start\" name=\"star\"></ion-icon>Assumir</ion-button>\n          </div>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n\n  <div *ngIf=\"listView\">\n    <ion-searchbar animated search-icon=\"search\" (ionChange)=\"filterOm()\" placeholder=\"Filtrar OM's\" [(ngModel)]=\"filter\"></ion-searchbar>\n    <ion-list >\n      <ion-item *ngFor=\"let order of filtredOrders\">\n        <ion-col class=\"align-center\" size=\"4\">\n          <label class=\"font-size-mini\">{{order.orderNumber}}</label>\n        </ion-col>\n        <ion-col class=\"align-center\" size=\"6\">\n          <label class=\"font-size-small\">{{order.equipamentName}}</label>\n        </ion-col>\n        <ion-col class=\"align-right\" size=\"2\">\n          <label class=\"font-size-mini\">{{order.priority}}</label>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -503,7 +518,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    <ion-toolbar>\n        <ion-buttons slot=\"start\">\n            <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-row>\n            <ion-col size=\"10\" class=\"align-center\">\n                <ion-title>\n                    Notificações\n                </ion-title>\n            </ion-col>\n            <ion-col size=\"2\" class=\"align-center\">\n            </ion-col>\n        </ion-row>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-card color=\"secondary\">\n        <ion-card-header>\n            <label>Reabertura</label>\n        </ion-card-header>\n    </ion-card>\n</ion-content>"
+module.exports = "<ion-header>\n    <ion-toolbar color=\"primary\">\n        <ion-buttons slot=\"start\">\n            <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-row>\n            <ion-col size=\"10\" class=\"align-center\">\n                <ion-title>\n                    Notificações\n                </ion-title>\n            </ion-col>\n            <ion-col size=\"2\" class=\"align-center\">\n            </ion-col>\n        </ion-row>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <ion-card color=\"secondary\">\n        <ion-card-header>\n            <label>Reabertura</label>\n        </ion-card-header>\n    </ion-card>\n</ion-content>"
 
 /***/ }),
 
@@ -514,7 +529,7 @@ module.exports = "<ion-header>\n    <ion-toolbar>\n        <ion-buttons slot=\"s
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  \n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <div class=\"divPrincipal\">\n      <img class=\"logoDuasRodas\" src=\"../../assets/img/logoDuasRodas.png\">\n      <ion-list>      \n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"email\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label position=\"floating\">Senha</ion-label>\n          <ion-input type=\"password\" [(ngModel)]=\"senha\"></ion-input>\n        </ion-item>\n      </ion-list>\n      <div class=\"DivButtonEntrar\">\n        <ion-button expand=\"block\" color=\"danger\" (click)=\"login()\">Entrar</ion-button>\n      </div>\n    </div>\n  </ion-card>\n</ion-content>"
+module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <div class=\"divPrincipal\">\n      <img class=\"logoDuasRodas\" src=\"../../assets/img/logoDuasRodas.png\">\n      <ion-list>      \n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"username\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label position=\"floating\">Senha</ion-label>\n          <ion-input type=\"password\" [(ngModel)]=\"password\" autocomplete=\"off\"></ion-input>\n        </ion-item>\n      </ion-list>\n      <div class=\"DivButtonEntrar\">\n        <ion-button expand=\"block\" color=\"primary\" (click)=\"login()\">Entrar</ion-button>\n      </div>\n    </div>\n  </ion-card>\n</ion-content>"
 
 /***/ }),
 
@@ -579,6 +594,10 @@ var routes = [
     {
         path: 'home/maintenance-order/assignature',
         loadChildren: function () { return __webpack_require__.e(/*! import() | home-maintenance-order-assignature-module */ "home-maintenance-order-assignature-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/assignature.module */ "./src/app/home/maintenance-order/assignature.module.ts")).then(function (m) { return m.AssignaturePageModule; }); }
+    },
+    {
+        path: 'configuration',
+        loadChildren: './configuration/configuration.module#ConfigurationPageModule'
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -638,7 +657,7 @@ var AppComponent = /** @class */ (function () {
         this.appPages = [
             {
                 title: 'Home',
-                url: '/home',
+                url: 'home/monitor',
                 icon: 'home'
             },
             {
@@ -648,12 +667,12 @@ var AppComponent = /** @class */ (function () {
             },
             {
                 title: 'Notificações',
-                url: '/notification',
+                url: 'home/notification',
                 icon: 'notifications'
             },
             {
                 title: 'Configurações',
-                url: '/configuration',
+                url: 'configuration',
                 icon: 'settings'
             },
             {
@@ -710,13 +729,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _login_login_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./login/login.module */ "./src/app/login/login.module.ts");
-/* harmony import */ var _home_home_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./home/home.module */ "./src/app/home/home.module.ts");
-/* harmony import */ var _home_maintenance_order_maintenance_order_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./home/maintenance-order/maintenance-order.module */ "./src/app/home/maintenance-order/maintenance-order.module.ts");
-/* harmony import */ var _home_monitor_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/monitor.module */ "./src/app/home/monitor.module.ts");
-/* harmony import */ var _home_notification_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./home/notification.module */ "./src/app/home/notification.module.ts");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _login_login_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login/login.module */ "./src/app/login/login.module.ts");
+/* harmony import */ var _home_home_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./home/home.module */ "./src/app/home/home.module.ts");
+/* harmony import */ var _home_maintenance_order_maintenance_order_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/maintenance-order/maintenance-order.module */ "./src/app/home/maintenance-order/maintenance-order.module.ts");
+/* harmony import */ var _home_monitor_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./home/monitor.module */ "./src/app/home/monitor.module.ts");
+/* harmony import */ var _home_notification_module__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./home/notification.module */ "./src/app/home/notification.module.ts");
+/* harmony import */ var _http_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./http/http */ "./src/app/http/http.ts");
+/* harmony import */ var _rest_loginRest__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./rest/loginRest */ "./src/app/rest/loginRest.ts");
+/* harmony import */ var _utils_viewUtils__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils/viewUtils */ "./src/app/utils/viewUtils.ts");
+
+
+
+
 
 
 
@@ -736,24 +763,30 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]],
+            declarations: [
+                _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]
+            ],
             entryComponents: [],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
-                _login_login_module__WEBPACK_IMPORTED_MODULE_9__["LoginPageModule"],
-                _home_home_module__WEBPACK_IMPORTED_MODULE_10__["HomePageModule"],
-                _home_maintenance_order_maintenance_order_module__WEBPACK_IMPORTED_MODULE_11__["MaintenanceOrderPageModule"],
-                _home_monitor_module__WEBPACK_IMPORTED_MODULE_12__["MonitorPageModule"],
-                _home_notification_module__WEBPACK_IMPORTED_MODULE_13__["NotificationPageModule"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_7__["HttpModule"],
+                _login_login_module__WEBPACK_IMPORTED_MODULE_10__["LoginPageModule"],
+                _home_home_module__WEBPACK_IMPORTED_MODULE_11__["HomePageModule"],
+                _home_maintenance_order_maintenance_order_module__WEBPACK_IMPORTED_MODULE_12__["MaintenanceOrderPageModule"],
+                _home_monitor_module__WEBPACK_IMPORTED_MODULE_13__["MonitorPageModule"],
+                _home_notification_module__WEBPACK_IMPORTED_MODULE_14__["NotificationPageModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"]
             ],
             providers: [
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
+                _http_http__WEBPACK_IMPORTED_MODULE_15__["HttpProvider"],
+                _utils_viewUtils__WEBPACK_IMPORTED_MODULE_17__["ViewUtils"],
+                _rest_loginRest__WEBPACK_IMPORTED_MODULE_16__["LoginRest"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -1091,24 +1124,142 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MonitorPage", function() { return MonitorPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _utils_viewUtils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/viewUtils */ "./src/app/utils/viewUtils.ts");
+
 
 
 var MonitorPage = /** @class */ (function () {
-    function MonitorPage() {
+    function MonitorPage(viewUtils) {
+        this.viewUtils = viewUtils;
         this.listView = false;
+        this.filtredOrders = [{}];
+        this.originalOrders = [{}];
+        this.allOrders = false;
     }
     MonitorPage.prototype.ngOnInit = function () {
+        this.loadOrders();
+    };
+    MonitorPage.prototype.loadOrders = function () {
+        var obj = JSON.parse(window.localStorage.getItem("user"));
+        if (this.allOrders) {
+            this.originalOrders = [
+                {
+                    "id": 1,
+                    "integrationID": "1000",
+                    "createdAt": "17/01/2016",
+                    "deleted": 0,
+                    "orderNumber": "OM - 2445492/DJ0449",
+                    "priority": "urgent",
+                    "type": "preventiva",
+                    "userId": 1,
+                    "installationAreaId": 1,
+                    "orderTypeId": 0,
+                    "orderClassificationId": 1,
+                    "orderEquipamentId": 1,
+                    "equipamentName": "DHA03005/007"
+                },
+                {
+                    "id": 2,
+                    "integrationID": "1001",
+                    "createdAt": "20/05/2018",
+                    "deleted": 0,
+                    "orderNumber": "OM - 2445000/DJ0123",
+                    "priority": "high",
+                    "type": "lista",
+                    "userId": 1,
+                    "installationAreaId": 1,
+                    "orderTypeId": 1,
+                    "orderClassificationId": 1,
+                    "orderEquipamentId": 1,
+                    "equipamentName": "DHA05505/010 "
+                },
+                {
+                    "id": 3,
+                    "integrationID": "1003",
+                    "createdAt": "11/02/2017",
+                    "deleted": 0,
+                    "orderNumber": "OM - 2444010/DJ0123",
+                    "priority": "medium",
+                    "type": "rota",
+                    "userId": 2,
+                    "installationAreaId": 1,
+                    "orderTypeId": 2,
+                    "orderClassificationId": 1,
+                    "orderEquipamentId": 1,
+                    "equipamentName": "DHA01505/007"
+                }
+            ];
+        }
+        else {
+            this.originalOrders = [
+                {
+                    "id": 1,
+                    "integrationID": "1000",
+                    "createdAt": "17/01/2016",
+                    "deleted": 0,
+                    "orderNumber": "OM - 2445492/DJ0449",
+                    "priority": "urgent",
+                    "type": "preventiva",
+                    "userId": 1,
+                    "installationAreaId": 1,
+                    "orderTypeId": 0,
+                    "orderClassificationId": 1,
+                    "orderEquipamentId": 1,
+                    "equipamentName": "DHA03005/007"
+                },
+                {
+                    "id": 2,
+                    "integrationID": "1001",
+                    "createdAt": "20/05/2018",
+                    "deleted": 0,
+                    "orderNumber": "OM - 2445000/DJ0123",
+                    "priority": "high",
+                    "type": "lista",
+                    "userId": 1,
+                    "installationAreaId": 1,
+                    "orderTypeId": 1,
+                    "orderClassificationId": 1,
+                    "orderEquipamentId": 1,
+                    "equipamentName": "DHA05505/010"
+                }
+            ];
+        }
+        this.filtredOrders = JSON.parse(JSON.stringify(this.originalOrders));
     };
     MonitorPage.prototype.changeVisualizationMode = function () {
         this.listView = !this.listView;
     };
+    MonitorPage.prototype.segmentChanged = function (event) {
+        this.allOrders = event.detail.value == "allOrders";
+        this.loadOrders();
+    };
+    MonitorPage.prototype.swipRefresh = function (event) {
+        this.allOrders = !this.allOrders;
+        this.loadOrders();
+        setTimeout(function () {
+            event.target.complete();
+        }, 200);
+    };
+    MonitorPage.prototype.filterOm = function () {
+        this.filtredOrders = JSON.parse(JSON.stringify(this.originalOrders));
+        if (this.filter == '') {
+            return;
+        }
+        this.filtredOrders = this.viewUtils.filterArray(this.filtredOrders, 'orderNumber', this.filter);
+    };
+    MonitorPage.prototype.openOrder = function () {
+        console.log("Testando");
+    };
+    MonitorPage.ctorParameters = function () { return [
+        { type: _utils_viewUtils__WEBPACK_IMPORTED_MODULE_2__["ViewUtils"] }
+    ]; };
     MonitorPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-monitor',
             template: __webpack_require__(/*! raw-loader!./monitor.page.html */ "./node_modules/raw-loader/index.js!./src/app/home/monitor.page.html"),
             styles: [__webpack_require__(/*! ./monitor.page.scss */ "./src/app/home/monitor.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_utils_viewUtils__WEBPACK_IMPORTED_MODULE_2__["ViewUtils"]])
     ], MonitorPage);
     return MonitorPage;
 }());
@@ -1213,6 +1364,87 @@ var NotificationPage = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/http/http.ts":
+/*!******************************!*\
+  !*** ./src/app/http/http.ts ***!
+  \******************************/
+/*! exports provided: HttpProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpProvider", function() { return HttpProvider; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
+
+
+var HttpProvider = /** @class */ (function () {
+    function HttpProvider(http) {
+        this.http = http;
+        this.TIMEOUT = 15000;
+        this.url = null;
+        this.token = null;
+    }
+    HttpProvider.prototype.prepareHeaders = function (contentType) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]();
+        headers.append('Accept', 'application/json');
+        if (contentType) {
+            headers.append('Content-Type', 'application/json');
+        }
+        if (this.token == '') {
+            this.token = null;
+        }
+        if (this.token != null) {
+            headers.append('Authorization', 'bearer ' + this.token);
+        }
+        return headers;
+    };
+    HttpProvider.prototype.get = function () {
+        var headers = this.prepareHeaders(false);
+        return this.http.get(this.url, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["timeout"])(this.TIMEOUT));
+    };
+    HttpProvider.prototype.post = function (object) {
+        var body = '';
+        var headers = this.prepareHeaders(true);
+        if (object != null && object != undefined) {
+            body = JSON.stringify(object);
+        }
+        return this.http.post(this.url, body, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["timeout"])(this.TIMEOUT));
+    };
+    HttpProvider.prototype.put = function (object) {
+        var body = '';
+        var headers = this.prepareHeaders(true);
+        if (object != null && object != undefined) {
+            body = JSON.stringify(object);
+        }
+        return this.http.put(this.url, body, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["timeout"])(this.TIMEOUT));
+    };
+    HttpProvider.prototype.patch = function (object) {
+        var body = '';
+        var headers = this.prepareHeaders(true);
+        if (object != null && object != undefined) {
+            body = JSON.stringify(object);
+        }
+        return this.http.patch(this.url, body, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["timeout"])(this.TIMEOUT));
+    };
+    HttpProvider.ctorParameters = function () { return [
+        { type: _angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"] }
+    ]; };
+    HttpProvider = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"]])
+    ], HttpProvider);
+    return HttpProvider;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/login/login.module.ts":
 /*!***************************************!*\
   !*** ./src/app/login/login.module.ts ***!
@@ -1289,16 +1521,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _rest_loginRest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../rest/loginRest */ "./src/app/rest/loginRest.ts");
+/* harmony import */ var _utils_viewUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/viewUtils */ "./src/app/utils/viewUtils.ts");
+
+
 
 
 
 
 var LoginPage = /** @class */ (function () {
-    function LoginPage(router, menuCtrl) {
+    function LoginPage(router, menuCtrl, loginRest, viewUtils) {
         this.router = router;
         this.menuCtrl = menuCtrl;
-        this.email = "jose@senai.com.br";
-        this.senha = "jose123";
+        this.loginRest = loginRest;
+        this.viewUtils = viewUtils;
+        this.username = "julio_thomazelli-ju1@estudante.sc.senai.br";
+        this.password = "123";
     }
     LoginPage.prototype.ngOnInit = function () {
     };
@@ -1309,11 +1547,32 @@ var LoginPage = /** @class */ (function () {
         this.menuCtrl.enable(true);
     };
     LoginPage.prototype.login = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var obj;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                obj = {
+                    username: this.username,
+                    password: this.password
+                };
+                this.router.navigateByUrl('/home');
+                return [2 /*return*/];
+            });
+        });
+    };
+    LoginPage.prototype.loginRestSucess = function (response) {
+        var user = JSON.parse(response._body);
+        if (!user.success) {
+            this.viewUtils.showToast(user.data);
+            return;
+        }
+        window.localStorage.setItem("user", JSON.stringify(user.data));
         this.router.navigateByUrl('/home');
     };
     LoginPage.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"] },
+        { type: _rest_loginRest__WEBPACK_IMPORTED_MODULE_4__["LoginRest"] },
+        { type: _utils_viewUtils__WEBPACK_IMPORTED_MODULE_5__["ViewUtils"] }
     ]; };
     LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1321,9 +1580,144 @@ var LoginPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./login.page.html */ "./node_modules/raw-loader/index.js!./src/app/login/login.page.html"),
             styles: [__webpack_require__(/*! ./login.page.scss */ "./src/app/login/login.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"], _rest_loginRest__WEBPACK_IMPORTED_MODULE_4__["LoginRest"], _utils_viewUtils__WEBPACK_IMPORTED_MODULE_5__["ViewUtils"]])
     ], LoginPage);
     return LoginPage;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/rest/loginRest.ts":
+/*!***********************************!*\
+  !*** ./src/app/rest/loginRest.ts ***!
+  \***********************************/
+/*! exports provided: LoginRest */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginRest", function() { return LoginRest; });
+/* harmony import */ var src_app_http_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/http/http */ "./src/app/http/http.ts");
+
+var LoginRest = /** @class */ (function () {
+    function LoginRest(http) {
+        this.http = http;
+        this.DefaultURL = 'http://localhost:3000';
+        this.LoginURL = '/login';
+    }
+    LoginRest.prototype.login = function (AObj) {
+        this.http.url = this.DefaultURL + this.LoginURL;
+        return this.http.post(AObj);
+    };
+    LoginRest.ctorParameters = function () { return [
+        { type: src_app_http_http__WEBPACK_IMPORTED_MODULE_0__["HttpProvider"] }
+    ]; };
+    return LoginRest;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/utils/viewUtils.ts":
+/*!************************************!*\
+  !*** ./src/app/utils/viewUtils.ts ***!
+  \************************************/
+/*! exports provided: ViewUtils */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewUtils", function() { return ViewUtils; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+var ViewUtils = /** @class */ (function () {
+    function ViewUtils(loadingController, toastController) {
+        this.loadingController = loadingController;
+        this.toastController = toastController;
+    }
+    ViewUtils.prototype.showProgressBar = function (AMessage) {
+        if (AMessage === void 0) { AMessage = "Aguarde..."; }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _a;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, this.loadingController.create({
+                                message: AMessage,
+                                duration: 0
+                            })];
+                    case 1:
+                        _a.progressBar = _b.sent();
+                        this.progressBar.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ViewUtils.prototype.hideProgressBar = function () {
+        this.progressBar.dismiss();
+    };
+    ViewUtils.prototype.showToast = function (message, duration) {
+        if (duration === void 0) { duration = 2000; }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var options, toast;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        options = {
+                            message: message,
+                            duration: duration,
+                            color: 'primary',
+                            icon: 'information-circle-outline'
+                        };
+                        return [4 /*yield*/, this.toastController.create(options)];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ViewUtils.prototype.removeAccents = function (word) {
+        var newWord = word.toLowerCase();
+        newWord = newWord.replace(new RegExp(/\s/g), '');
+        newWord = newWord.replace(new RegExp(/[àáâãäå]/g), 'a');
+        newWord = newWord.replace(new RegExp(/æ/g), 'ae');
+        newWord = newWord.replace(new RegExp(/ç/g), 'c');
+        newWord = newWord.replace(new RegExp(/[èéêë]/g), 'e');
+        newWord = newWord.replace(new RegExp(/[ìíîï]/g), 'i');
+        newWord = newWord.replace(new RegExp(/ñ/g), 'n');
+        newWord = newWord.replace(new RegExp(/[òóôõö]/g), 'o');
+        newWord = newWord.replace(new RegExp(/œ/g), 'oe');
+        newWord = newWord.replace(new RegExp(/[ùúûü]/g), 'u');
+        newWord = newWord.replace(new RegExp(/[ýÿ]/g), 'y');
+        newWord = newWord.replace(new RegExp(/\W/g), '');
+        return newWord;
+    };
+    ViewUtils.prototype.filterArray = function (array, propertyName, filterTerm) {
+        var _this = this;
+        var arrayFiltred = [];
+        filterTerm = this.removeAccents(filterTerm.trim());
+        array.forEach(function (element) {
+            var text = _this.removeAccents(element[propertyName].trim());
+            if (text.indexOf(filterTerm) >= 0) {
+                arrayFiltred.push(element);
+            }
+        });
+        return arrayFiltred;
+    };
+    ViewUtils.ctorParameters = function () { return [
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ToastController"] }
+    ]; };
+    return ViewUtils;
 }());
 
 
