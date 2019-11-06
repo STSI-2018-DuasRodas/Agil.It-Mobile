@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewUtils } from '../utils/viewUtils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-monitor',
@@ -14,7 +15,7 @@ export class MonitorPage implements OnInit {
   allOrders         : boolean = false;
   filter            : string         ;
 
-  constructor(private viewUtils : ViewUtils) { }
+  constructor(private viewUtils : ViewUtils, private router: Router) { }
 
   ngOnInit() {
     this.loadOrders();
@@ -138,8 +139,12 @@ export class MonitorPage implements OnInit {
     this.filtredOrders = this.viewUtils.filterArray(this.filtredOrders, 'orderNumber', this.filter);
   }
 
-  public openOrder(){
-    console.log("Testando");
+  public openOrder(obj : any){
+    this.router.navigateByUrl('/home/maintenance-order/' + obj.id);
+  }
+
+  public assumeOrder(event){
+    event.stopPropagation();
   }
   
 }

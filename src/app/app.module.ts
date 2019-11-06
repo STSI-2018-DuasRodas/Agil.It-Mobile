@@ -18,7 +18,6 @@ import { HttpProvider } from './http/http';
 import { LoginRest } from './rest/loginRest';
 import { ViewUtils } from './utils/viewUtils';
 
-
 @NgModule({
   declarations: [
     AppComponent

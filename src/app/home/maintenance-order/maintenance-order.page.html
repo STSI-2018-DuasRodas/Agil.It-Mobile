@@ -8,13 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom" color="">
-
-      <ion-tab-button *ngFor="let tab of tabs" [tab]="tab.route">
-        <ion-icon [name]="tab.icon"></ion-icon>
-      </ion-tab-button>
-
-    </ion-tab-bar>
-  </ion-tabs>
+  <app-default *ngIf="order.orderTypeId == 0"></app-default>
+  <app-list    *ngIf="order.orderTypeId == 1"></app-list>
+  <app-route   *ngIf="order.orderTypeId == 2"></app-route>
 </ion-content>

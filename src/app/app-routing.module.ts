@@ -24,20 +24,12 @@ const routes: Routes = [
     loadChildren: './home/monitor.module#MonitorPageModule' 
   },
   { 
-    path: 'home/maintenance-order/maintenance-order', 
+    path: 'home/maintenance-order/:id', 
     loadChildren: () => import('./home/maintenance-order/maintenance-order.module').then(m => m.MaintenanceOrderPageModule)
   },
   { 
-    path: 'home/maintenance-order/resume',
-    loadChildren: () => import('./home/maintenance-order/resume.module').then(m => m.ResumePageModule)
-  },
-  { 
     path: 'home/maintenance-order/problems',
-    loadChildren: () => import('./home/maintenance-order/problems.module').then(m => m.ProblemsPageModule)
-  },
-  { 
-    path: 'home/maintenance-order/components', 
-    loadChildren: () => import('./home/maintenance-order/components.module').then(m => m.ComponentsPageModule)
+    loadChildren: () => import('./home/maintenance-order/default/problems.module').then(m => m.ProblemsPageModule)
   },
   { 
     path: 'home/maintenance-order/hourWorked', 
@@ -50,7 +42,8 @@ const routes: Routes = [
   { 
     path: 'configuration', 
     loadChildren: './configuration/configuration.module#ConfigurationPageModule' 
-  }
+  },
+  { path: 'observation', loadChildren: './home/maintenance-order/observation/observation.module#ObservationPageModule' }
 ];
 
 @NgModule({

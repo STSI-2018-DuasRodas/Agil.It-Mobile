@@ -1,26 +1,28 @@
 import { NgModule } from '@angular/core';
+import { DefaultComponent } from '../maintenance-order/default/default.component';
+import { ListComponent } from '../maintenance-order/list/list.component';
+import { RouteComponent } from '../maintenance-order/route/route.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
-import { ComponentsPage } from './components.page';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: ComponentsPage
-  }
-];
-
 @NgModule({
-  imports: [
+  imports:[
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
   ],
-  declarations: [ComponentsPage]
+  declarations: [    
+    DefaultComponent,
+    ListComponent,
+    RouteComponent
+  ],
+  exports: [
+    DefaultComponent,
+    ListComponent,
+    RouteComponent
+  ]
 })
-export class ComponentsPageModule {}
+
+export class ComponentsModule {
+  
+}
