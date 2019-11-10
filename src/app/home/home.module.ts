@@ -15,11 +15,11 @@ const routes : Routes = [
     children: [
       {
         path: "monitor",
-        loadChildren: "./monitor.module#MonitorPageModule"
+        loadChildren: () => import('./monitor.module').then(m => m.MonitorPageModule)
       },
-      {
+      { 
         path: "notification",
-        loadChildren: "./notification.module#NotificationPageModule"
+        loadChildren: () => import('./notification.module').then(m => m.NotificationPageModule)
       },
       {
         path: "",

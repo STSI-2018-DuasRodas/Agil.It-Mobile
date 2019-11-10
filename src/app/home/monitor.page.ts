@@ -140,7 +140,23 @@ export class MonitorPage implements OnInit {
   }
 
   public openOrder(obj : any){
-    this.router.navigateByUrl('/home/maintenance-order/' + obj.id);
+    if (obj.orderTypeId == 0){
+      this.router.navigateByUrl('home/maintenance-order/' + obj.orderTypeId + '/default');
+
+      return;
+    }
+
+    if (obj.orderTypeId == 1){
+      this.router.navigateByUrl('home/maintenance-order/' + obj.orderTypeId + '/list');
+
+      return;
+    }
+    
+    if (obj.orderTypeId == 2){
+      this.router.navigateByUrl('home/maintenance-order/' + obj.orderTypeId + '/route');
+
+      return;
+    }
   }
 
   public assumeOrder(event){

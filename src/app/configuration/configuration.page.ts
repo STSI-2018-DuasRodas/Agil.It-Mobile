@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-configuration',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfigurationPage implements OnInit {
 
-  constructor() { }
+  constructor(private menuCtrl : MenuController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewWillLeave(){
+    this.menuCtrl.enable(true);
   }
 
 }

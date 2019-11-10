@@ -10,8 +10,8 @@
         </ion-title>
       </ion-col>
       <ion-col size="2" class="align-center" (click)="changeVisualizationMode()">
-        <ion-icon *ngIf="listView"  name="grid"    style="width: 1.7em; height: 1.7em;"></ion-icon>
-        <ion-icon *ngIf="!listView" name="options" style="width: 1.7em; height: 1.7em;"></ion-icon>
+        <ion-icon *ngIf="listView"  name="grid"    class="icon-default-size"></ion-icon>
+        <ion-icon *ngIf="!listView" name="options" class="icon-default-size"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -44,9 +44,9 @@
                 <ion-label class="font-size-small font-to-upper font-style-bold" color="secondary">{{order.type}}</ion-label>
               </ion-col>
               <ion-col size="2">
-                <ion-icon *ngIf="order.orderTypeId == 0" style="font-size: 6.5vw;" name="bookmark" color="primary"></ion-icon>
-                <ion-icon *ngIf="order.orderTypeId == 1" style="font-size: 6.5vw;" name="bookmark" color="warning"></ion-icon>
-                <ion-icon *ngIf="order.orderTypeId == 2" style="font-size: 6.5vw;" name="bookmark" color="medium"></ion-icon>
+                <ion-icon *ngIf="order.orderTypeId == 0" class="icon-default-size" name="bookmark" color="primary"></ion-icon>
+                <ion-icon *ngIf="order.orderTypeId == 1" class="icon-default-size" name="bookmark" color="warning"></ion-icon>
+                <ion-icon *ngIf="order.orderTypeId == 2" class="icon-default-size" name="bookmark" color="medium"></ion-icon>
               </ion-col>
             </ion-row>
           </div>
@@ -76,13 +76,13 @@
     <ion-list >
       <ion-item *ngFor="let order of filtredOrders">
         <ion-col class="align-center" size="4">
-          <label class="font-size-mini">{{order.orderNumber}}</label>
+          <ion-label class="font-size-mini">{{order.orderNumber}}</ion-label>
         </ion-col>
         <ion-col class="align-center" size="6">
-          <label class="font-size-small">{{order.equipamentName}}</label>
+          <ion-label class="font-size-small">{{order.equipamentName}}</ion-label>
         </ion-col>
         <ion-col class="align-right" size="2">
-          <label class="font-size-mini">{{order.priority}}</label>
+          <ion-label class="font-size-mini">{{order.priority}}</ion-label>
         </ion-col>
       </ion-item>
     </ion-list>

@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor() {
+  }
 
   public tabs : any = this.obterTabs();
-  // public notificationPage = NotificationPage;
 
   public obterTabs(){
     return [

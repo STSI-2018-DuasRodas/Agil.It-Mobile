@@ -9,41 +9,56 @@ const routes: Routes = [
   },
   { 
     path: 'login', 
-    loadChildren: './login/login.module#LoginPageModule' 
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  { 
+    path: 'configuration', 
+    loadChildren: () => import('./configuration/configuration.module').then(m => m.ConfigurationPageModule)
   },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   { 
-    path: 'home/notification', 
-    loadChildren: './home/notification.module#NotificationPageModule' 
-  },
-  { 
     path: 'home/monitor', 
-    loadChildren: './home/monitor.module#MonitorPageModule' 
+    loadChildren: () => import('./home/monitor.module').then(m => m.MonitorPageModule)
   },
   { 
-    path: 'home/maintenance-order/:id', 
-    loadChildren: () => import('./home/maintenance-order/maintenance-order.module').then(m => m.MaintenanceOrderPageModule)
+    path: 'home/notification', 
+    loadChildren: () => import('./home/notification.module').then(m => m.NotificationPageModule)
   },
   { 
-    path: 'home/maintenance-order/problems',
-    loadChildren: () => import('./home/maintenance-order/default/problems.module').then(m => m.ProblemsPageModule)
+    path: 'home/maintenance-order/:id/default', 
+    loadChildren: () => import('./home/maintenance-order/default/default.module').then(m => m.DefaultPageModule)
   },
   { 
-    path: 'home/maintenance-order/hourWorked', 
-    loadChildren: () => import('./home/maintenance-order/hour-worked.module').then(m => m.HourWorkedPageModule)
+    path: 'home/maintenance-order/:id/list', 
+    loadChildren: () => import('./home/maintenance-order/list/list.module').then(m => m.ListPageModule)
   },
   { 
-    path: 'home/maintenance-order/assignature', 
-    loadChildren: () => import('./home/maintenance-order/assignature.module').then(m => m.AssignaturePageModule)
+    path: 'home/maintenance-order/:id/route', 
+    loadChildren: () => import('./home/maintenance-order/route/route.module').then(m => m.RoutePageModule)
   },
   { 
-    path: 'configuration', 
-    loadChildren: './configuration/configuration.module#ConfigurationPageModule' 
+    path: 'home/maintenance-order/:id/:type/resume', 
+    loadChildren: () => import('./home/maintenance-order/tabs/resume.module').then(m => m.ResumePageModule)
   },
-  { path: 'observation', loadChildren: './home/maintenance-order/observation/observation.module#ObservationPageModule' }
+  { 
+    path: 'home/maintenance-order/:id/:type/problems',
+    loadChildren: () => import('./home/maintenance-order/tabs/problems.module').then(m => m.ProblemsPageModule)
+  },
+  { 
+    path: 'home/maintenance-order/:id/:type/components', 
+    loadChildren: () => import('./home/maintenance-order/tabs/components.module').then(m => m.ComponentsPageModule)
+  },
+  { 
+    path: 'home/maintenance-order/:id/:type/hourWorked', 
+    loadChildren: () => import('./home/maintenance-order/tabs/hour-worked.module').then(m => m.HourWorkedPageModule)
+  },
+  { 
+    path: 'home/maintenance-order/:id/:type/assignature', 
+    loadChildren: () => import('./home/maintenance-order/tabs/assignature.module').then(m => m.AssignaturePageModule)
+  }
 ];
 
 @NgModule({

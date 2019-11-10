@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageModule } from './login/login.module';
 import { HomePageModule } from './home/home.module';
-import { MaintenanceOrderPageModule } from './home/maintenance-order/maintenance-order.module';
 import { MonitorPageModule } from './home/monitor.module';
 import { NotificationPageModule } from './home/notification.module';
 import { HttpProvider } from './http/http';
@@ -28,7 +27,6 @@ import { ViewUtils } from './utils/viewUtils';
     HttpModule,
     LoginPageModule,
     HomePageModule,
-    MaintenanceOrderPageModule,
     MonitorPageModule,
     NotificationPageModule,
     IonicModule.forRoot(),
