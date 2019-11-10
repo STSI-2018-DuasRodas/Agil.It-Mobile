@@ -16,7 +16,13 @@ import { NotificationPageModule } from './home/notification.module';
 import { HttpProvider } from './http/http';
 import { LoginRest } from './rest/loginRest';
 import { ViewUtils } from './utils/viewUtils';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
+library.add(fas, far, fab);
 @NgModule({
   declarations: [
     AppComponent
@@ -30,7 +36,8 @@ import { ViewUtils } from './utils/viewUtils';
     MonitorPageModule,
     NotificationPageModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [
     StatusBar,

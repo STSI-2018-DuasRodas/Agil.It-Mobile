@@ -5,52 +5,21 @@
   !*** ./$$_lazy_route_resource lazy namespace object ***!
   \******************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var map = {
-	"./configuration/configuration.module": [
-		"./src/app/configuration/configuration.module.ts",
-		"configuration-configuration-module"
-	],
-	"./home/maintenance-order/observation/observation.module": [
-		"./src/app/home/maintenance-order/observation/observation.module.ts",
-		"home-maintenance-order-observation-observation-module"
-	],
-	"./home/monitor.module": [
-		"./src/app/home/monitor.module.ts"
-	],
-	"./home/notification.module": [
-		"./src/app/home/notification.module.ts"
-	],
-	"./login/login.module": [
-		"./src/app/login/login.module.ts"
-	],
-	"./monitor.module": [
-		"./src/app/home/monitor.module.ts"
-	],
-	"./notification.module": [
-		"./src/app/home/notification.module.ts"
-	]
-};
-function webpackAsyncContext(req) {
-	if(!__webpack_require__.o(map, req)) {
-		return Promise.resolve().then(function() {
-			var e = new Error("Cannot find module '" + req + "'");
-			e.code = 'MODULE_NOT_FOUND';
-			throw e;
-		});
-	}
-
-	var ids = map[req], id = ids[0];
-	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
-		return __webpack_require__(id);
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncaught exception popping up in devtools
+	return Promise.resolve().then(function() {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
 	});
 }
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
-module.exports = webpackAsyncContext;
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
@@ -483,51 +452,7 @@ module.exports = "<ion-app>\n  <ion-split-pane>      \n    <ion-menu type=\"over
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n\n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n        <ion-label>{{tab.name}}</ion-label>\n        <ion-badge>{{tab.notification}}</ion-badge>\n      </ion-tab-button>\n\n    </ion-tab-bar>\n  </ion-tabs>\n\n</ion-content>\n"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/default/default.component.html":
-/*!*************************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/home/maintenance-order/default/default.component.html ***!
-  \*************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n  <ion-tabs>\n  <ion-tab-bar slot=\"bottom\" color=\"\">\n\n    <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n      <ion-icon [name]=\"tab.icon\"></ion-icon>\n    </ion-tab-button>\n\n  </ion-tab-bar>\n</ion-tabs>"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/list/list.component.html":
-/*!*******************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/home/maintenance-order/list/list.component.html ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n  \n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n      </ion-tab-button>\n  \n    </ion-tab-bar>\n  </ion-tabs>"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/maintenance-order.page.html":
-/*!**********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/home/maintenance-order/maintenance-order.page.html ***!
-  \**********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"/home\"></ion-back-button>\n    </ion-buttons>\n    <ion-title>maintenance-order</ion-title>    \n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <app-default *ngIf=\"order.orderTypeId == 0\"></app-default>\n  <app-list    *ngIf=\"order.orderTypeId == 1\"></app-list>\n  <app-route   *ngIf=\"order.orderTypeId == 2\"></app-route>\n</ion-content>\n"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/route/route.component.html":
-/*!*********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/home/maintenance-order/route/route.component.html ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n  \n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n      </ion-tab-button>\n  \n    </ion-tab-bar>\n  </ion-tabs>"
+module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n\n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n        <ion-label>{{tab.name}}</ion-label>\n        <ion-badge>{{tab.notification}}</ion-badge>\n      </ion-tab-button>\n\n    </ion-tab-bar>\n  </ion-tabs>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -538,7 +463,7 @@ module.exports = "<ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n  \n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    style=\"width: 1.7em; height: 1.7em;\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" style=\"width: 1.7em; height: 1.7em;\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"swipRefresh($event)\">\n    <ion-refresher-content refreshingText=\"Carregando...\"></ion-refresher-content>\n  </ion-refresher>\n  <ion-segment color=\"secondary\" (ionChange)=\"segmentChanged($event)\" value=\"userOrders\">\n    <ion-segment-button value=\"allOrders\">\n      <ion-label>TODAS</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"userOrders\">\n      <ion-label>MINHAS ORDENS</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\" *ngFor=\"let order of filtredOrders\">\n      <ion-card (click)=\"openOrder(order)\">\n        <ion-card-header class=\"align-center\">\n          <ion-label class=\"font-style-bold font-size-mini\" color=\"dark\">{{order.orderNumber}}</ion-label>\n        </ion-card-header>\n        <ion-card-content>\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"10\" class=\"align-center\">\n                <ion-label class=\"font-size-small font-to-upper font-style-bold\" color=\"secondary\">{{order.type}}</ion-label>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-icon *ngIf=\"order.orderTypeId == 0\" style=\"font-size: 6.5vw;\" name=\"bookmark\" color=\"primary\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 1\" style=\"font-size: 6.5vw;\" name=\"bookmark\" color=\"warning\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 2\" style=\"font-size: 6.5vw;\" name=\"bookmark\" color=\"medium\"></ion-icon>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-left\">\n            <ion-row>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Equip.:</b> {{order.equipamentName}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Prioridade:</b> {{order.priority}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Abertura:</b> {{order.createdAt}}</ion-label>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-center\">\n            <ion-button (click)=\"assumeOrder($event)\" size=\"small\"><ion-icon slot=\"start\" name=\"star\"></ion-icon>Assumir</ion-button>\n          </div>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n\n  <div *ngIf=\"listView\">\n    <ion-searchbar animated search-icon=\"search\" (ionChange)=\"filterOm()\" placeholder=\"Filtrar OM's\" [(ngModel)]=\"filter\"></ion-searchbar>\n    <ion-list >\n      <ion-item *ngFor=\"let order of filtredOrders\">\n        <ion-col class=\"align-center\" size=\"4\">\n          <label class=\"font-size-mini\">{{order.orderNumber}}</label>\n        </ion-col>\n        <ion-col class=\"align-center\" size=\"6\">\n          <label class=\"font-size-small\">{{order.equipamentName}}</label>\n        </ion-col>\n        <ion-col class=\"align-right\" size=\"2\">\n          <label class=\"font-size-mini\">{{order.priority}}</label>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    class=\"icon-default-size\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" class=\"icon-default-size\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"swipRefresh($event)\">\n    <ion-refresher-content refreshingText=\"Carregando...\"></ion-refresher-content>\n  </ion-refresher>\n  <ion-segment color=\"secondary\" (ionChange)=\"segmentChanged($event)\" value=\"userOrders\">\n    <ion-segment-button value=\"allOrders\">\n      <ion-label>TODAS</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"userOrders\">\n      <ion-label>MINHAS ORDENS</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\" *ngFor=\"let order of filtredOrders\">\n      <ion-card (click)=\"openOrder(order)\">\n        <ion-card-header class=\"align-center\">\n          <ion-label class=\"font-style-bold font-size-mini\" color=\"dark\">{{order.orderNumber}}</ion-label>\n        </ion-card-header>\n        <ion-card-content>\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"10\" class=\"align-center\">\n                <ion-label class=\"font-size-small font-to-upper font-style-bold\" color=\"secondary\">{{order.type}}</ion-label>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-icon *ngIf=\"order.orderTypeId == 0\" class=\"icon-default-size\" name=\"bookmark\" color=\"primary\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 1\" class=\"icon-default-size\" name=\"bookmark\" color=\"warning\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 2\" class=\"icon-default-size\" name=\"bookmark\" color=\"medium\"></ion-icon>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-left\">\n            <ion-row>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Equip.:</b> {{order.equipamentName}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Prioridade:</b> {{order.priority}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Abertura:</b> {{order.createdAt}}</ion-label>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-center\">\n            <ion-button (click)=\"assumeOrder($event)\" size=\"small\"><ion-icon slot=\"start\" name=\"star\"></ion-icon>Assumir</ion-button>\n          </div>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n\n  <div *ngIf=\"listView\">\n    <ion-searchbar animated search-icon=\"search\" (ionChange)=\"filterOm()\" placeholder=\"Filtrar OM's\" [(ngModel)]=\"filter\"></ion-searchbar>\n    <ion-list >\n      <ion-item *ngFor=\"let order of filtredOrders\">\n        <ion-col class=\"align-center\" size=\"4\">\n          <ion-label class=\"font-size-mini\">{{order.orderNumber}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-center\" size=\"6\">\n          <ion-label class=\"font-size-small\">{{order.equipamentName}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-right\" size=\"2\">\n          <ion-label class=\"font-size-mini\">{{order.priority}}</ion-label>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -588,41 +513,56 @@ const routes = [
     },
     {
         path: 'login',
-        loadChildren: './login/login.module#LoginPageModule'
+        loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./login/login.module */ "./src/app/login/login.module.ts")).then(m => m.LoginPageModule)
+    },
+    {
+        path: 'configuration',
+        loadChildren: () => __webpack_require__.e(/*! import() | configuration-configuration-module */ "configuration-configuration-module").then(__webpack_require__.bind(null, /*! ./configuration/configuration.module */ "./src/app/configuration/configuration.module.ts")).then(m => m.ConfigurationPageModule)
     },
     {
         path: 'home',
         loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule)
     },
     {
-        path: 'home/notification',
-        loadChildren: './home/notification.module#NotificationPageModule'
-    },
-    {
         path: 'home/monitor',
-        loadChildren: './home/monitor.module#MonitorPageModule'
+        loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./home/monitor.module */ "./src/app/home/monitor.module.ts")).then(m => m.MonitorPageModule)
     },
     {
-        path: 'home/maintenance-order/:id',
-        loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./home/maintenance-order/maintenance-order.module */ "./src/app/home/maintenance-order/maintenance-order.module.ts")).then(m => m.MaintenanceOrderPageModule)
+        path: 'home/notification',
+        loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./home/notification.module */ "./src/app/home/notification.module.ts")).then(m => m.NotificationPageModule)
     },
     {
-        path: 'home/maintenance-order/problems',
-        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-default-problems-module */ "home-maintenance-order-default-problems-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/default/problems.module */ "./src/app/home/maintenance-order/default/problems.module.ts")).then(m => m.ProblemsPageModule)
+        path: 'home/maintenance-order/:id/default',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-default-default-module */ "home-maintenance-order-default-default-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/default/default.module */ "./src/app/home/maintenance-order/default/default.module.ts")).then(m => m.DefaultPageModule)
     },
     {
-        path: 'home/maintenance-order/hourWorked',
-        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-hour-worked-module */ "home-maintenance-order-hour-worked-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/hour-worked.module */ "./src/app/home/maintenance-order/hour-worked.module.ts")).then(m => m.HourWorkedPageModule)
+        path: 'home/maintenance-order/:id/list',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-list-list-module */ "home-maintenance-order-list-list-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/list/list.module */ "./src/app/home/maintenance-order/list/list.module.ts")).then(m => m.ListPageModule)
     },
     {
-        path: 'home/maintenance-order/assignature',
-        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-assignature-module */ "home-maintenance-order-assignature-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/assignature.module */ "./src/app/home/maintenance-order/assignature.module.ts")).then(m => m.AssignaturePageModule)
+        path: 'home/maintenance-order/:id/route',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-route-route-module */ "home-maintenance-order-route-route-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/route/route.module */ "./src/app/home/maintenance-order/route/route.module.ts")).then(m => m.RoutePageModule)
     },
     {
-        path: 'configuration',
-        loadChildren: './configuration/configuration.module#ConfigurationPageModule'
+        path: 'home/maintenance-order/:id/:type/resume',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-tabs-resume-module */ "tabs-resume-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/tabs/resume.module */ "./src/app/home/maintenance-order/tabs/resume.module.ts")).then(m => m.ResumePageModule)
     },
-    { path: 'observation', loadChildren: './home/maintenance-order/observation/observation.module#ObservationPageModule' }
+    {
+        path: 'home/maintenance-order/:id/:type/problems',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-tabs-problems-module */ "tabs-problems-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/tabs/problems.module */ "./src/app/home/maintenance-order/tabs/problems.module.ts")).then(m => m.ProblemsPageModule)
+    },
+    {
+        path: 'home/maintenance-order/:id/:type/components',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-tabs-components-module */ "tabs-components-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/tabs/components.module */ "./src/app/home/maintenance-order/tabs/components.module.ts")).then(m => m.ComponentsPageModule)
+    },
+    {
+        path: 'home/maintenance-order/:id/:type/hourWorked',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-tabs-hour-worked-module */ "tabs-hour-worked-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/tabs/hour-worked.module */ "./src/app/home/maintenance-order/tabs/hour-worked.module.ts")).then(m => m.HourWorkedPageModule)
+    },
+    {
+        path: 'home/maintenance-order/:id/:type/assignature',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-tabs-assignature-module */ "tabs-assignature-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/tabs/assignature.module */ "./src/app/home/maintenance-order/tabs/assignature.module.ts")).then(m => m.AssignaturePageModule)
+    }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -753,12 +693,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _login_login_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./login/login.module */ "./src/app/login/login.module.ts");
 /* harmony import */ var _home_home_module__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./home/home.module */ "./src/app/home/home.module.ts");
-/* harmony import */ var _home_maintenance_order_maintenance_order_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/maintenance-order/maintenance-order.module */ "./src/app/home/maintenance-order/maintenance-order.module.ts");
-/* harmony import */ var _home_monitor_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./home/monitor.module */ "./src/app/home/monitor.module.ts");
-/* harmony import */ var _home_notification_module__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./home/notification.module */ "./src/app/home/notification.module.ts");
-/* harmony import */ var _http_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./http/http */ "./src/app/http/http.ts");
-/* harmony import */ var _rest_loginRest__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./rest/loginRest */ "./src/app/rest/loginRest.ts");
-/* harmony import */ var _utils_viewUtils__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./utils/viewUtils */ "./src/app/utils/viewUtils.ts");
+/* harmony import */ var _home_monitor_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/monitor.module */ "./src/app/home/monitor.module.ts");
+/* harmony import */ var _home_notification_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./home/notification.module */ "./src/app/home/notification.module.ts");
+/* harmony import */ var _http_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./http/http */ "./src/app/http/http.ts");
+/* harmony import */ var _rest_loginRest__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./rest/loginRest */ "./src/app/rest/loginRest.ts");
+/* harmony import */ var _utils_viewUtils__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./utils/viewUtils */ "./src/app/utils/viewUtils.ts");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm2015/angular-fontawesome.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
 
 
 
@@ -777,6 +721,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_18__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_19__["fas"], _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_20__["far"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_21__["fab"]);
 let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -790,18 +739,18 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_http__WEBPACK_IMPORTED_MODULE_7__["HttpModule"],
             _login_login_module__WEBPACK_IMPORTED_MODULE_10__["LoginPageModule"],
             _home_home_module__WEBPACK_IMPORTED_MODULE_11__["HomePageModule"],
-            _home_maintenance_order_maintenance_order_module__WEBPACK_IMPORTED_MODULE_12__["MaintenanceOrderPageModule"],
-            _home_monitor_module__WEBPACK_IMPORTED_MODULE_13__["MonitorPageModule"],
-            _home_notification_module__WEBPACK_IMPORTED_MODULE_14__["NotificationPageModule"],
+            _home_monitor_module__WEBPACK_IMPORTED_MODULE_12__["MonitorPageModule"],
+            _home_notification_module__WEBPACK_IMPORTED_MODULE_13__["NotificationPageModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"]
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
+            _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_17__["FontAwesomeModule"]
         ],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
-            _http_http__WEBPACK_IMPORTED_MODULE_15__["HttpProvider"],
-            _utils_viewUtils__WEBPACK_IMPORTED_MODULE_17__["ViewUtils"],
-            _rest_loginRest__WEBPACK_IMPORTED_MODULE_16__["LoginRest"],
+            _http_http__WEBPACK_IMPORTED_MODULE_14__["HttpProvider"],
+            _utils_viewUtils__WEBPACK_IMPORTED_MODULE_16__["ViewUtils"],
+            _rest_loginRest__WEBPACK_IMPORTED_MODULE_15__["LoginRest"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
@@ -847,11 +796,11 @@ const routes = [
         children: [
             {
                 path: "monitor",
-                loadChildren: "./monitor.module#MonitorPageModule"
+                loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./monitor.module */ "./src/app/home/monitor.module.ts")).then(m => m.MonitorPageModule)
             },
             {
                 path: "notification",
-                loadChildren: "./notification.module#NotificationPageModule"
+                loadChildren: () => Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./notification.module */ "./src/app/home/notification.module.ts")).then(m => m.NotificationPageModule)
             },
             {
                 path: "",
@@ -910,7 +859,6 @@ let HomePage = class HomePage {
     constructor() {
         this.tabs = this.obterTabs();
     }
-    // public notificationPage = NotificationPage;
     obterTabs() {
         return [
             {
@@ -936,366 +884,6 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
 ], HomePage);
-
-
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/components.module.ts":
-/*!*************************************************************!*\
-  !*** ./src/app/home/maintenance-order/components.module.ts ***!
-  \*************************************************************/
-/*! exports provided: ComponentsModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ComponentsModule", function() { return ComponentsModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _maintenance_order_default_default_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../maintenance-order/default/default.component */ "./src/app/home/maintenance-order/default/default.component.ts");
-/* harmony import */ var _maintenance_order_list_list_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../maintenance-order/list/list.component */ "./src/app/home/maintenance-order/list/list.component.ts");
-/* harmony import */ var _maintenance_order_route_route_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../maintenance-order/route/route.component */ "./src/app/home/maintenance-order/route/route.component.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-
-
-
-
-
-
-
-
-let ComponentsModule = class ComponentsModule {
-};
-ComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_5__["CommonModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["IonicModule"],
-        ],
-        declarations: [
-            _maintenance_order_default_default_component__WEBPACK_IMPORTED_MODULE_2__["DefaultComponent"],
-            _maintenance_order_list_list_component__WEBPACK_IMPORTED_MODULE_3__["ListComponent"],
-            _maintenance_order_route_route_component__WEBPACK_IMPORTED_MODULE_4__["RouteComponent"]
-        ],
-        exports: [
-            _maintenance_order_default_default_component__WEBPACK_IMPORTED_MODULE_2__["DefaultComponent"],
-            _maintenance_order_list_list_component__WEBPACK_IMPORTED_MODULE_3__["ListComponent"],
-            _maintenance_order_route_route_component__WEBPACK_IMPORTED_MODULE_4__["RouteComponent"]
-        ]
-    })
-], ComponentsModule);
-
-
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/default/default.component.scss":
-/*!***********************************************************************!*\
-  !*** ./src/app/home/maintenance-order/default/default.component.scss ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvbWFpbnRlbmFuY2Utb3JkZXIvZGVmYXVsdC9kZWZhdWx0LmNvbXBvbmVudC5zY3NzIn0= */"
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/default/default.component.ts":
-/*!*********************************************************************!*\
-  !*** ./src/app/home/maintenance-order/default/default.component.ts ***!
-  \*********************************************************************/
-/*! exports provided: DefaultComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DefaultComponent", function() { return DefaultComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-
-
-let DefaultComponent = class DefaultComponent {
-    constructor() {
-        this.tabs = this.obterTabs();
-    }
-    ngOnInit() { }
-    obterTabs() {
-        return [
-            {
-                route: "resume",
-                icon: "clipboard"
-            },
-            {
-                route: "problem",
-                icon: "information-circle"
-            },
-            {
-                route: "component",
-                icon: "build"
-            },
-            {
-                route: "hourWorked",
-                icon: "time"
-            },
-            {
-                route: "assignature",
-                icon: "create"
-            }
-        ];
-    }
-};
-DefaultComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-default',
-        template: __webpack_require__(/*! raw-loader!./default.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/default/default.component.html"),
-        styles: [__webpack_require__(/*! ./default.component.scss */ "./src/app/home/maintenance-order/default/default.component.scss")]
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-], DefaultComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/list/list.component.scss":
-/*!*****************************************************************!*\
-  !*** ./src/app/home/maintenance-order/list/list.component.scss ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvbWFpbnRlbmFuY2Utb3JkZXIvbGlzdC9saXN0LmNvbXBvbmVudC5zY3NzIn0= */"
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/list/list.component.ts":
-/*!***************************************************************!*\
-  !*** ./src/app/home/maintenance-order/list/list.component.ts ***!
-  \***************************************************************/
-/*! exports provided: ListComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListComponent", function() { return ListComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-
-
-let ListComponent = class ListComponent {
-    constructor() {
-        this.tabs = this.obterTabs();
-    }
-    ngOnInit() { }
-    obterTabs() {
-        return [
-            {
-                route: "resume",
-                icon: "clipboard"
-            },
-            {
-                route: "component",
-                icon: "build"
-            },
-            {
-                route: "assignature",
-                icon: "create"
-            }
-        ];
-    }
-};
-ListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-list',
-        template: __webpack_require__(/*! raw-loader!./list.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/list/list.component.html"),
-        styles: [__webpack_require__(/*! ./list.component.scss */ "./src/app/home/maintenance-order/list/list.component.scss")]
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-], ListComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/maintenance-order.module.ts":
-/*!********************************************************************!*\
-  !*** ./src/app/home/maintenance-order/maintenance-order.module.ts ***!
-  \********************************************************************/
-/*! exports provided: MaintenanceOrderPageModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MaintenanceOrderPageModule", function() { return MaintenanceOrderPageModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _maintenance_order_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./maintenance-order.page */ "./src/app/home/maintenance-order/maintenance-order.page.ts");
-/* harmony import */ var _components_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components.module */ "./src/app/home/maintenance-order/components.module.ts");
-
-
-
-
-
-
-
-
-const routes = [
-    {
-        path: '',
-        component: _maintenance_order_page__WEBPACK_IMPORTED_MODULE_6__["MaintenanceOrderPage"]
-    }
-];
-let MaintenanceOrderPageModule = class MaintenanceOrderPageModule {
-};
-MaintenanceOrderPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
-            _components_module__WEBPACK_IMPORTED_MODULE_7__["ComponentsModule"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
-        ],
-        declarations: [_maintenance_order_page__WEBPACK_IMPORTED_MODULE_6__["MaintenanceOrderPage"]]
-    })
-], MaintenanceOrderPageModule);
-
-
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/maintenance-order.page.scss":
-/*!********************************************************************!*\
-  !*** ./src/app/home/maintenance-order/maintenance-order.page.scss ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvbWFpbnRlbmFuY2Utb3JkZXIvbWFpbnRlbmFuY2Utb3JkZXIucGFnZS5zY3NzIn0= */"
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/maintenance-order.page.ts":
-/*!******************************************************************!*\
-  !*** ./src/app/home/maintenance-order/maintenance-order.page.ts ***!
-  \******************************************************************/
-/*! exports provided: MaintenanceOrderPage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MaintenanceOrderPage", function() { return MaintenanceOrderPage; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-
-
-
-let MaintenanceOrderPage = class MaintenanceOrderPage {
-    constructor(activeRoute) {
-        this.activeRoute = activeRoute;
-        let id = this.activeRoute.snapshot.paramMap.get('id');
-        this.loadFullOrderData(Number(id));
-    }
-    ngOnInit() {
-    }
-    loadFullOrderData(id) {
-        this.order = {
-            "id": 1,
-            "integrationID": "1000",
-            "createdAt": "17/01/2016",
-            "deleted": 0,
-            "orderNumber": "OM - 2445492/DJ0449",
-            "priority": "urgent",
-            "type": "preventiva",
-            "userId": 1,
-            "installationAreaId": 1,
-            "orderTypeId": id - 1,
-            "orderClassificationId": 1,
-            "orderEquipamentId": 1,
-            "equipamentName": "DHA03005/007"
-        };
-    }
-};
-MaintenanceOrderPage.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
-];
-MaintenanceOrderPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-maintenance-order',
-        template: __webpack_require__(/*! raw-loader!./maintenance-order.page.html */ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/maintenance-order.page.html"),
-        styles: [__webpack_require__(/*! ./maintenance-order.page.scss */ "./src/app/home/maintenance-order/maintenance-order.page.scss")]
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
-], MaintenanceOrderPage);
-
-
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/route/route.component.scss":
-/*!*******************************************************************!*\
-  !*** ./src/app/home/maintenance-order/route/route.component.scss ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvbWFpbnRlbmFuY2Utb3JkZXIvcm91dGUvcm91dGUuY29tcG9uZW50LnNjc3MifQ== */"
-
-/***/ }),
-
-/***/ "./src/app/home/maintenance-order/route/route.component.ts":
-/*!*****************************************************************!*\
-  !*** ./src/app/home/maintenance-order/route/route.component.ts ***!
-  \*****************************************************************/
-/*! exports provided: RouteComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RouteComponent", function() { return RouteComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-
-
-let RouteComponent = class RouteComponent {
-    constructor() {
-        this.tabs = this.obterTabs();
-    }
-    ngOnInit() { }
-    obterTabs() {
-        return [
-            {
-                route: "resume",
-                icon: "clipboard"
-            },
-            {
-                route: "component",
-                icon: "build"
-            },
-            {
-                route: "assignature",
-                icon: "create"
-            }
-        ];
-    }
-};
-RouteComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-route',
-        template: __webpack_require__(/*! raw-loader!./route.component.html */ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/route/route.component.html"),
-        styles: [__webpack_require__(/*! ./route.component.scss */ "./src/app/home/maintenance-order/route/route.component.scss")]
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-], RouteComponent);
 
 
 
@@ -1499,7 +1087,18 @@ let MonitorPage = class MonitorPage {
         this.filtredOrders = this.viewUtils.filterArray(this.filtredOrders, 'orderNumber', this.filter);
     }
     openOrder(obj) {
-        this.router.navigateByUrl('/home/maintenance-order/' + obj.id);
+        if (obj.orderTypeId == 0) {
+            this.router.navigateByUrl('home/maintenance-order/' + obj.orderTypeId + '/default');
+            return;
+        }
+        if (obj.orderTypeId == 1) {
+            this.router.navigateByUrl('home/maintenance-order/' + obj.orderTypeId + '/list');
+            return;
+        }
+        if (obj.orderTypeId == 2) {
+            this.router.navigateByUrl('home/maintenance-order/' + obj.orderTypeId + '/route');
+            return;
+        }
     }
     assumeOrder(event) {
         event.stopPropagation();
