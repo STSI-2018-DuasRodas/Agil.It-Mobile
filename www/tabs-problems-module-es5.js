@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n</ion-header>\n\n<ion-content>\n  <ion-label>Problemas</ion-label>\n</ion-content>\n"
+module.exports = "<ion-header>\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-card-header>\n      <ion-item-divider>\n        <ion-card-title color=\"secondary\">Problemas</ion-card-title>\n      </ion-item-divider>\n    </ion-card-header>\n\n    <ion-card-content>\n      <div>\n        <ion-label class=\"font-size-small font-style-bold\" color=\"primary\" position=\"stacked\">Causa</ion-label>\n        <ion-item lines=\"none\">\n          <ion-input class=\"font-size-small\" disabled>Descarga Elétrica</ion-input>\n        </ion-item>\n      </div>\n\n      <div class=\"m-top-2\">\n        <ion-label class=\"font-size-small font-style-bold\" color=\"primary\" position=\"stacked\">Informações da Casa</ion-label>\n        <ion-item>\n          <ion-input class=\"font-size-small\" disabled>Ao ligar o disjuntor da máquina deu a descarga.</ion-input>\n        </ion-item>\n      </div>\n\n      <div class=\"m-top-6\">\n        <ion-label class=\"font-size-small font-style-bold\" color=\"primary\" position=\"stacked\">Sintoma</ion-label>\n        <ion-item lines=\"none\">\n          <ion-input class=\"font-size-small\" disabled>Motor queimado</ion-input>\n        </ion-item>\n      </div>\n\n      <div class=\"m-top-2\">\n        <ion-label class=\"font-size-small font-style-bold\" color=\"primary\" position=\"stacked\">Informações do Sintoma</ion-label>\n        <ion-item>\n          <ion-input class=\"font-size-small\" disabled>Quando deu a descarga, saiu fumaça do motor da máquina.</ion-input>\n        </ion-item>\n      </div>\n\n      <div class=\"m-top-6\">\n        <ion-label class=\"font-size-small font-style-bold\" color=\"primary\" position=\"stacked\">Componente Defeituoso</ion-label>\n        <ion-item lines=\"none\">\n          <ion-input class=\"font-size-small\" disabled>Motor</ion-input>\n        </ion-item>\n      </div>\n    </ion-card-content>\n  </ion-card>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -28,6 +28,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _problems_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./problems.page */ "./src/app/home/maintenance-order/tabs/problems.page.ts");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm5/angular-fontawesome.js");
+
 
 
 
@@ -50,7 +52,8 @@ var ProblemsPageModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes),
+                _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeModule"]
             ],
             declarations: [_problems_page__WEBPACK_IMPORTED_MODULE_6__["ProblemsPage"]]
         })

@@ -2,38 +2,49 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-virtual-scroll [items]="items">
-      <ion-item *virtualItem="let item">
-        <ion-row>
-          <ion-col size="12">
-            <ion-card>
-              <ion-card-header>
-                <ion-item-divider>
-                  <ion-label class="font-size-mini font-style-bold" color="primary">Causa</ion-label>
-                  <ion-icon name="add-circle" slot="end"></ion-icon>
-                </ion-item-divider>
-              </ion-card-header>
-              <ion-card-content>
-                {{item.cause}}
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col size="12">
-            <ion-card>
-              <ion-card-header >
-                <ion-item-divider>
-                  <ion-label class="font-size-mini font-style-bold" color="primary">Informações da Causa</ion-label>  
-                </ion-item-divider>
-              </ion-card-header>
-              <ion-card-content>
-                {{item.causeInformation}}
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-virtual-scroll>
-  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-item-divider>
+        <ion-card-title color="secondary">Problemas</ion-card-title>
+      </ion-item-divider>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div>
+        <ion-label class="font-size-small font-style-bold" color="primary" position="stacked">Causa</ion-label>
+        <ion-item lines="none">
+          <ion-input class="font-size-small" disabled>Descarga Elétrica</ion-input>
+        </ion-item>
+      </div>
+
+      <div class="m-top-2">
+        <ion-label class="font-size-small font-style-bold" color="primary" position="stacked">Informações da Casa</ion-label>
+        <ion-item>
+          <ion-input class="font-size-small" disabled>Ao ligar o disjuntor da máquina deu a descarga.</ion-input>
+        </ion-item>
+      </div>
+
+      <div class="m-top-6">
+        <ion-label class="font-size-small font-style-bold" color="primary" position="stacked">Sintoma</ion-label>
+        <ion-item lines="none">
+          <ion-input class="font-size-small" disabled>Motor queimado</ion-input>
+        </ion-item>
+      </div>
+
+      <div class="m-top-2">
+        <ion-label class="font-size-small font-style-bold" color="primary" position="stacked">Informações do Sintoma</ion-label>
+        <ion-item>
+          <ion-input class="font-size-small" disabled>Quando deu a descarga, saiu fumaça do motor da máquina.</ion-input>
+        </ion-item>
+      </div>
+
+      <div class="m-top-6">
+        <ion-label class="font-size-small font-style-bold" color="primary" position="stacked">Componente Defeituoso</ion-label>
+        <ion-item lines="none">
+          <ion-input class="font-size-small" disabled>Motor</ion-input>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

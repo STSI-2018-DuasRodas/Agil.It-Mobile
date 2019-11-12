@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n</ion-header>\n\n<ion-content>\n  <ion-label>componentes</ion-label>\n</ion-content>\n"
+module.exports = "<ion-header>\n</ion-header>\n\n<ion-content>\n  <ion-virtual-scroll [items]=\"items\">\n    <ion-item *virtualItem=\"let item\" class=\"p-right-6 p-left-6\" lines=\"full\">\n      <ion-row>\n        <ion-col size=\"12\">\n          <ion-label class=\"font-style-bold\">{{ item.name }}</ion-label>\n        </ion-col>\n        <ion-col size=\"1\"></ion-col>\n        <ion-col size=\"10\">\n          <ion-label class=\"font-size-mini\">{{ item.description }}</ion-label>\n        </ion-col>\n        <ion-col size=\"1\">\n          <fa-icon class=\"color-secondary icon-default-size\" icon=\"ban\"></fa-icon>\n        </ion-col>\n      </ion-row>\n    </ion-item>\n  </ion-virtual-scroll>\n  \n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button>\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n"
 
 /***/ }),
 
@@ -28,6 +28,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _components_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components.page */ "./src/app/home/maintenance-order/tabs/components.page.ts");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm2015/angular-fontawesome.js");
+
 
 
 
@@ -49,7 +51,8 @@ ComponentsPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes),
+            _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_7__["FontAwesomeModule"]
         ],
         declarations: [_components_page__WEBPACK_IMPORTED_MODULE_6__["ComponentsPage"]]
     })
@@ -85,8 +88,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ComponentsPage = class ComponentsPage {
-    constructor() { }
+    constructor() {
+        this.items = [];
+        this.loadComponents();
+    }
     ngOnInit() {
+    }
+    loadComponents() {
+        for (let i = 0; i < 50; i++) {
+            this.items.push({
+                name: 'Alicate ' + ' N' + i,
+                description: 'Alicate de corte - 01 UN'
+            });
+        }
     }
 };
 ComponentsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
