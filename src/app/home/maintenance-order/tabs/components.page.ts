@@ -16,11 +16,27 @@ export class ComponentsPage implements OnInit {
   }
 
   public loadComponents(){
-    for (let i = 0; i < 50; i++) {
-      this.items.push({
-        name: 'Alicate ' + ' N' + i,
+    this.items.push(
+      {
+        name: 'Alicate',
         description: 'Alicate de corte - 01 UN'
-      });
-    }
+      },
+      {
+        name: 'Alicate',
+        description: 'Alicate universal - 01 UN'
+      },
+      {
+        name: 'Parafuso',
+        description: 'Parafuso Fenda 6cm - 08 UN'
+      },
+      {
+        name: 'Parafuso',
+        description: 'Parafuso Fenda 6cm - 08 UN'
+      },
+      {
+        name: 'Parafuso',
+        description: 'Parafuso Fenda 6cm - 08 UN'
+      },
+    );
   }
 }

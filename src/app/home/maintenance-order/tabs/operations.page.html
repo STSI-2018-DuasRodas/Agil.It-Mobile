@@ -1,0 +1,18 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+  <ion-virtual-scroll [items]="items">
+    <ion-item *virtualItem="let item" class="p-right-6 p-left-6" lines="full">
+      <ion-label color="secondary" class="font-style-bold">{{ item.name }}</ion-label>
+      <fa-icon class="color-primary icon-mini-size" icon="pencil-alt" slot="end"></fa-icon>
+      <fa-icon class="color-secondary icon-mini-size" icon="trash-alt" slot="end"></fa-icon>
+    </ion-item>
+  </ion-virtual-scroll>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

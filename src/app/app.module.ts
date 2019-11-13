@@ -21,13 +21,15 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import { PopoverComponent } from './popover/popover.component';
 
 library.add(fas, far, fab);
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PopoverComponent
   ],
-  entryComponents: [],
+  entryComponents: [PopoverComponent],
   imports: [
     BrowserModule,
     HttpModule,

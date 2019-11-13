@@ -58,6 +58,10 @@ const routes: Routes = [
   { 
     path: 'home/maintenance-order/:id/:type/assignature', 
     loadChildren: () => import('./home/maintenance-order/tabs/assignature.module').then(m => m.AssignaturePageModule)
+  },
+  {
+    path: 'home/maintenance-order/:id/:type/operations', 
+    loadChildren: () => import('./home/maintenance-order/tabs/operations.module').then(m => m.OperationsPageModule)
   }
 ];
 

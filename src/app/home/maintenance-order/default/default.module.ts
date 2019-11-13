@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DefaultPage } from './default.page';
+import { PopoverComponent } from 'src/app/popover/popover.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       { 
         path: "components",
         loadChildren: () => import('../tabs/components.module').then(m => m.ComponentsPageModule)
+      },
+      { 
+        path: "operations",
+        loadChildren: () => import('../tabs/operations.module').then(m => m.OperationsPageModule)
       },
       { 
         path: "hourWorked",
