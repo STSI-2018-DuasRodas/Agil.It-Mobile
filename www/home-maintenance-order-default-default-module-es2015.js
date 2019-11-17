@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <div class=\"align-center\" style=\"margin-right: 8%;\">\n      <ion-row>\n        <ion-col size=\"12\">\n          <ion-title>{{order.orderNumber}}</ion-title>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col size=\"3\"></ion-col>\n        <ion-col size=\"1\">\n          <ion-icon class=\"icon-default-size\" *ngIf=\"order.orderTypeId == 0\" name=\"bookmark\" color=\"primary\"></ion-icon>\n          <ion-icon class=\"icon-default-size\" *ngIf=\"order.orderTypeId == 1\" name=\"bookmark\" color=\"warning\"></ion-icon>\n          <ion-icon class=\"icon-default-size\" *ngIf=\"order.orderTypeId == 2\" name=\"bookmark\" color=\"medium\"></ion-icon>\n        </ion-col>\n        <ion-col size=\"5\">\n          <ion-label class=\"font-size-medium\">{{order.type}}</ion-label>\n        </ion-col>\n        <ion-col size=\"2\"></ion-col>\n        <ion-col size=\"1\">\n          <ion-icon class=\"icon-default-size\" name=\"settings\"></ion-icon>\n        </ion-col>\n      </ion-row>\n    </div>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"home/monitor\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n      </ion-tab-button>\n    </ion-tab-bar>\n  </ion-tabs>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <div class=\"align-center\" style=\"margin-right: 8%;\">\n      <ion-row>\n        <ion-col size=\"12\">\n          <ion-title>{{order.orderNumber}}</ion-title>\n        </ion-col>\n      </ion-row>\n      <ion-row>\n        <ion-col size=\"3\"></ion-col>\n        <ion-col size=\"1\">\n          <ion-icon class=\"icon-default-size\" *ngIf=\"order.orderTypeId == 0\" name=\"bookmark\" color=\"primary\"></ion-icon>\n          <ion-icon class=\"icon-default-size\" *ngIf=\"order.orderTypeId == 1\" name=\"bookmark\" color=\"warning\"></ion-icon>\n          <ion-icon class=\"icon-default-size\" *ngIf=\"order.orderTypeId == 2\" name=\"bookmark\" color=\"medium\"></ion-icon>\n        </ion-col>\n        <ion-col size=\"5\">\n          <ion-label class=\"font-size-medium\">{{order.type}}</ion-label>\n        </ion-col>\n        <ion-col size=\"2\"></ion-col>\n        <ion-col size=\"1\">\n          <ion-icon (click)=\"presentPopover()\" class=\"icon-default-size\" name=\"settings\"></ion-icon>\n        </ion-col>\n      </ion-row>\n    </div>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"home/monitor\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-tabs>\n    <ion-tab-bar slot=\"bottom\" color=\"\">\n      <ion-tab-button *ngFor=\"let tab of tabs\" [tab]=\"tab.route\">\n        <ion-icon [name]=\"tab.icon\"></ion-icon>\n      </ion-tab-button>\n    </ion-tab-bar>\n  </ion-tabs>\n</ion-content>\n"
 
 /***/ }),
 
@@ -51,6 +51,10 @@ const routes = [
             {
                 path: "components",
                 loadChildren: () => __webpack_require__.e(/*! import() | tabs-components-module */ "tabs-components-module").then(__webpack_require__.bind(null, /*! ../tabs/components.module */ "./src/app/home/maintenance-order/tabs/components.module.ts")).then(m => m.ComponentsPageModule)
+            },
+            {
+                path: "operations",
+                loadChildren: () => __webpack_require__.e(/*! import() | tabs-operations-module */ "tabs-operations-module").then(__webpack_require__.bind(null, /*! ../tabs/operations.module */ "./src/app/home/maintenance-order/tabs/operations.module.ts")).then(m => m.OperationsPageModule)
             },
             {
                 path: "hourWorked",
@@ -111,16 +115,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var src_app_popover_popover_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/popover/popover.component */ "./src/app/popover/popover.component.ts");
+
 
 
 
 
 let DefaultPage = class DefaultPage {
-    constructor(activeRoute, menuCtrl) {
+    constructor(activeRoute, menuCtrl, popoverController, events) {
         this.activeRoute = activeRoute;
         this.menuCtrl = menuCtrl;
+        this.popoverController = popoverController;
+        this.events = events;
         this.tabs = this.obterTabs();
         this.order = {};
+        this.currentPopover = null;
         this.loadOrderById(this.activeRoute.snapshot.paramMap.get('id'));
     }
     ngOnInit() {
@@ -144,6 +153,10 @@ let DefaultPage = class DefaultPage {
             {
                 route: "components",
                 icon: "build"
+            },
+            {
+                route: "operations",
+                icon: "construct"
             },
             {
                 route: "hourWorked",
@@ -172,10 +185,69 @@ let DefaultPage = class DefaultPage {
             "equipamentName": "DHA03005/007"
         };
     }
+    presentPopover(ev) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const popover = yield this.popoverController.create({
+                component: src_app_popover_popover_component__WEBPACK_IMPORTED_MODULE_4__["PopoverComponent"],
+                event: ev,
+                id: 'popover',
+                translucent: true
+            });
+            this.currentPopover = popover;
+            this.subscribeMethods();
+            return yield popover.present();
+        });
+    }
+    subscribeMethods() {
+        this.events.subscribe('assume', () => {
+            console.log("Assumir");
+            this.unSubscribeMethods();
+        });
+        this.events.subscribe('start', () => {
+            console.log("Inicar");
+            this.unSubscribeMethods();
+        });
+        this.events.subscribe('pause', () => {
+            console.log("Pausar");
+            this.unSubscribeMethods();
+        });
+        this.events.subscribe('delegate', () => {
+            console.log("Delegar");
+            this.unSubscribeMethods();
+        });
+        this.events.subscribe('invite', () => {
+            console.log("Convidar");
+            this.unSubscribeMethods();
+        });
+        this.events.subscribe('requestParticipation', () => {
+            console.log("Solicitar Participação");
+            this.unSubscribeMethods();
+        });
+        this.events.subscribe('equipamentStatus', () => {
+            console.log("status do equipamento");
+            this.unSubscribeMethods();
+        });
+        this.events.subscribe('checkList', () => {
+            console.log("CheckList");
+            this.unSubscribeMethods();
+        });
+    }
+    unSubscribeMethods() {
+        this.events.unsubscribe('assume');
+        this.events.unsubscribe('start');
+        this.events.unsubscribe('pause');
+        this.events.unsubscribe('delegate');
+        this.events.unsubscribe('invite');
+        this.events.unsubscribe('requestParticipation');
+        this.events.unsubscribe('equipamentStatus');
+        this.events.unsubscribe('checkList');
+    }
 };
 DefaultPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["PopoverController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] }
 ];
 DefaultPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -183,7 +255,7 @@ DefaultPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./default.page.html */ "./node_modules/raw-loader/index.js!./src/app/home/maintenance-order/default/default.page.html"),
         styles: [__webpack_require__(/*! ./default.page.scss */ "./src/app/home/maintenance-order/default/default.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["MenuController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["PopoverController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"]])
 ], DefaultPage);
 
 

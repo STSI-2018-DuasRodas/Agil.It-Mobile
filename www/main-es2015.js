@@ -489,6 +489,17 @@ module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-car
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/popover/popover.component.html":
+/*!**************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/popover/popover.component.html ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-list>\n  <ion-item-divider>\n    <ion-list-header class=\"font-size-medium font-style-bold\">Lista de ações</ion-list-header>\n  </ion-item-divider>\n  <ion-item (click)=\"assume()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"hand-point-up\"></fa-icon>Assumir</ion-item>\n  <ion-item (click)=\"start()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"play-circle\"></fa-icon>Iniciar</ion-item>\n  <ion-item (click)=\"pause()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"pause-circle\"></fa-icon>Pausar</ion-item>\n  <ion-item (click)=\"delegate()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"hand-point-right\"></fa-icon>Delegar</ion-item>\n  <ion-item (click)=\"invite()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"user-friends\"></fa-icon>Convidar</ion-item>\n  <ion-item (click)=\"requestParticipation()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"users\"></fa-icon>Solicitar Participação</ion-item>\n  <ion-item (click)=\"equipamentStatus()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"info\"></fa-icon>Status Equipamento</ion-item>\n  <ion-item lines=\"none\" (click)=\"checkList()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"check-square\"></fa-icon>Check-List</ion-item>\n</ion-list>\n<ion-button expand=\"block\" (click)=\"dismissPopover()\">Close</ion-button>"
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -562,6 +573,10 @@ const routes = [
     {
         path: 'home/maintenance-order/:id/:type/assignature',
         loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-tabs-assignature-module */ "tabs-assignature-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/tabs/assignature.module */ "./src/app/home/maintenance-order/tabs/assignature.module.ts")).then(m => m.AssignaturePageModule)
+    },
+    {
+        path: 'home/maintenance-order/:id/:type/operations',
+        loadChildren: () => __webpack_require__.e(/*! import() | home-maintenance-order-tabs-operations-module */ "tabs-operations-module").then(__webpack_require__.bind(null, /*! ./home/maintenance-order/tabs/operations.module */ "./src/app/home/maintenance-order/tabs/operations.module.ts")).then(m => m.OperationsPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -703,6 +718,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
 /* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
+/* harmony import */ var _popover_popover_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./popover/popover.component */ "./src/app/popover/popover.component.ts");
+
 
 
 
@@ -731,9 +748,10 @@ let AppModule = class AppModule {
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
+            _popover_popover_component__WEBPACK_IMPORTED_MODULE_22__["PopoverComponent"]
         ],
-        entryComponents: [],
+        entryComponents: [_popover_popover_component__WEBPACK_IMPORTED_MODULE_22__["PopoverComponent"]],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
             _angular_http__WEBPACK_IMPORTED_MODULE_7__["HttpModule"],
@@ -1434,6 +1452,97 @@ LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"], _rest_loginRest__WEBPACK_IMPORTED_MODULE_4__["LoginRest"], _utils_viewUtils__WEBPACK_IMPORTED_MODULE_5__["ViewUtils"]])
 ], LoginPage);
+
+
+
+/***/ }),
+
+/***/ "./src/app/popover/popover.component.scss":
+/*!************************************************!*\
+  !*** ./src/app/popover/popover.component.scss ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BvcG92ZXIvcG9wb3Zlci5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/popover/popover.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/popover/popover.component.ts ***!
+  \**********************************************/
+/*! exports provided: PopoverComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PopoverComponent", function() { return PopoverComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+
+let PopoverComponent = class PopoverComponent {
+    constructor(events, popoverController, navParams) {
+        this.events = events;
+        this.popoverController = popoverController;
+        this.navParams = navParams;
+    }
+    ngOnInit() {
+        this.page = this.navParams.get('data');
+    }
+    dismissPopover() {
+        this.events.publish('dismissPopover');
+        this.popoverController.dismiss();
+    }
+    assume() {
+        this.events.publish('assume');
+        this.popoverController.dismiss();
+    }
+    start() {
+        this.events.publish('start');
+        this.popoverController.dismiss();
+    }
+    pause() {
+        this.events.publish('pause');
+        this.popoverController.dismiss();
+    }
+    delegate() {
+        this.events.publish('delegate');
+        this.popoverController.dismiss();
+    }
+    invite() {
+        this.events.publish('invite');
+        this.popoverController.dismiss();
+    }
+    requestParticipation() {
+        this.events.publish('requestParticipation');
+        this.popoverController.dismiss();
+    }
+    equipamentStatus() {
+        this.events.publish('equipamentStatus');
+        this.popoverController.dismiss();
+    }
+    checkList() {
+        this.events.publish('checkList');
+        this.popoverController.dismiss();
+    }
+};
+PopoverComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["PopoverController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] }
+];
+PopoverComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-popover',
+        template: __webpack_require__(/*! raw-loader!./popover.component.html */ "./node_modules/raw-loader/index.js!./src/app/popover/popover.component.html"),
+        styles: [__webpack_require__(/*! ./popover.component.scss */ "./src/app/popover/popover.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["PopoverController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]])
+], PopoverComponent);
 
 
 

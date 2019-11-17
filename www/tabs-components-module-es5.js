@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n</ion-header>\n\n<ion-content>\n  <ion-virtual-scroll [items]=\"items\">\n    <ion-item *virtualItem=\"let item\" class=\"p-right-6 p-left-6\" lines=\"full\">\n      <ion-row>\n        <ion-col size=\"12\">\n          <ion-label class=\"font-style-bold\">{{ item.name }}</ion-label>\n        </ion-col>\n        <ion-col size=\"1\"></ion-col>\n        <ion-col size=\"10\">\n          <ion-label class=\"font-size-mini\">{{ item.description }}</ion-label>\n        </ion-col>\n        <ion-col size=\"1\">\n          <fa-icon class=\"color-secondary icon-default-size\" icon=\"ban\"></fa-icon>\n        </ion-col>\n      </ion-row>\n    </ion-item>\n  </ion-virtual-scroll>\n  \n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button>\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n"
+module.exports = "<ion-header>\n</ion-header>\n\n<ion-content>\n  <ion-virtual-scroll [items]=\"items\">\n    <ion-item *virtualItem=\"let item\" class=\"p-right-6 p-left-6\" lines=\"full\">\n      <ion-row>\n        <ion-col size=\"12\">\n          <ion-label class=\"font-size-mini font-style-bold\">{{ item.name }}</ion-label>\n        </ion-col>\n        <ion-col size=\"1\"></ion-col>\n        <ion-col size=\"11\">\n          <ion-label color=\"secondary\" class=\"font-size-mini font-style-bold\">{{ item.description }}</ion-label>\n        </ion-col>\n      </ion-row>\n      <fa-icon class=\"color-secondary icon-mini-size\" icon=\"ban\" slot=\"end\"></fa-icon>\n    </ion-item>\n  </ion-virtual-scroll>\n  \n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button>\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n"
 
 /***/ }),
 
@@ -98,12 +98,22 @@ var ComponentsPage = /** @class */ (function () {
     ComponentsPage.prototype.ngOnInit = function () {
     };
     ComponentsPage.prototype.loadComponents = function () {
-        for (var i = 0; i < 50; i++) {
-            this.items.push({
-                name: 'Alicate ' + ' N' + i,
-                description: 'Alicate de corte - 01 UN'
-            });
-        }
+        this.items.push({
+            name: 'Alicate',
+            description: 'Alicate de corte - 01 UN'
+        }, {
+            name: 'Alicate',
+            description: 'Alicate universal - 01 UN'
+        }, {
+            name: 'Parafuso',
+            description: 'Parafuso Fenda 6cm - 08 UN'
+        }, {
+            name: 'Parafuso',
+            description: 'Parafuso Fenda 6cm - 08 UN'
+        }, {
+            name: 'Parafuso',
+            description: 'Parafuso Fenda 6cm - 08 UN'
+        });
     };
     ComponentsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

@@ -23,4 +23,9 @@ const routes: Routes = [
   ],
   declarations: [AssignaturePage]
 })
-export class AssignaturePageModule {}
+export class AssignaturePageModule {
+
+  constructor(){
+
+  }
+}
