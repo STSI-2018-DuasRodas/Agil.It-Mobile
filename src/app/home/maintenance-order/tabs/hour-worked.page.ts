@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HourWorkedPage implements OnInit {
 
-  constructor() { }
+  hoursAponted = [{}];  
+  hourAponted = {"Date": "", "InitialHour": "", "FinalHour": "", "Total": "", "Interval": ""};
 
   ngOnInit() {
   }
 
+  teste() {
+    console.log(this.testando);
+  }
 }

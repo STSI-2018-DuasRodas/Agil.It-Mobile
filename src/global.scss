@@ -66,6 +66,10 @@
   color: #797777;
 }
 
+.color-black{
+  color: black;
+}
+
 .font-style-bold{
   font-weight: bold;
 }
@@ -118,12 +122,36 @@
   margin-bottom: 2%;
 }
 
-.m-bottom-1{
+.m-bottom-4{
   margin-bottom: 4%;
 }
 
 .m-bottom-6{
   margin-bottom: 6%;
+}
+
+.m-left-2{
+  margin-left: 2%;
+}
+
+.m-left-4{
+  margin-left: 4%;
+}
+
+.m-left-6{
+  margin-left: 6%;
+}
+
+.m-right-2{
+  margin-right: 2%;
+}
+
+.m-right-4{
+  margin-right: 4%;
+}
+
+.m-right-6{
+  margin-right: 6%;
 }
 
 .p-top-2{
@@ -172,4 +200,12 @@
 
 .p-right-6{
   padding-right: 6%;
+}
+
+.float-right{
+  float: right;
+}
+
+.float-left{
+  float: left;
 }
