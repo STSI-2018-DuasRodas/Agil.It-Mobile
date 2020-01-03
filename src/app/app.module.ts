@@ -22,6 +22,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { PopoverComponent } from './popover/popover.component';
+import { CustomComponentsModule } from './utils/customComponents.module';
 
 library.add(fas, far, fab);
 @NgModule({
@@ -37,6 +38,7 @@ library.add(fas, far, fab);
     HomePageModule,
     MonitorPageModule,
     NotificationPageModule,
+    CustomComponentsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     FontAwesomeModule

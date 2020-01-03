@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n\n</ion-header>\n\n<ion-content>\n  <ion-label>Assinatura</ion-label>\n</ion-content>\n"
+module.exports = "<ion-header>\n\n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <ion-card-header>\n    \n    </ion-card-header>\n    <ion-card-content>\n      <ion-item>\n        <ion-label color=\"secondary\" position=\"floating\">Digite sua senha:</ion-label>\n        <ion-input type=\"password\"></ion-input>\n      </ion-item>\n      <ion-item lines=\"none\">\n        <ion-checkbox slot=\"start\" [(ngModel)]=\"assignatureVerificationChecked\"></ion-checkbox>\n        <ion-label>Confirmar Assinatura?</ion-label>\n      </ion-item>\n      <div class=\"align-center p-top-6\">\n        <agilit-button (click)=\"assineOm()\" [disabled]=\"!assignatureVerificationChecked\">Assinar</agilit-button>\n      </div>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -28,6 +28,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _assignature_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./assignature.page */ "./src/app/home/maintenance-order/tabs/assignature.page.ts");
+/* harmony import */ var src_app_utils_customComponents_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/utils/customComponents.module */ "./src/app/utils/customComponents.module.ts");
+
 
 
 
@@ -50,10 +52,12 @@ var AssignaturePageModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                src_app_utils_customComponents_module__WEBPACK_IMPORTED_MODULE_7__["CustomComponentsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
             ],
             declarations: [_assignature_page__WEBPACK_IMPORTED_MODULE_6__["AssignaturePage"]]
-        })
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], AssignaturePageModule);
     return AssignaturePageModule;
 }());
@@ -89,8 +93,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var AssignaturePage = /** @class */ (function () {
     function AssignaturePage() {
+        this.assignatureVerificationChecked = false;
     }
     AssignaturePage.prototype.ngOnInit = function () {
+    };
+    AssignaturePage.prototype.assineOm = function () {
+        console.log(this.assignatureVerificationChecked);
     };
     AssignaturePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

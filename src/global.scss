@@ -83,7 +83,7 @@
 }
 
 .font-size-medium{
-  font-size: 5vw;
+  font-size: 4.5vw;
 }
 
 .font-size-large{
@@ -178,6 +178,10 @@
   padding-bottom: 6%;
 }
 
+.p-left-0{
+  padding-left: 0;
+}
+
 .p-left-2{
   padding-left: 2%;
 }
@@ -188,6 +192,10 @@
 
 .p-left-6{
   padding-left: 6%;
+}
+
+.p-right-0{
+  padding-right: 0;
 }
 
 .p-right-2{
@@ -202,10 +210,30 @@
   padding-right: 6%;
 }
 
+.p-2{
+  padding: 2%;
+}
+
+.p-4{
+  padding: 4%;
+}
+
+.p-6{
+  padding: 6%;
+}
+
 .float-right{
   float: right;
 }
 
 .float-left{
   float: left;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }

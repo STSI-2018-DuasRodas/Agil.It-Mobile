@@ -67,4 +67,25 @@ export class ViewUtils {
     
     return arrayFiltred;
   }
+
+  public formatDateToString(date : string) : string {
+    if (date == undefined || date == null || date == ""){
+      return "";
+    }  
+    
+    let array = date.split('-');
+
+    return array[2] + '/' + array[1] + '/' + array[0];
+  }
+
+  public formatTimeToString(time : string) : string {
+    debugger;
+    if (time == undefined || time == null || time == ""){
+      return "";
+    }  
+    
+    let array = time.split('-');
+
+    return array[2].trim() + '/' + array[1].trim() + '/' + array[0].trim();
+  }
 }

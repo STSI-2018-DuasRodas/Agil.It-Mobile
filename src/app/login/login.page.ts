@@ -19,8 +19,8 @@ export class LoginPage implements OnInit {
     
   }
 
-  public username : string = "julio_thomazelli-ju1@estudante.sc.senai.br";
-  public password : string = "123";
+  public username : string = "julio";
+  public password : string = "julio123";
 
   ionViewWillEnter(){
     this.menuCtrl.enable(false);
@@ -35,32 +35,26 @@ export class LoginPage implements OnInit {
       username: this.username,
       password : this.password
       }
-      this.router.navigateByUrl('/home');
       
     // await this.viewUtils.showProgressBar();
 
-    // this.loginRest.login(obj).subscribe(
-        // (data : any) => {
-        //   this.loginRestSucess(data);
-        //   this.viewUtils.hideProgressBar();
-        // },
-        // (error : any) =>{
-        //   this.viewUtils.hideProgressBar();
-        //   this.viewUtils.showToast("Algo de errado aconteceu!");
-        // }
-      // )
+    // let response = await this.loginRest.login(obj);
+    // this.loginRestSucess(response);
+    this.router.navigateByUrl('/home'); // Tirar essa linha
+    // this.viewUtils.hideProgressBar();
   }
 
   public loginRestSucess(response) : void{
-    let user = JSON.parse(response._body);
+    let user = JSON.stringify(response);
 
-    if (!user.success){
-      this.viewUtils.showToast(user.data);
+    if (!response.success){
+      this.viewUtils.showToast(response.error.message);
 
       return;
     }
 
-    window.localStorage.setItem("user", JSON.stringify(user.data));
+    window.localStorage.setItem("user", user);
     this.router.navigateByUrl('/home');
+    
   }
 }

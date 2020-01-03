@@ -34,16 +34,16 @@
   <ion-row *ngIf="!listView">
     <ion-col size="6" *ngFor="let order of filtredOrders">
       <ion-card (click)="openOrder(order)">
-        <ion-card-header class="align-center">
-          <ion-label class="font-style-bold font-size-mini" color="dark">{{order.orderNumber}}</ion-label>
+        <ion-card-header class="align-center p-left-0 p-right-0">
+          <ion-label class="font-style-bold font-size-small" color="dark">{{order.orderNumber}}</ion-label>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content class="p-left-0 p-right-0">
           <div class="align-center">
             <ion-row>
-              <ion-col size="10" class="align-center">
-                <ion-label class="font-size-small font-to-upper font-style-bold" color="secondary">{{order.type}}</ion-label>
+              <ion-col size="10">
+                <ion-label class="font-size-medium font-to-upper font-style-bold" color="secondary">{{order.type}}</ion-label>
               </ion-col>
-              <ion-col size="2">
+              <ion-col size="2" class="p-right-2">
                 <ion-icon *ngIf="order.orderTypeId == 0" class="icon-default-size" name="bookmark" color="primary"></ion-icon>
                 <ion-icon *ngIf="order.orderTypeId == 1" class="icon-default-size" name="bookmark" color="warning"></ion-icon>
                 <ion-icon *ngIf="order.orderTypeId == 2" class="icon-default-size" name="bookmark" color="medium"></ion-icon>
@@ -53,26 +53,26 @@
           <div class="align-left">
             <ion-row>
               <ion-col size="12">
-                <ion-label class="font-size-mini"><b>Equip.:</b> {{order.equipamentName}}</ion-label>
+                <ion-label class="font-size-medium"><ion-icon slot="start" name="hammer"></ion-icon>&nbsp;&nbsp;{{order.equipamentName}}</ion-label>
               </ion-col>
               <ion-col size="12">
-                <ion-label class="font-size-mini"><b>Prioridade:</b> {{order.priority}}</ion-label>
+                <ion-label class="font-size-medium"><ion-icon slot="start" name="help-circle"></ion-icon>&nbsp;&nbsp;{{order.priority}}</ion-label>
               </ion-col>
               <ion-col size="12">
-                <ion-label class="font-size-mini"><b>Abertura:</b> {{order.createdAt}}</ion-label>
+                <ion-label class="font-size-medium"><ion-icon slot="start" name="alarm"></ion-icon>&nbsp;&nbsp;{{order.createdAt}}</ion-label>
               </ion-col>
             </ion-row>
           </div>
           <div class="align-center">
-            <ion-button (click)="assumeOrder($event)" size="small"><ion-icon slot="start" name="star"></ion-icon>Assumir</ion-button>
+            <agilit-button (click)="assumeOrder($event)" [size]="'small'"><ion-icon slot="start" name="star"></ion-icon>Assumir </agilit-button>
           </div>
         </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
 
-  <div *ngIf="listView">
-    <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>
+  <div *ngIf="listView">    
+    <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>      
     <ion-list >
       <ion-item *ngFor="let order of filtredOrders">
         <ion-col class="align-center" size="4">

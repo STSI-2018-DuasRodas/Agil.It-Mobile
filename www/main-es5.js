@@ -440,6 +440,17 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/agilit-button/agilit-button.component.html":
+/*!**************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/agilit-button/agilit-button.component.html ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-button color=\"{{color}}\" size=\"{{size}}\" expand=\"{{expand}}\" [disabled]=\"disabled\">\r\n    <ng-content></ng-content>\r\n</ion-button>"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/app.component.html":
 /*!**************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/app.component.html ***!
@@ -469,7 +480,7 @@ module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-tab
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    class=\"icon-default-size\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" class=\"icon-default-size\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"swipRefresh($event)\">\n    <ion-refresher-content refreshingText=\"Carregando...\"></ion-refresher-content>\n  </ion-refresher>\n  <ion-segment color=\"secondary\" (ionChange)=\"segmentChanged($event)\" value=\"userOrders\">\n    <ion-segment-button value=\"allOrders\">\n      <ion-label>TODAS</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"userOrders\">\n      <ion-label>MINHAS ORDENS</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\" *ngFor=\"let order of filtredOrders\">\n      <ion-card (click)=\"openOrder(order)\">\n        <ion-card-header class=\"align-center\">\n          <ion-label class=\"font-style-bold font-size-mini\" color=\"dark\">{{order.orderNumber}}</ion-label>\n        </ion-card-header>\n        <ion-card-content>\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"10\" class=\"align-center\">\n                <ion-label class=\"font-size-small font-to-upper font-style-bold\" color=\"secondary\">{{order.type}}</ion-label>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-icon *ngIf=\"order.orderTypeId == 0\" class=\"icon-default-size\" name=\"bookmark\" color=\"primary\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 1\" class=\"icon-default-size\" name=\"bookmark\" color=\"warning\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 2\" class=\"icon-default-size\" name=\"bookmark\" color=\"medium\"></ion-icon>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-left\">\n            <ion-row>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Equip.:</b> {{order.equipamentName}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Prioridade:</b> {{order.priority}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Abertura:</b> {{order.createdAt}}</ion-label>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-center\">\n            <ion-button (click)=\"assumeOrder($event)\" size=\"small\"><ion-icon slot=\"start\" name=\"star\"></ion-icon>Assumir</ion-button>\n          </div>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n\n  <div *ngIf=\"listView\">\n    <ion-searchbar animated search-icon=\"search\" (ionChange)=\"filterOm()\" placeholder=\"Filtrar OM's\" [(ngModel)]=\"filter\"></ion-searchbar>\n    <ion-list >\n      <ion-item *ngFor=\"let order of filtredOrders\">\n        <ion-col class=\"align-center\" size=\"4\">\n          <ion-label class=\"font-size-mini\">{{order.orderNumber}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-center\" size=\"6\">\n          <ion-label class=\"font-size-small\">{{order.equipamentName}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-right\" size=\"2\">\n          <ion-label class=\"font-size-mini\">{{order.priority}}</ion-label>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    class=\"icon-default-size\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" class=\"icon-default-size\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"swipRefresh($event)\">\n    <ion-refresher-content refreshingText=\"Carregando...\"></ion-refresher-content>\n  </ion-refresher>\n  <ion-segment color=\"secondary\" (ionChange)=\"segmentChanged($event)\" value=\"userOrders\">\n    <ion-segment-button value=\"allOrders\">\n      <ion-label>TODAS</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"userOrders\">\n      <ion-label>MINHAS ORDENS</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\" *ngFor=\"let order of filtredOrders\">\n      <ion-card (click)=\"openOrder(order)\">\n        <ion-card-header class=\"align-center\">\n          <ion-label class=\"font-style-bold font-size-mini\" color=\"dark\">{{order.orderNumber}}</ion-label>\n        </ion-card-header>\n        <ion-card-content>\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"10\" class=\"align-center\">\n                <ion-label class=\"font-size-small font-to-upper font-style-bold\" color=\"secondary\">{{order.type}}</ion-label>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-icon *ngIf=\"order.orderTypeId == 0\" class=\"icon-default-size\" name=\"bookmark\" color=\"primary\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 1\" class=\"icon-default-size\" name=\"bookmark\" color=\"warning\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 2\" class=\"icon-default-size\" name=\"bookmark\" color=\"medium\"></ion-icon>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-left\">\n            <ion-row>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Equip.:</b> {{order.equipamentName}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Prioridade:</b> {{order.priority}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Abertura:</b> {{order.createdAt}}</ion-label>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-center\">\n            <agilit-button (click)=\"assumeOrder($event)\" [size]=\"'small'\"><ion-icon slot=\"start\" name=\"star\"></ion-icon>Assumir </agilit-button>\n          </div>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n\n  <div *ngIf=\"listView\">\n    <ion-searchbar animated search-icon=\"search\" (ionChange)=\"filterOm()\" placeholder=\"Filtrar OM's\" [(ngModel)]=\"filter\"></ion-searchbar>\n    <ion-list >\n      <ion-item *ngFor=\"let order of filtredOrders\">\n        <ion-col class=\"align-center\" size=\"4\">\n          <ion-label class=\"font-size-mini\">{{order.orderNumber}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-center\" size=\"6\">\n          <ion-label class=\"font-size-small\">{{order.equipamentName}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-right\" size=\"2\">\n          <ion-label class=\"font-size-mini\">{{order.priority}}</ion-label>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -491,7 +502,7 @@ module.exports = "<ion-header>\n    <ion-toolbar color=\"primary\">\n        <io
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <div class=\"divPrincipal\">\n      <img class=\"logoDuasRodas\" src=\"../../assets/img/logoDuasRodas.png\">\n      <ion-list>      \n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"username\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label position=\"floating\">Senha</ion-label>\n          <ion-input type=\"password\" [(ngModel)]=\"password\" autocomplete=\"off\"></ion-input>\n        </ion-item>\n      </ion-list>\n      <div class=\"DivButtonEntrar\">\n        <ion-button expand=\"block\" color=\"primary\" (click)=\"login()\">Entrar</ion-button>\n      </div>\n    </div>\n  </ion-card>\n</ion-content>"
+module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <div class=\"divPrincipal\">\n      <img class=\"logoDuasRodas\" src=\"../../assets/img/logoDuasRodas.png\">\n      <ion-list>      \n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"username\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label position=\"floating\">Senha</ion-label>\n          <ion-input type=\"password\" [(ngModel)]=\"password\" autocomplete=\"off\"></ion-input>\n        </ion-item>\n      </ion-list>\n      <div class=\"DivButtonEntrar\">\n        <agilit-button [expand]=\"'block'\" (click)=\"login()\">Entrar</agilit-button>\n      </div>\n    </div>\n  </ion-card>\n</ion-content>"
 
 /***/ }),
 
@@ -502,7 +513,72 @@ module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-car
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-list>\n  <ion-item-divider>\n    <ion-list-header class=\"font-size-medium font-style-bold\">Lista de ações</ion-list-header>\n  </ion-item-divider>\n  <ion-item (click)=\"assume()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"hand-point-up\"></fa-icon>Assumir</ion-item>\n  <ion-item (click)=\"start()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"play-circle\"></fa-icon>Iniciar</ion-item>\n  <ion-item (click)=\"pause()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"pause-circle\"></fa-icon>Pausar</ion-item>\n  <ion-item (click)=\"delegate()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"hand-point-right\"></fa-icon>Delegar</ion-item>\n  <ion-item (click)=\"invite()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"user-friends\"></fa-icon>Convidar</ion-item>\n  <ion-item (click)=\"requestParticipation()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"users\"></fa-icon>Solicitar Participação</ion-item>\n  <ion-item (click)=\"equipamentStatus()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"info\"></fa-icon>Status Equipamento</ion-item>\n  <ion-item lines=\"none\" (click)=\"checkList()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"check-square\"></fa-icon>Check-List</ion-item>\n</ion-list>\n<ion-button expand=\"block\" (click)=\"dismissPopover()\">Close</ion-button>"
+module.exports = "<ion-list>\n  <ion-item-divider>\n    <ion-list-header class=\"font-size-medium font-style-bold\">Lista de ações</ion-list-header>\n  </ion-item-divider>\n  <ion-item (click)=\"assume()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"hand-point-up\"></fa-icon>Assumir</ion-item>\n  <ion-item (click)=\"start()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"play-circle\"></fa-icon>Iniciar</ion-item>\n  <ion-item (click)=\"pause()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"pause-circle\"></fa-icon>Pausar</ion-item>\n  <ion-item (click)=\"delegate()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"hand-point-right\"></fa-icon>Delegar</ion-item>\n  <ion-item (click)=\"invite()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"user-friends\"></fa-icon>Convidar</ion-item>\n  <ion-item (click)=\"requestParticipation()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"users\"></fa-icon>Solicitar Participação</ion-item>\n  <ion-item (click)=\"equipamentStatus()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"info\"></fa-icon>Status Equipamento</ion-item>\n  <ion-item lines=\"none\" (click)=\"checkList()\" button><fa-icon class=\"color-secondary icon-default-size p-right-6\" icon=\"check-square\"></fa-icon>Check-List</ion-item>\n</ion-list>\n<agilit-button [expand]=\"'block'\" (click)=\"dismissPopover()\">Fechar</agilit-button>"
+
+/***/ }),
+
+/***/ "./src/app/agilit-button/agilit-button.component.scss":
+/*!************************************************************!*\
+  !*** ./src/app/agilit-button/agilit-button.component.scss ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FnaWxpdC1idXR0b24vYWdpbGl0LWJ1dHRvbi5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/agilit-button/agilit-button.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/agilit-button/agilit-button.component.ts ***!
+  \**********************************************************/
+/*! exports provided: AgilitButtonComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AgilitButtonComponent", function() { return AgilitButtonComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var AgilitButtonComponent = /** @class */ (function () {
+    function AgilitButtonComponent() {
+        this.color = "primary";
+        this.size = "default";
+        this.expand = "";
+        this.disabled = false;
+    }
+    AgilitButtonComponent.prototype.ngOnInit = function () { };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], AgilitButtonComponent.prototype, "color", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], AgilitButtonComponent.prototype, "size", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], AgilitButtonComponent.prototype, "expand", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)
+    ], AgilitButtonComponent.prototype, "disabled", void 0);
+    AgilitButtonComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'agilit-button',
+            template: __webpack_require__(/*! raw-loader!./agilit-button.component.html */ "./node_modules/raw-loader/index.js!./src/app/agilit-button/agilit-button.component.html"),
+            styles: [__webpack_require__(/*! ./agilit-button.component.scss */ "./src/app/agilit-button/agilit-button.component.scss")]
+        }),
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], AgilitButtonComponent);
+    return AgilitButtonComponent;
+}());
+
+
 
 /***/ }),
 
@@ -730,6 +806,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_free_regular_svg_icons__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @fortawesome/free-regular-svg-icons */ "./node_modules/@fortawesome/free-regular-svg-icons/index.es.js");
 /* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
 /* harmony import */ var _popover_popover_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./popover/popover.component */ "./src/app/popover/popover.component.ts");
+/* harmony import */ var _utils_customComponents_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./utils/customComponents.module */ "./src/app/utils/customComponents.module.ts");
+
 
 
 
@@ -771,6 +849,7 @@ var AppModule = /** @class */ (function () {
                 _home_home_module__WEBPACK_IMPORTED_MODULE_11__["HomePageModule"],
                 _home_monitor_module__WEBPACK_IMPORTED_MODULE_12__["MonitorPageModule"],
                 _home_notification_module__WEBPACK_IMPORTED_MODULE_13__["NotificationPageModule"],
+                _utils_customComponents_module__WEBPACK_IMPORTED_MODULE_23__["CustomComponentsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(),
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
                 _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_17__["FontAwesomeModule"]
@@ -872,7 +951,7 @@ var HomePageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".welcome-card img {\n  max-height: 35vh;\n  overflow: hidden; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9DOlxcVXNlcnNcXEp1bGlvIFRob21hemVsbGlcXERlc2t0b3BcXEN1cnNvXFwzIC0gU2VtZXN0cmVcXER1YXMgUm9kYXNcXEFnaWwtaXRcXG1vYmlsZS9zcmNcXGFwcFxcaG9tZVxcaG9tZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBZ0I7RUFDaEIsZ0JBQWdCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLndlbGNvbWUtY2FyZCBpbWcge1xuICBtYXgtaGVpZ2h0OiAzNXZoO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuIl19 */"
+module.exports = ".welcome-card img {\n  max-height: 35vh;\n  overflow: hidden; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9DOlxcVXNlcnNcXEluaWNpYW5kbyBvIFdpbmRvd3NcXERlc2t0b3BcXEN1cnNvXFwzIC0gU2VtZXN0cmVcXER1YXMgUm9kYXNcXEFnaWwtaXRcXG1vYmlsZS9zcmNcXGFwcFxcaG9tZVxcaG9tZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBZ0I7RUFDaEIsZ0JBQWdCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9ob21lL2hvbWUucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLndlbGNvbWUtY2FyZCBpbWcge1xuICBtYXgtaGVpZ2h0OiAzNXZoO1xuICBvdmVyZmxvdzogaGlkZGVuO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -942,6 +1021,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _monitor_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./monitor.page */ "./src/app/home/monitor.page.ts");
+/* harmony import */ var _utils_customComponents_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/customComponents.module */ "./src/app/utils/customComponents.module.ts");
+
 
 
 
@@ -964,6 +1045,7 @@ var MonitorPageModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _utils_customComponents_module__WEBPACK_IMPORTED_MODULE_7__["CustomComponentsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
             ],
             declarations: [_monitor_page__WEBPACK_IMPORTED_MODULE_6__["MonitorPage"]]
@@ -1324,6 +1406,28 @@ var HttpProvider = /** @class */ (function () {
         }
         return this.http.patch(this.url, body, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["timeout"])(this.TIMEOUT));
     };
+    HttpProvider.prototype.delete = function () {
+        var headers = this.prepareHeaders(false);
+        return this.http.delete(this.url, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["timeout"])(this.TIMEOUT));
+    };
+    HttpProvider.prototype.send = function (tipo, object) {
+        if (tipo === 'get') {
+            return this.get();
+        }
+        else if (tipo === 'delete') {
+            return this.delete();
+        }
+        else if (tipo === 'post') {
+            return this.post(object);
+        }
+        else if (tipo === 'put') {
+            return this.put(object);
+        }
+        else if (tipo === 'patch') {
+            return this.patch(object);
+        }
+        throw new Error('Invalid http method!');
+    };
     HttpProvider.ctorParameters = function () { return [
         { type: _angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"] }
     ]; };
@@ -1355,6 +1459,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _login_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login.page */ "./src/app/login/login.page.ts");
+/* harmony import */ var _utils_customComponents_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/customComponents.module */ "./src/app/utils/customComponents.module.ts");
+
 
 
 
@@ -1377,6 +1483,7 @@ var LoginPageModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _utils_customComponents_module__WEBPACK_IMPORTED_MODULE_7__["CustomComponentsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
             ],
             declarations: [_login_page__WEBPACK_IMPORTED_MODULE_6__["LoginPage"]]
@@ -1396,7 +1503,7 @@ var LoginPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".divPrincipal {\n  padding: 5%; }\n\n.logoDuasRodas {\n  width: 200px;\n  margin: 0 auto; }\n\n.DivButtonEntrar {\n  margin-top: 2%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vQzpcXFVzZXJzXFxKdWxpbyBUaG9tYXplbGxpXFxEZXNrdG9wXFxDdXJzb1xcMyAtIFNlbWVzdHJlXFxEdWFzIFJvZGFzXFxBZ2lsLWl0XFxtb2JpbGUvc3JjXFxhcHBcXGxvZ2luXFxsb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXLEVBQUE7O0FBR2I7RUFDRSxZQUFZO0VBQ1osY0FBYyxFQUFBOztBQUdoQjtFQUNFLGNBQWMsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kaXZQcmluY2lwYWx7XHJcbiAgcGFkZGluZzogNSU7XHJcbn1cclxuXHJcbi5sb2dvRHVhc1JvZGFze1xyXG4gIHdpZHRoOiAyMDBweDtcclxuICBtYXJnaW46IDAgYXV0bztcclxufVxyXG5cclxuLkRpdkJ1dHRvbkVudHJhcntcclxuICBtYXJnaW4tdG9wOiAyJTtcclxufVxyXG4iXX0= */"
+module.exports = ".divPrincipal {\n  padding: 5%; }\n\n.logoDuasRodas {\n  width: 200px;\n  margin: 0 auto; }\n\n.DivButtonEntrar {\n  margin-top: 2%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vQzpcXFVzZXJzXFxJbmljaWFuZG8gbyBXaW5kb3dzXFxEZXNrdG9wXFxDdXJzb1xcMyAtIFNlbWVzdHJlXFxEdWFzIFJvZGFzXFxBZ2lsLWl0XFxtb2JpbGUvc3JjXFxhcHBcXGxvZ2luXFxsb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXLEVBQUE7O0FBR2I7RUFDRSxZQUFZO0VBQ1osY0FBYyxFQUFBOztBQUdoQjtFQUNFLGNBQWMsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kaXZQcmluY2lwYWx7XHJcbiAgcGFkZGluZzogNSU7XHJcbn1cclxuXHJcbi5sb2dvRHVhc1JvZGFze1xyXG4gIHdpZHRoOiAyMDBweDtcclxuICBtYXJnaW46IDAgYXV0bztcclxufVxyXG5cclxuLkRpdkJ1dHRvbkVudHJhcntcclxuICBtYXJnaW4tdG9wOiAyJTtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -1428,8 +1535,8 @@ var LoginPage = /** @class */ (function () {
         this.menuCtrl = menuCtrl;
         this.loginRest = loginRest;
         this.viewUtils = viewUtils;
-        this.username = "julio_thomazelli-ju1@estudante.sc.senai.br";
-        this.password = "123";
+        this.username = "julio";
+        this.password = "julio123";
     }
     LoginPage.prototype.ngOnInit = function () {
     };
@@ -1447,18 +1554,21 @@ var LoginPage = /** @class */ (function () {
                     username: this.username,
                     password: this.password
                 };
-                this.router.navigateByUrl('/home');
+                // await this.viewUtils.showProgressBar();
+                // let response = await this.loginRest.login(obj);
+                // this.loginRestSucess(response);
+                this.router.navigateByUrl('/home'); // Tirar essa linha
                 return [2 /*return*/];
             });
         });
     };
     LoginPage.prototype.loginRestSucess = function (response) {
-        var user = JSON.parse(response._body);
-        if (!user.success) {
-            this.viewUtils.showToast(user.data);
-            return;
-        }
-        window.localStorage.setItem("user", JSON.stringify(user.data));
+        // let user = JSON.stringify(response);
+        // if (!response.success){
+        //   this.viewUtils.showToast(response.Error);
+        //   return;
+        // }
+        // window.localStorage.setItem("user", user);
         this.router.navigateByUrl('/home');
     };
     LoginPage.ctorParameters = function () { return [
@@ -1574,6 +1684,87 @@ var PopoverComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/rest/helper.ts":
+/*!********************************!*\
+  !*** ./src/app/rest/helper.ts ***!
+  \********************************/
+/*! exports provided: ProviderHelper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProviderHelper", function() { return ProviderHelper; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+
+var ProviderHelper = /** @class */ (function () {
+    function ProviderHelper() {
+    }
+    ProviderHelper.makeRequest = function (http, tipo, body) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var response, error_1;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, http.send(tipo, body).toPromise()];
+                    case 1:
+                        response = _a.sent();
+                        this.validateResponse(response);
+                        this.updateToken(response);
+                        return [2 /*return*/, JSON.parse(response._body).data];
+                    case 2:
+                        error_1 = _a.sent();
+                        return [2 /*return*/, {
+                                success: false,
+                                error: error_1
+                            }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProviderHelper.setToken = function (token) {
+        window.localStorage.setItem("token", token);
+    };
+    ProviderHelper.updateToken = function (response) {
+        var token = "";
+        response.headers._headers.forEach(function (value, key) {
+            if (key === "token") {
+                token = value[0];
+            }
+        });
+        if (token === "") {
+            throw new Error('Token não identificado');
+        }
+        return this.setToken(token);
+    };
+    ProviderHelper.validateResponse = function (response) {
+        if (response.status != 200) {
+            throw new Error('Erro');
+        }
+    };
+    ProviderHelper.get = function (http) {
+        return this.makeRequest(http, 'get');
+    };
+    ProviderHelper.delete = function (http) {
+        return this.makeRequest(http, 'delete');
+    };
+    ProviderHelper.post = function (http, object) {
+        return this.makeRequest(http, 'post', object);
+    };
+    ProviderHelper.put = function (http, object) {
+        return this.makeRequest(http, 'put', object);
+    };
+    ProviderHelper.patch = function (http, object) {
+        return this.makeRequest(http, 'patch', object);
+    };
+    return ProviderHelper;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/rest/loginRest.ts":
 /*!***********************************!*\
   !*** ./src/app/rest/loginRest.ts ***!
@@ -1584,22 +1775,85 @@ var PopoverComponent = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginRest", function() { return LoginRest; });
-/* harmony import */ var src_app_http_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/http/http */ "./src/app/http/http.ts");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var src_app_http_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/http/http */ "./src/app/http/http.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./helper */ "./src/app/rest/helper.ts");
+
+
+
 
 var LoginRest = /** @class */ (function () {
     function LoginRest(http) {
+        this.DefaultURL = 'http://localhost:4000/api/v1';
         this.http = http;
-        this.DefaultURL = 'http://localhost:3000';
-        this.LoginURL = '/login';
     }
-    LoginRest.prototype.login = function (AObj) {
-        this.http.url = this.DefaultURL + this.LoginURL;
-        return this.http.post(AObj);
+    LoginRest.prototype.login = function (object) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.http.url = this.DefaultURL + "/login";
+                return [2 /*return*/, _helper__WEBPACK_IMPORTED_MODULE_3__["ProviderHelper"].post(this.http, object)];
+            });
+        });
     };
     LoginRest.ctorParameters = function () { return [
-        { type: src_app_http_http__WEBPACK_IMPORTED_MODULE_0__["HttpProvider"] }
+        { type: src_app_http_http__WEBPACK_IMPORTED_MODULE_1__["HttpProvider"] }
     ]; };
+    LoginRest = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_http_http__WEBPACK_IMPORTED_MODULE_1__["HttpProvider"]])
+    ], LoginRest);
     return LoginRest;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/utils/customComponents.module.ts":
+/*!**************************************************!*\
+  !*** ./src/app/utils/customComponents.module.ts ***!
+  \**************************************************/
+/*! exports provided: CustomComponentsModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomComponentsModule", function() { return CustomComponentsModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _agilit_button_agilit_button_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../agilit-button/agilit-button.component */ "./src/app/agilit-button/agilit-button.component.ts");
+
+
+
+
+
+
+var CustomComponentsModule = /** @class */ (function () {
+    function CustomComponentsModule() {
+    }
+    CustomComponentsModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"]
+            ],
+            declarations: [
+                _agilit_button_agilit_button_component__WEBPACK_IMPORTED_MODULE_5__["AgilitButtonComponent"]
+            ],
+            exports: [
+                _agilit_button_agilit_button_component__WEBPACK_IMPORTED_MODULE_5__["AgilitButtonComponent"]
+            ],
+            entryComponents: []
+        })
+    ], CustomComponentsModule);
+    return CustomComponentsModule;
 }());
 
 
@@ -1698,6 +1952,21 @@ var ViewUtils = /** @class */ (function () {
         });
         return arrayFiltred;
     };
+    ViewUtils.prototype.formatDateToString = function (date) {
+        if (date == undefined || date == null || date == "") {
+            return "";
+        }
+        var array = date.split('-');
+        return array[2] + '/' + array[1] + '/' + array[0];
+    };
+    ViewUtils.prototype.formatTimeToString = function (time) {
+        debugger;
+        if (time == undefined || time == null || time == "") {
+            return "";
+        }
+        var array = time.split('-');
+        return array[2].trim() + '/' + array[1].trim() + '/' + array[0].trim();
+    };
     ViewUtils.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["LoadingController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["ToastController"] }
@@ -1770,7 +2039,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Julio Thomazelli\Desktop\Curso\3 - Semestre\Duas Rodas\Agil-it\mobile\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Iniciando o Windows\Desktop\Curso\3 - Semestre\Duas Rodas\Agil-it\mobile\src\main.ts */"./src/main.ts");
 
 
 /***/ })

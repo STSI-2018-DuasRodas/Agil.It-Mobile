@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 import { MonitorPageModule } from './monitor.module';
 import { NotificationPageModule } from './notification.module';
+import { CustomComponentsModule } from '../utils/customComponents.module';
 
 const routes : Routes = [
   {

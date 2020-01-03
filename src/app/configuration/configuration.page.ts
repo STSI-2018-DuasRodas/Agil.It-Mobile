@@ -21,4 +21,7 @@ export class ConfigurationPage implements OnInit {
     this.menuCtrl.enable(true);
   }
 
+  teste(){
+
+  }
 }

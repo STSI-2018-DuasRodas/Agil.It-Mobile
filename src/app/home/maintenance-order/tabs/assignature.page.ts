@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AssignaturePage implements OnInit {
 
+  assignatureVerificationChecked : boolean = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  assineOm(){
+    console.log(this.assignatureVerificationChecked);
+  }
 }
