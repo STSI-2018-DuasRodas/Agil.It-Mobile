@@ -15,22 +15,26 @@ export class AppComponent {
     {
       title: 'Home',
       url: 'home/monitor',
-      icon: 'home'
+      icon: 'home',
+      color: 'secondary'
     },
     {
       title: 'Ordem de Manutenção',
       url: '/resume',
-      icon: 'build'
+      icon: 'build',
+      color: ''
     },
     {
       title: 'Notificações',
       url: 'home/notification',
-      icon: 'notifications'
+      icon: 'notifications',
+      color: ''
     },
     {
       title: 'Configurações',
       url: 'configuration',
-      icon: 'settings'
+      icon: 'settings',
+      color: ''
     },
     {
       title: 'LogOut',
@@ -52,5 +56,19 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  selectItemMenu(itemMenu){
+    this.appPages.forEach(element => {
+      if (element['color']){
+        element.color = '';
+      }      
+    });
+
+    if (itemMenu.title === 'LogOut'){
+      return;
+    }
+
+    itemMenu.color = 'secondary';
   }
 }

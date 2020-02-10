@@ -458,7 +458,7 @@ module.exports = "<ion-button color=\"{{color}}\" size=\"{{size}}\" expand=\"{{e
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-split-pane>      \n    <ion-menu type=\"overlay\">\n      <ion-header>\n        <ion-toolbar color=\"primary\">\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"3\">\n                <ion-avatar>\n                  <img src=\"../../assets/img/user.png\">\n                </ion-avatar>\n              </ion-col>\n              <ion-col size=\"9\">\n                <ion-row>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-small\">Lucas Gonçalves</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"8\">\n                <ion-row>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Cracha: 1231231561561561</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-mini\">Função: Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"4\"></ion-col>\n            </ion-row>\n          </div>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\" >\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <ion-split-pane>      \n    <ion-menu type=\"overlay\">\n      <ion-header>\n        <ion-toolbar color=\"primary\">\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"3\">\n                <ion-avatar>\n                  <img src=\"../../assets/img/user.png\">\n                </ion-avatar>\n              </ion-col>\n              <ion-col size=\"9\">\n                <ion-row>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-medium\">Lucas Gonçalves</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-small\">Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"8\">\n                <ion-row>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-small\">Cracha: 1231231561561561</ion-label>\n                  </ion-col>\n                  <ion-col size=\"12\" class=\"align-left\">\n                    <ion-label class=\"font-arial font-style-bold color-white font-size-small\">Função: Técnico</ion-label>\n                  </ion-col>\n                </ion-row>\n              </ion-col>\n              <ion-col size=\"4\"></ion-col>\n            </ion-row>\n          </div>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\" [color]=\"p.color\" (click)=\"selectItemMenu(p)\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n"
 
 /***/ }),
 
@@ -480,7 +480,7 @@ module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-tab
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    class=\"icon-default-size\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" class=\"icon-default-size\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"swipRefresh($event)\">\n    <ion-refresher-content refreshingText=\"Carregando...\"></ion-refresher-content>\n  </ion-refresher>\n  <ion-segment color=\"secondary\" (ionChange)=\"segmentChanged($event)\" value=\"userOrders\">\n    <ion-segment-button value=\"allOrders\">\n      <ion-label>TODAS</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"userOrders\">\n      <ion-label>MINHAS ORDENS</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\" *ngFor=\"let order of filtredOrders\">\n      <ion-card (click)=\"openOrder(order)\">\n        <ion-card-header class=\"align-center\">\n          <ion-label class=\"font-style-bold font-size-mini\" color=\"dark\">{{order.orderNumber}}</ion-label>\n        </ion-card-header>\n        <ion-card-content>\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"10\" class=\"align-center\">\n                <ion-label class=\"font-size-small font-to-upper font-style-bold\" color=\"secondary\">{{order.type}}</ion-label>\n              </ion-col>\n              <ion-col size=\"2\">\n                <ion-icon *ngIf=\"order.orderTypeId == 0\" class=\"icon-default-size\" name=\"bookmark\" color=\"primary\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 1\" class=\"icon-default-size\" name=\"bookmark\" color=\"warning\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 2\" class=\"icon-default-size\" name=\"bookmark\" color=\"medium\"></ion-icon>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-left\">\n            <ion-row>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Equip.:</b> {{order.equipamentName}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Prioridade:</b> {{order.priority}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-mini\"><b>Abertura:</b> {{order.createdAt}}</ion-label>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-center\">\n            <agilit-button (click)=\"assumeOrder($event)\" [size]=\"'small'\"><ion-icon slot=\"start\" name=\"star\"></ion-icon>Assumir </agilit-button>\n          </div>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n\n  <div *ngIf=\"listView\">\n    <ion-searchbar animated search-icon=\"search\" (ionChange)=\"filterOm()\" placeholder=\"Filtrar OM's\" [(ngModel)]=\"filter\"></ion-searchbar>\n    <ion-list >\n      <ion-item *ngFor=\"let order of filtredOrders\">\n        <ion-col class=\"align-center\" size=\"4\">\n          <ion-label class=\"font-size-mini\">{{order.orderNumber}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-center\" size=\"6\">\n          <ion-label class=\"font-size-small\">{{order.equipamentName}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-right\" size=\"2\">\n          <ion-label class=\"font-size-mini\">{{order.priority}}</ion-label>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-row>\n      <ion-col size=\"10\" class=\"align-center\">\n        <ion-title>\n          Monitor de Ordens\n        </ion-title>\n      </ion-col>\n      <ion-col size=\"2\" class=\"align-center\" (click)=\"changeVisualizationMode()\">\n        <ion-icon *ngIf=\"listView\"  name=\"grid\"    class=\"icon-default-size\"></ion-icon>\n        <ion-icon *ngIf=\"!listView\" name=\"options\" class=\"icon-default-size\"></ion-icon>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"swipRefresh($event)\">\n    <ion-refresher-content refreshingText=\"Carregando...\"></ion-refresher-content>\n  </ion-refresher>\n  <ion-segment color=\"secondary\" (ionChange)=\"segmentChanged($event)\" value=\"userOrders\">\n    <ion-segment-button value=\"allOrders\">\n      <ion-label>TODAS</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"userOrders\">\n      <ion-label>MINHAS ORDENS</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n\n\n  <ion-row *ngIf=\"!listView\">\n    <ion-col size=\"6\" *ngFor=\"let order of filtredOrders\">\n      <ion-card (click)=\"openOrder(order)\">\n        <ion-card-header class=\"align-center p-left-0 p-right-0\">\n          <ion-label class=\"font-style-bold font-size-small\" color=\"dark\">{{order.orderNumber}}</ion-label>\n        </ion-card-header>\n        <ion-card-content class=\"p-left-0 p-right-0\">\n          <div class=\"align-center\">\n            <ion-row>\n              <ion-col size=\"10\">\n                <ion-label class=\"font-size-medium font-to-upper font-style-bold\" color=\"secondary\">{{order.type}}</ion-label>\n              </ion-col>\n              <ion-col size=\"2\" class=\"p-right-2\">\n                <ion-icon *ngIf=\"order.orderTypeId == 0\" class=\"icon-default-size\" name=\"bookmark\" color=\"primary\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 1\" class=\"icon-default-size\" name=\"bookmark\" color=\"warning\"></ion-icon>\n                <ion-icon *ngIf=\"order.orderTypeId == 2\" class=\"icon-default-size\" name=\"bookmark\" color=\"medium\"></ion-icon>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-left\">\n            <ion-row>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-medium\"><ion-icon slot=\"start\" name=\"hammer\"></ion-icon>&nbsp;&nbsp;{{order.equipamentName}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-medium\"><ion-icon slot=\"start\" name=\"help-circle\"></ion-icon>&nbsp;&nbsp;{{order.priority}}</ion-label>\n              </ion-col>\n              <ion-col size=\"12\">\n                <ion-label class=\"font-size-medium\"><ion-icon slot=\"start\" name=\"alarm\"></ion-icon>&nbsp;&nbsp;{{order.createdAt}}</ion-label>\n              </ion-col>\n            </ion-row>\n          </div>\n          <div class=\"align-center\">\n            <agilit-button (click)=\"assumeOrder($event)\" [size]=\"'small'\"><ion-icon slot=\"start\" name=\"star\"></ion-icon>Assumir </agilit-button>\n          </div>\n        </ion-card-content>\n      </ion-card>\n    </ion-col>\n  </ion-row>\n\n  <div *ngIf=\"listView\">    \n    <ion-searchbar animated search-icon=\"search\" (ionChange)=\"filterOm()\" placeholder=\"Filtrar OM's\" [(ngModel)]=\"filter\"></ion-searchbar>      \n    <ion-list >\n      <ion-item *ngFor=\"let order of filtredOrders\">\n        <ion-col class=\"align-center\" size=\"4\">\n          <ion-label class=\"font-size-mini\">{{order.orderNumber}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-center\" size=\"6\">\n          <ion-label class=\"font-size-small\">{{order.equipamentName}}</ion-label>\n        </ion-col>\n        <ion-col class=\"align-right\" size=\"2\">\n          <ion-label class=\"font-size-mini\">{{order.priority}}</ion-label>\n        </ion-col>\n      </ion-item>\n    </ion-list>\n  </div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -502,7 +502,7 @@ module.exports = "<ion-header>\n    <ion-toolbar color=\"primary\">\n        <io
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n  <ion-card>\n    <div class=\"divPrincipal\">\n      <img class=\"logoDuasRodas\" src=\"../../assets/img/logoDuasRodas.png\">\n      <ion-list>      \n        <ion-item>\n          <ion-label position=\"floating\">Email</ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"username\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label position=\"floating\">Senha</ion-label>\n          <ion-input type=\"password\" [(ngModel)]=\"password\" autocomplete=\"off\"></ion-input>\n        </ion-item>\n      </ion-list>\n      <div class=\"DivButtonEntrar\">\n        <agilit-button [expand]=\"'block'\" (click)=\"login()\">Entrar</agilit-button>\n      </div>\n    </div>\n  </ion-card>\n</ion-content>"
+module.exports = "<ion-header>\n    \n</ion-header>\n\n<ion-content>\n<ion-card class=\"content p-4\">\n    <img class=\"logoDuasRodas\" src=\"../../assets/img/logoDuasRodas.png\">\n    <ion-list>      \n      <ion-item>\n        <ion-label position=\"floating\">Email</ion-label>\n        <ion-icon class=\"icon-default-size\" slot=\"start\" name=\"person\" color=\"secondary\"></ion-icon>\n        <ion-input type=\"text\" [(ngModel)]=\"username\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">Senha</ion-label>\n        <ion-icon class=\"icon-default-size\" slot=\"start\" name=\"key\" color=\"secondary\"></ion-icon>\n        <ion-input type=\"password\" [(ngModel)]=\"password\" autocomplete=\"off\"></ion-input>\n      </ion-item>\n    </ion-list>\n    \n    <div class=\"mt-4\">\n      <ion-item lines=\"none\">\n        <ion-checkbox slot=\"start\" color=\"primary\" [(ngModel)]=\"saveCreditional\"></ion-checkbox>\n        <ion-label class=\"font-size-small\">Salvar credenciais</ion-label>\n      </ion-item>               \n    </div>\n\n    <div class=\"mt-6\">\n      <agilit-button [expand]=\"'block'\" (click)=\"login()\">Entrar<ion-icon slot=\"end\" name=\"arrow-round-forward\"></ion-icon></agilit-button>\n    </div>    \n  </ion-card>\n</ion-content>"
 
 /***/ }),
 
@@ -719,22 +719,26 @@ var AppComponent = /** @class */ (function () {
             {
                 title: 'Home',
                 url: 'home/monitor',
-                icon: 'home'
+                icon: 'home',
+                color: ''
             },
             {
                 title: 'Ordem de Manutenção',
                 url: '/resume',
-                icon: 'build'
+                icon: 'build',
+                color: ''
             },
             {
                 title: 'Notificações',
                 url: 'home/notification',
-                icon: 'notifications'
+                icon: 'notifications',
+                color: ''
             },
             {
                 title: 'Configurações',
                 url: 'configuration',
-                icon: 'settings'
+                icon: 'settings',
+                color: ''
             },
             {
                 title: 'LogOut',
@@ -750,6 +754,17 @@ var AppComponent = /** @class */ (function () {
             _this.statusBar.styleDefault();
             _this.splashScreen.hide();
         });
+    };
+    AppComponent.prototype.selectItemMenu = function (itemMenu) {
+        this.appPages.forEach(function (element) {
+            if (element['color']) {
+                element.color = '';
+            }
+        });
+        if (itemMenu.title === 'LogOut') {
+            return;
+        }
+        itemMenu.color = 'secondary';
     };
     AppComponent.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
@@ -1108,7 +1123,7 @@ var MonitorPage = /** @class */ (function () {
                     "integrationID": "1000",
                     "createdAt": "17/01/2016",
                     "deleted": 0,
-                    "orderNumber": "OM - 2445492/DJ0449",
+                    "orderNumber": "2445492/DJ0449",
                     "priority": "urgent",
                     "type": "preventiva",
                     "userId": 1,
@@ -1123,7 +1138,7 @@ var MonitorPage = /** @class */ (function () {
                     "integrationID": "1001",
                     "createdAt": "20/05/2018",
                     "deleted": 0,
-                    "orderNumber": "OM - 2445000/DJ0123",
+                    "orderNumber": "2445000/DJ0123",
                     "priority": "high",
                     "type": "lista",
                     "userId": 1,
@@ -1138,7 +1153,7 @@ var MonitorPage = /** @class */ (function () {
                     "integrationID": "1003",
                     "createdAt": "11/02/2017",
                     "deleted": 0,
-                    "orderNumber": "OM - 2444010/DJ0123",
+                    "orderNumber": "2444010/DJ0123",
                     "priority": "medium",
                     "type": "rota",
                     "userId": 2,
@@ -1157,7 +1172,7 @@ var MonitorPage = /** @class */ (function () {
                     "integrationID": "1000",
                     "createdAt": "17/01/2016",
                     "deleted": 0,
-                    "orderNumber": "OM - 2445492/DJ0449",
+                    "orderNumber": "2445492/DJ0449",
                     "priority": "urgent",
                     "type": "preventiva",
                     "userId": 1,
@@ -1172,7 +1187,7 @@ var MonitorPage = /** @class */ (function () {
                     "integrationID": "1001",
                     "createdAt": "20/05/2018",
                     "deleted": 0,
-                    "orderNumber": "OM - 2445000/DJ0123",
+                    "orderNumber": "2445000/DJ0123",
                     "priority": "high",
                     "type": "lista",
                     "userId": 1,
@@ -1503,7 +1518,7 @@ var LoginPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".divPrincipal {\n  padding: 5%; }\n\n.logoDuasRodas {\n  width: 200px;\n  margin: 0 auto; }\n\n.DivButtonEntrar {\n  margin-top: 2%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vQzpcXFVzZXJzXFxJbmljaWFuZG8gbyBXaW5kb3dzXFxEZXNrdG9wXFxDdXJzb1xcMyAtIFNlbWVzdHJlXFxEdWFzIFJvZGFzXFxBZ2lsLWl0XFxtb2JpbGUvc3JjXFxhcHBcXGxvZ2luXFxsb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXLEVBQUE7O0FBR2I7RUFDRSxZQUFZO0VBQ1osY0FBYyxFQUFBOztBQUdoQjtFQUNFLGNBQWMsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kaXZQcmluY2lwYWx7XHJcbiAgcGFkZGluZzogNSU7XHJcbn1cclxuXHJcbi5sb2dvRHVhc1JvZGFze1xyXG4gIHdpZHRoOiAyMDBweDtcclxuICBtYXJnaW46IDAgYXV0bztcclxufVxyXG5cclxuLkRpdkJ1dHRvbkVudHJhcntcclxuICBtYXJnaW4tdG9wOiAyJTtcclxufVxyXG4iXX0= */"
+module.exports = ".content {\n  min-height: 97%; }\n\n.logoDuasRodas {\n  width: 70vw;\n  margin: 0 auto; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vQzpcXFVzZXJzXFxJbmljaWFuZG8gbyBXaW5kb3dzXFxEZXNrdG9wXFxDdXJzb1xcMyAtIFNlbWVzdHJlXFxEdWFzIFJvZGFzXFxBZ2lsLWl0XFxtb2JpbGUvc3JjXFxhcHBcXGxvZ2luXFxsb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxlQUFlLEVBQUE7O0FBR2pCO0VBQ0UsV0FBVztFQUNYLGNBQWMsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250ZW50IHtcclxuICBtaW4taGVpZ2h0OiA5NyU7XHJcbn1cclxuXHJcbi5sb2dvRHVhc1JvZGFze1xyXG4gIHdpZHRoOiA3MHZ3O1xyXG4gIG1hcmdpbjogMCBhdXRvOyAgXHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -1535,6 +1550,7 @@ var LoginPage = /** @class */ (function () {
         this.menuCtrl = menuCtrl;
         this.loginRest = loginRest;
         this.viewUtils = viewUtils;
+        this.saveCreditional = true;
         this.username = "julio";
         this.password = "julio123";
     }
@@ -1542,6 +1558,12 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage.prototype.ionViewWillEnter = function () {
         this.menuCtrl.enable(false);
+        if (window.localStorage.getItem("username") != undefined) {
+            this.username = window.localStorage.getItem("username");
+        }
+        if (window.localStorage.getItem("password") != undefined) {
+            this.password = window.localStorage.getItem("password");
+        }
     };
     LoginPage.prototype.ionViewWillLeave = function () {
         this.menuCtrl.enable(true);
@@ -1550,6 +1572,14 @@ var LoginPage = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var obj;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                if (this.saveCreditional) {
+                    window.localStorage.setItem("username", this.username);
+                    window.localStorage.setItem("password", this.password);
+                }
+                else {
+                    window.localStorage.removeItem("username");
+                    window.localStorage.removeItem("password");
+                }
                 obj = {
                     username: this.username,
                     password: this.password
@@ -1563,12 +1593,12 @@ var LoginPage = /** @class */ (function () {
         });
     };
     LoginPage.prototype.loginRestSucess = function (response) {
-        // let user = JSON.stringify(response);
-        // if (!response.success){
-        //   this.viewUtils.showToast(response.Error);
-        //   return;
-        // }
-        // window.localStorage.setItem("user", user);
+        var user = JSON.stringify(response);
+        if (!response.success) {
+            this.viewUtils.showToast(response.error.message);
+            return;
+        }
+        window.localStorage.setItem("user", user);
         this.router.navigateByUrl('/home');
     };
     LoginPage.ctorParameters = function () { return [
@@ -1741,6 +1771,13 @@ var ProviderHelper = /** @class */ (function () {
     ProviderHelper.validateResponse = function (response) {
         if (response.status != 200) {
             throw new Error('Erro');
+        }
+        var body = JSON.parse(response._body);
+        if (body.success == false) {
+            throw new Error(body.error);
+        }
+        if (body.data.success == false) {
+            throw new Error(body.data.error);
         }
     };
     ProviderHelper.get = function (http) {

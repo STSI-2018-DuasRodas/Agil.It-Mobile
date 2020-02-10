@@ -16,9 +16,15 @@
 </ion-header>
 
 <ion-content>
-    <ion-card color="secondary">
+    <ion-card color="secondary" *ngFor="let item of notifications">
         <ion-card-header>
-            <label>Reabertura</label>
-        </ion-card-header>
+            <ion-label class="font-style-bold">{{item.title}}</ion-label>
+            <ion-icon [name]="item.icon" class="icon-default-size float-right" color="primary"></ion-icon>
+        </ion-card-header>        
+
+        <ion-card-content>
+            <label>{{item.description}}</label>
+        </ion-card-content>
     </ion-card>
+
 </ion-content>

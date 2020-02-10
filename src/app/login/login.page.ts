@@ -12,11 +12,11 @@ import { ViewUtils } from '../utils/viewUtils';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  public saveCreditional : boolean = true;
 
   constructor(private router: Router, private menuCtrl : MenuController, private loginRest : LoginRest, private viewUtils : ViewUtils) { }
 
-  ngOnInit() {
-    
+  ngOnInit() { 
   }
 
   public username : string = "julio";
@@ -24,6 +24,14 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter(){
     this.menuCtrl.enable(false);
+    
+    if (window.localStorage.getItem("username") != undefined){
+      this.username = window.localStorage.getItem("username");
+    }
+
+    if  (window.localStorage.getItem("password") != undefined){
+      this.password = window.localStorage.getItem("password");
+    }
   }
 
   ionViewWillLeave(){
@@ -31,6 +39,14 @@ export class LoginPage implements OnInit {
   }
   
   async login() {
+    if (this.saveCreditional){
+      window.localStorage.setItem("username", this.username);
+      window.localStorage.setItem("password", this.password);
+    } else {
+      window.localStorage.removeItem("username");
+      window.localStorage.removeItem("password");
+    }
+
     let obj = {
       username: this.username,
       password : this.password
