@@ -52,19 +52,18 @@ export class LoginPage implements OnInit {
       password : this.password
       }
       
-    // await this.viewUtils.showProgressBar();
+    await this.viewUtils.showProgressBar();
 
-    // let response = await this.loginRest.login(obj);
-    // this.loginRestSucess(response);
-    this.router.navigateByUrl('/home'); // Tirar essa linha
-    // this.viewUtils.hideProgressBar();
+    let response = await this.loginRest.login(obj);
+    this.loginRestSucess(response);
+    this.viewUtils.hideProgressBar();
   }
 
   public loginRestSucess(response) : void{
     let user = JSON.stringify(response);
 
     if (!response.success){
-      this.viewUtils.showToast(response.error.message);
+      this.viewUtils.showToast(response.error.message, 2000, false);
 
       return;
     }

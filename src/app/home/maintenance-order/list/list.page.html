@@ -1,6 +1,27 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Lista</ion-title>
+  <ion-toolbar>
+    <div class="align-center" style="margin-right: 8%;">
+      <ion-row>
+        <ion-col size="12">
+          <ion-title>{{listOrder.orderNumber}}</ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3"></ion-col>
+        <ion-col size="1">
+          <!-- <ion-icon class="icon-default-size" *ngIf="listOrder.orderTypeId == 0" name="bookmark" color="primary"></ion-icon>
+          <ion-icon class="icon-default-size" *ngIf="listOrder.orderTypeId == 1" name="bookmark" color="warning"></ion-icon>
+          <ion-icon class="icon-default-size" *ngIf="listOrder.orderTypeId == 2" name="bookmark" color="medium"></ion-icon> -->
+        </ion-col>
+        <ion-col size="4">
+          <ion-label name="orderType" class="font-size-medium">{{listOrder.type}}</ion-label>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+        <ion-col size="1">
+          <ion-icon (click)="presentPopover()" class="icon-default-size" name="settings"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home/monitor"></ion-back-button>
     </ion-buttons>

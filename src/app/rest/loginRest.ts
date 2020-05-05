@@ -14,10 +14,9 @@ export class LoginRest {
     this.http = http;
   }
   
-  public async login(object:any) {
-    
+  public async login(object:any) {    
     this.http.url = `${this.DefaultURL}/login`;
-    return ProviderHelper.post(this.http, object)
+    return ProviderHelper.post(this.http, object);
   }
 
 }

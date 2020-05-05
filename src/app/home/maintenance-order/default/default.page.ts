@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, PopoverController, Events } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { PopoverComponent } from 'src/app/popover/popover.component';
+import { Order } from 'src/app/order/order';
+import { AgilitUtils } from 'src/app/utils/agilitUtils';
+import { DefaultIO } from 'src/app/io/defaultIO';
+import { RestOrder } from 'src/app/rest/restorder';
+import { ViewUtils } from 'src/app/utils/viewUtils';
 
 @Component({
   selector: 'app-default',
@@ -10,11 +15,13 @@ import { PopoverComponent } from 'src/app/popover/popover.component';
 })
 export class DefaultPage implements OnInit {
 
-  public tabs : any = this.obterTabs();
-  order : any = {};
-  currentPopover = null;
+  public tabs  : any = this.defineTabs();
+  public order : any = this.createOrderObject();
+
+  public defaultOrder : DefaultIO;
+  public currentPopover = null;
   
-  constructor(public activeRoute : ActivatedRoute, private menuCtrl : MenuController, public popoverController: PopoverController, private events : Events) {
+  constructor(public activeRoute : ActivatedRoute, private menuCtrl : MenuController, public popoverController: PopoverController, private events : Events, private agilitUtils : AgilitUtils, private restOrder : RestOrder,  private viewUtils: ViewUtils) {
     this.loadOrderById(this.activeRoute.snapshot.paramMap.get('id'));
   }
 
@@ -29,7 +36,7 @@ export class DefaultPage implements OnInit {
     this.menuCtrl.enable(true);
   }
 
-  public obterTabs(){
+  public defineTabs(){
     return [
       {
         route : "resume",
@@ -38,10 +45,6 @@ export class DefaultPage implements OnInit {
       {
         route : "problems",
         icon : "alert"
-      },
-      {
-        route : "components",
-        icon : "build"
       },
       {
         route : "operations",
@@ -58,21 +61,36 @@ export class DefaultPage implements OnInit {
     ]
   }
 
-  public loadOrderById(idOrder : string){
-    this.order = {
-      "id": 1,
-      "integrationID" : "1000",
-      "createdAt": "17/01/2016",
-      "deleted": 0,
-      "orderNumber": "OM - 2445492/DJ0449",
-      "priority": "urgent",
-      "type": "Preventiva",
-      "userId": 1,
-      "installationAreaId": 1,
-      "orderTypeId": 0,
-      "orderClassificationId": 1,
-      "orderEquipamentId":1,
-      "equipamentName": "DHA03005/007"
+  public async loadOrderById(idOrder : string){
+    if (idOrder == ''){
+      return;
+    }
+
+    await this.viewUtils.showProgressBar();
+    this.restOrder.loadOrder(idOrder).then(
+      (response: any) => {
+        this.viewUtils.hideProgressBar();
+
+        if (AgilitUtils.isNullOrUndefined(response)){
+          return;
+        }
+
+        Order.getInstance().orderDefault = response;
+        this.order = Order.getInstance().orderDefault;        
+      }
+    ).catch(
+      error => {
+        console.log('Error');
+        this.viewUtils.hideProgressBar();
+      }
+    );    
+  }
+
+  private createOrderObject(){
+    return {
+      orderNumber: '',
+      type       : '',
+      orderTypeId: ''
     }
   }
 

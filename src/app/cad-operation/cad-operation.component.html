@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastrar Operação</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label color="secondary" position="floating">Descrição da operação</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <div class="align-center">
+    <agilit-button (click)="confirmOperation()">Confirmar</agilit-button>
+  </div>
+</ion-footer>

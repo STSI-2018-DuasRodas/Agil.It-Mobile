@@ -25,10 +25,8 @@ export class HttpProvider {
     if (this.token == ''){
       this.token = null;
     }
-
-    if (this.token != null){
-      headers.append('Authorization', 'bearer ' + this.token);
-    }
+    
+    headers.append('token', window.localStorage.getItem("token"));    
 
     return headers;
   }

@@ -1,0 +1,13 @@
+<ion-list (click)="openSelectedOrder()">
+  <ion-row>
+    <ion-col class="align-center" size="4">
+      <ion-label class="font-size-mini">{{data.orderNumber}}</ion-label>
+    </ion-col>
+    <ion-col class="align-center" size="6">
+      <ion-label class="font-size-small">{{data.orderEquipment[0].equipment.description}}</ion-label>
+    </ion-col>
+    <ion-col class="align-right" size="2">
+      <ion-label class="font-size-mini">{{data.priorityFormated}}</ion-label>
+    </ion-col>
+  </ion-row>  
+</ion-list>

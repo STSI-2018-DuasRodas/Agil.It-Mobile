@@ -23,14 +23,18 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { PopoverComponent } from './popover/popover.component';
 import { CustomComponentsModule } from './utils/customComponents.module';
+import { AgilitUtils } from './utils/agilitUtils';
+import { CadOperationComponent } from './cad-operation/cad-operation.component';
+import { RestOrder } from './rest/restorder';
 
 library.add(fas, far, fab);
 @NgModule({
   declarations: [
     AppComponent,
-    PopoverComponent
+    PopoverComponent,
+    CadOperationComponent
   ],
-  entryComponents: [PopoverComponent],
+  entryComponents: [PopoverComponent, CadOperationComponent],
   imports: [
     BrowserModule,
     HttpModule,
@@ -49,6 +53,8 @@ library.add(fas, far, fab);
     HttpProvider,
     ViewUtils,
     LoginRest,
+    RestOrder,
+    AgilitUtils,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

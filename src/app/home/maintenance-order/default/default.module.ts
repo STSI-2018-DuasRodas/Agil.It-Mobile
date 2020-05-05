@@ -22,10 +22,6 @@ const routes: Routes = [
         loadChildren: () => import('../tabs/problems.module').then(m => m.ProblemsPageModule)
       },
       { 
-        path: "components",
-        loadChildren: () => import('../tabs/components.module').then(m => m.ComponentsPageModule)
-      },
-      { 
         path: "operations",
         loadChildren: () => import('../tabs/operations.module').then(m => m.OperationsPageModule)
       },

@@ -17,7 +17,7 @@
           </ion-item-divider>
         </ion-card-header>      
         <ion-card-content class="align-center">
-          Galpão 02 / B210
+          {{defaultOrder.installationArea.description}}
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -35,7 +35,7 @@
           </ion-item-divider>
         </ion-card-header>      
         <ion-card-content class="align-center">
-            DHA03005/007
+            {{defaultOrder.defectOrigin.machineType.description}}
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -75,12 +75,12 @@
       <ion-row>
         <ion-col size="6">
           <div class="align-center">
-            Descarga elétrica
+            {{defaultOrder.defectOrigin.description}}
           </div>
         </ion-col>
         <ion-col size="6">
           <div class="align-center">
-            Motor queimado
+            {{defaultOrder.defectSymptomNote}}
           </div>
         </ion-col>
       </ion-row>
@@ -108,7 +108,7 @@
       </ion-item-divider>
     </ion-card-header>      
     <ion-card-content class="align-center">
-      <ion-label class="font-size-medium">José Correa</ion-label>
+      <ion-label class="font-size-medium">{{defaultOrder.orderEquipament[0].workers.description}}</ion-label>
     </ion-card-content>
   </ion-card>
   
@@ -119,7 +119,7 @@
       </ion-item-divider>
     </ion-card-header>      
     <ion-card-content class="align-center">
-      <ion-label class="font-size-medium">Elétrico</ion-label>
+      <ion-label class="font-size-medium">{{defaultOrder.installationArea.sector.description}}</ion-label>
     </ion-card-content>
   </ion-card>
   

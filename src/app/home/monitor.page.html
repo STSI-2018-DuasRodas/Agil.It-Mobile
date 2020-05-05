@@ -10,7 +10,7 @@
         </ion-title>
       </ion-col>
       <ion-col size="2" class="align-center" (click)="changeVisualizationMode()">
-        <ion-icon *ngIf="listView"  name="grid"    class="icon-default-size"></ion-icon>
+        <ion-icon *ngIf="listView" name="grid" class="icon-default-size"></ion-icon>
         <ion-icon *ngIf="!listView" name="options" class="icon-default-size"></ion-icon>
       </ion-col>
     </ion-row>
@@ -21,70 +21,44 @@
   <ion-refresher slot="fixed" (ionRefresh)="swipRefresh($event)">
     <ion-refresher-content refreshingText="Carregando..."></ion-refresher-content>
   </ion-refresher>
-  <ion-segment color="secondary" (ionChange)="segmentChanged($event)" value="userOrders">
-    <ion-segment-button value="allOrders">
-      <ion-label>TODAS</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="userOrders">
-      <ion-label>MINHAS ORDENS</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+
+  <ion-toolbar slot="fixed">
+    <ion-segment color="secondary" (ionChange)="segmentChanged($event)" value="userOrders">
+      <ion-segment-button value="allOrders">
+        <ion-label>TODAS</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="userOrders">
+        <ion-label>MINHAS ORDENS</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <div class="p-6"></div>
 
 
-  <ion-row *ngIf="!listView">
-    <ion-col size="6" *ngFor="let order of filtredOrders">
-      <ion-card (click)="openOrder(order)">
-        <ion-card-header class="align-center p-left-0 p-right-0">
-          <ion-label class="font-style-bold font-size-small" color="dark">{{order.orderNumber}}</ion-label>
-        </ion-card-header>
-        <ion-card-content class="p-left-0 p-right-0">
-          <div class="align-center">
-            <ion-row>
-              <ion-col size="10">
-                <ion-label class="font-size-medium font-to-upper font-style-bold" color="secondary">{{order.type}}</ion-label>
-              </ion-col>
-              <ion-col size="2" class="p-right-2">
-                <ion-icon *ngIf="order.orderTypeId == 0" class="icon-default-size" name="bookmark" color="primary"></ion-icon>
-                <ion-icon *ngIf="order.orderTypeId == 1" class="icon-default-size" name="bookmark" color="warning"></ion-icon>
-                <ion-icon *ngIf="order.orderTypeId == 2" class="icon-default-size" name="bookmark" color="medium"></ion-icon>
-              </ion-col>
-            </ion-row>
-          </div>
-          <div class="align-left">
-            <ion-row>
-              <ion-col size="12">
-                <ion-label class="font-size-medium"><ion-icon slot="start" name="hammer"></ion-icon>&nbsp;&nbsp;{{order.equipamentName}}</ion-label>
-              </ion-col>
-              <ion-col size="12">
-                <ion-label class="font-size-medium"><ion-icon slot="start" name="help-circle"></ion-icon>&nbsp;&nbsp;{{order.priority}}</ion-label>
-              </ion-col>
-              <ion-col size="12">
-                <ion-label class="font-size-medium"><ion-icon slot="start" name="alarm"></ion-icon>&nbsp;&nbsp;{{order.createdAt}}</ion-label>
-              </ion-col>
-            </ion-row>
-          </div>
-          <div class="align-center">
-            <agilit-button (click)="assumeOrder($event)" [size]="'small'"><ion-icon slot="start" name="star"></ion-icon>Assumir </agilit-button>
-          </div>
-        </ion-card-content>
+  <div *ngIf="!listView">
+    <ion-virtual-scroll [items]="rowList" approxItemHeight="320px">
+      <div *virtualItem="let item; let itemBounds = bounds;">
+        <ion-row>
+          <ion-col size="6">
+            <app-ordercard [data]="item[0]" (openOrder)="openSelectOrder($event)"></app-ordercard>
+          </ion-col>
+          <ion-col size="6" *ngIf="item[1]">
+            <app-ordercard [data]="item[1]" (openOrder)="openSelectOrder($event)"></app-ordercard>
+          </ion-col>          
+        </ion-row>
+      </div>
+    </ion-virtual-scroll>
+  </div>
+
+  <div *ngIf="listView">
+    <ion-toolbar slot="fixed">
+      <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>  
+    </ion-toolbar>      
+    <ion-virtual-scroll [items]="orders" approxItemHeight="320px">
+      <ion-card *virtualItem="let item; let itemBounds = bounds;">
+        <app-orderlist [data]="item" (openOrder)="openSelectOrder($event)"></app-orderlist>
       </ion-card>
-    </ion-col>
-  </ion-row>
-
-  <div *ngIf="listView">    
-    <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>      
-    <ion-list >
-      <ion-item *ngFor="let order of filtredOrders">
-        <ion-col class="align-center" size="4">
-          <ion-label class="font-size-mini">{{order.orderNumber}}</ion-label>
-        </ion-col>
-        <ion-col class="align-center" size="6">
-          <ion-label class="font-size-small">{{order.equipamentName}}</ion-label>
-        </ion-col>
-        <ion-col class="align-right" size="2">
-          <ion-label class="font-size-mini">{{order.priority}}</ion-label>
-        </ion-col>
-      </ion-item>
-    </ion-list>
+    </ion-virtual-scroll>
   </div>
 </ion-content>

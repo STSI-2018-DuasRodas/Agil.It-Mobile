@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AgilitButtonComponent } from '../agilit-button/agilit-button.component';
+import { OrdercardComponent } from '../ordercard/ordercard.component';
+import { OrderlistComponent } from '../orderlist/orderlist.component';
 @NgModule({
   imports:[
     CommonModule,
@@ -10,10 +12,14 @@ import { AgilitButtonComponent } from '../agilit-button/agilit-button.component'
     IonicModule
   ],
   declarations: [    
-    AgilitButtonComponent
+    AgilitButtonComponent,
+    OrdercardComponent,
+    OrderlistComponent
   ],
   exports: [
-    AgilitButtonComponent
+    AgilitButtonComponent,
+    OrdercardComponent,
+    OrderlistComponent
   ],
   entryComponents: [
   ]

@@ -1,4 +1,5 @@
 import { LoadingController, ToastController } from '@ionic/angular';
+import { AgilitUtils } from './agilitUtils';
 
 export class ViewUtils {
   public progressBar: any;
@@ -20,13 +21,32 @@ export class ViewUtils {
     this.progressBar.dismiss();
   }
 
-  async showToast(message : string, duration : number = 2000) {
-    let options = {
+  async showToast(message : string, duration : number = 2000, success : boolean = true) {
+    let options : any = {};
+
+    if (success){
+      if (message == undefined){
+        message = 'Sucesso';
+      }      
+
+      options = {
+        message: message,
+        duration : duration,
+        color : 'success',
+        icon: 'information-circle-outline'
+      }
+    } else {      
+      if (message == undefined){
+        message = 'Erro desconhecido';
+      }
+
+      options = {
         message: message,
         duration : duration,
         color : 'primary',
         icon: 'information-circle-outline'
-    }
+      }
+    }    
 
     let toast = await this.toastController.create(options);
     

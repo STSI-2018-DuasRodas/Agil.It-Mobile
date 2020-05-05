@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Order } from 'src/app/order/order';
 
 @Component({
   selector: 'app-assignature',
@@ -11,7 +12,7 @@ export class AssignaturePage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
 
   assineOm(){

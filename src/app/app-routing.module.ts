@@ -38,30 +38,6 @@ const routes: Routes = [
   { 
     path: 'home/maintenance-order/:id/route', 
     loadChildren: () => import('./home/maintenance-order/route/route.module').then(m => m.RoutePageModule)
-  },
-  { 
-    path: 'home/maintenance-order/:id/:type/resume', 
-    loadChildren: () => import('./home/maintenance-order/tabs/resume.module').then(m => m.ResumePageModule)
-  },
-  { 
-    path: 'home/maintenance-order/:id/:type/problems',
-    loadChildren: () => import('./home/maintenance-order/tabs/problems.module').then(m => m.ProblemsPageModule)
-  },
-  { 
-    path: 'home/maintenance-order/:id/:type/components', 
-    loadChildren: () => import('./home/maintenance-order/tabs/components.module').then(m => m.ComponentsPageModule)
-  },
-  { 
-    path: 'home/maintenance-order/:id/:type/hourWorked', 
-    loadChildren: () => import('./home/maintenance-order/tabs/hour-worked.module').then(m => m.HourWorkedPageModule)
-  },
-  { 
-    path: 'home/maintenance-order/:id/:type/assignature', 
-    loadChildren: () => import('./home/maintenance-order/tabs/assignature.module').then(m => m.AssignaturePageModule)
-  },
-  {
-    path: 'home/maintenance-order/:id/:type/operations', 
-    loadChildren: () => import('./home/maintenance-order/tabs/operations.module').then(m => m.OperationsPageModule)
   }
 ];
 
