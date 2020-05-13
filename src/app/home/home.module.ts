@@ -5,8 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { MonitorPageModule } from './monitor.module';
-import { NotificationPageModule } from './notification.module';
+import { MonitorPageModule } from '../monitor/monitor.module';
+import { NotificationPageModule } from '../notification/notification.module';
 import { CustomComponentsModule } from '../utils/customComponents.module';
 
 const routes : Routes = [
@@ -16,11 +16,11 @@ const routes : Routes = [
     children: [
       {
         path: "monitor",
-        loadChildren: () => import('./monitor.module').then(m => m.MonitorPageModule)
+        loadChildren: () => import('../monitor/monitor.module').then(m => m.MonitorPageModule)
       },
       { 
         path: "notification",
-        loadChildren: () => import('./notification.module').then(m => m.NotificationPageModule)
+        loadChildren: () => import('../notification/notification.module').then(m => m.NotificationPageModule)
       },
       {
         path: "",

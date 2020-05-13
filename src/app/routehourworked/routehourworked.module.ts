@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DefaultResumePage } from './defaultresume.page';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { RouteHourworkedPage } from './routehourworked.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DefaultResumePage
+    component: RouteHourworkedPage
   }
 ];
 
@@ -20,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    FontAwesomeModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [DefaultResumePage]
+  declarations: [RouteHourworkedPage]
 })
-export class DefaultResumePageModule {}
+export class RouteHourworkedPageModule {}

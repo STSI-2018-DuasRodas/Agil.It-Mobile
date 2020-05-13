@@ -5,13 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DefaultResumePage } from './defaultresume.page';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { MonitorPage } from './monitor.page';
+import { CustomComponentsModule } from '../utils/customComponents.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: DefaultResumePage
+    component: MonitorPage
   }
 ];
 
@@ -20,9 +20,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    FontAwesomeModule
+    CustomComponentsModule,
+    RouterModule.forChild(routes)
   ],
-  declarations: [DefaultResumePage]
+  declarations: [MonitorPage]
 })
-export class DefaultResumePageModule {}
+  
+export class MonitorPageModule {}

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-row>
+      <ion-col size="10" class="align-center">
+        <ion-title>
+          Monitor de Ordens
+        </ion-title>
+      </ion-col>
+      <ion-col size="2" class="align-center" (click)="changeVisualizationMode()">
+        <ion-icon *ngIf="listView" name="grid" class="icon-default-size"></ion-icon>
+        <ion-icon *ngIf="!listView" name="options" class="icon-default-size"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="swipRefresh($event)">
+    <ion-refresher-content refreshingText="Carregando..."></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-toolbar slot="fixed">
+    <ion-segment color="secondary" (ionChange)="segmentChanged($event)" value="userOrders">
+      <ion-segment-button value="allOrders">
+        <ion-label>TODAS</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="userOrders">
+        <ion-label>MINHAS ORDENS</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <div class="p-6"></div>
+
+
+  <div *ngIf="!listView">    
+    <ion-virtual-scroll [items]="rowList" approxItemHeight="320px">
+      <div *virtualItem="let item; let itemBounds = bounds;">
+        <ion-row>
+          <ion-col size="6">
+            <app-ordercard [data]="item[0]" (openOrder)="openSelectOrder($event)"></app-ordercard>
+          </ion-col>
+          <ion-col size="6" *ngIf="item[1]">
+            <app-ordercard [data]="item[1]" (openOrder)="openSelectOrder($event)"></app-ordercard>
+          </ion-col>          
+        </ion-row>
+      </div>
+    </ion-virtual-scroll>
+  </div>
+
+  <div *ngIf="listView">
+    <ion-toolbar slot="fixed">
+      <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>  
+    </ion-toolbar>      
+    <ion-virtual-scroll [items]="orders" approxItemHeight="320px">
+      <ion-card *virtualItem="let item; let itemBounds = bounds;">
+        <app-orderlist [data]="item" (openOrder)="openSelectOrder($event)"></app-orderlist>
+      </ion-card>
+    </ion-virtual-scroll>
+  </div>
+</ion-content>

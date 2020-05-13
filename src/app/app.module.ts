@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy, LoadingController } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { HttpModule } from '@angular/http';
@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageModule } from './login/login.module';
 import { HomePageModule } from './home/home.module';
-import { MonitorPageModule } from './home/monitor.module';
-import { NotificationPageModule } from './home/notification.module';
+import { MonitorPageModule } from './monitor/monitor.module';
+import { NotificationPageModule } from './notification/notification.module';
 import { HttpProvider } from './http/http';
 import { LoginRest } from './rest/loginRest';
 import { ViewUtils } from './utils/viewUtils';
@@ -26,13 +26,18 @@ import { CustomComponentsModule } from './utils/customComponents.module';
 import { AgilitUtils } from './utils/agilitUtils';
 import { CadOperationComponent } from './cad-operation/cad-operation.component';
 import { RestOrder } from './rest/restorder';
+import { DefaultPage } from './default/default.page';
+import { DefaultPageModule } from './default/default.module';
+import { AgilitDatePipe } from './pipe/date.pipe';
+import { AgilitTimePipe } from './pipe/time.pipe';
 
 library.add(fas, far, fab);
 @NgModule({
   declarations: [
     AppComponent,
     PopoverComponent,
-    CadOperationComponent
+    CadOperationComponent    
+
   ],
   entryComponents: [PopoverComponent, CadOperationComponent],
   imports: [

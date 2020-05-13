@@ -5,13 +5,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DefaultResumePage } from './defaultresume.page';
+import { DefaultHourWorkedPage } from './defaulthourworked.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import { AgilitButtonComponent } from 'src/app/agilit-button/agilit-button.component';
+import { CustomComponentsModule } from 'src/app/utils/customComponents.module';
+import { AgilitDatePipe } from 'src/app/pipe/date.pipe';
+import { AgilitTimePipe } from 'src/app/pipe/time.pipe';
 
 const routes: Routes = [
   {
     path: '',
-    component: DefaultResumePage
+    component: DefaultHourWorkedPage
   }
 ];
 
@@ -20,9 +24,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    CustomComponentsModule,
     RouterModule.forChild(routes),
     FontAwesomeModule
   ],
-  declarations: [DefaultResumePage]
+  declarations: [DefaultHourWorkedPage]
 })
-export class DefaultResumePageModule {}
+export class DefaultHourWorkedPageModule {}

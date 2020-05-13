@@ -1,10 +1,13 @@
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, PopoverController } from '@ionic/angular';
 import { AgilitUtils } from './agilitUtils';
+import { RestOrder } from '../rest/restorder';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class ViewUtils {
   public progressBar: any;
     
-  constructor(private loadingController: LoadingController, private toastController: ToastController){
+  constructor(private loadingController: LoadingController, private toastController: ToastController, private agilitUtils : AgilitUtils, private restOrder : RestOrder, public popoverController: PopoverController){
 
   }
 

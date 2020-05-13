@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { AgilitButtonComponent } from '../agilit-button/agilit-button.component';
 import { OrdercardComponent } from '../ordercard/ordercard.component';
 import { OrderlistComponent } from '../orderlist/orderlist.component';
+import { AgilitTimePipe } from '../pipe/time.pipe';
+import { AgilitDatePipe } from '../pipe/date.pipe';
 @NgModule({
   imports:[
     CommonModule,
@@ -14,12 +16,16 @@ import { OrderlistComponent } from '../orderlist/orderlist.component';
   declarations: [    
     AgilitButtonComponent,
     OrdercardComponent,
-    OrderlistComponent
+    OrderlistComponent,
+    AgilitDatePipe, 
+    AgilitTimePipe
   ],
   exports: [
     AgilitButtonComponent,
     OrdercardComponent,
-    OrderlistComponent
+    OrderlistComponent,
+    AgilitDatePipe, 
+    AgilitTimePipe
   ],
   entryComponents: [
   ]

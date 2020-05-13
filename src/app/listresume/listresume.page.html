@@ -1,0 +1,29 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="order != undefined">
+    <div *ngFor="let item of order.orderEquipment">
+      <ion-card>
+        <ion-card-header>
+          <ion-item-divider>
+            <fa-icon icon="hammer" size="2x"></fa-icon>
+            <ion-label class="font-size-large m-left-4"><strong>{{item.equipment.description}}</strong></ion-label>
+          </ion-item-divider>
+        </ion-card-header> 
+        
+        <ion-card-header>
+          <ion-item-divider>
+            <fa-icon class="color-blue" icon="map-marker-alt" size="2x"></fa-icon>
+            <ion-label class="font-size-large m-left-6"><strong>{{item.installationArea.description}}</strong></ion-label>
+          </ion-item-divider>
+        </ion-card-header>      
+        <ion-card-content class="align-center">
+          
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    
+  </div>  
+</ion-content>

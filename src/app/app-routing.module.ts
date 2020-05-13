@@ -21,24 +21,26 @@ const routes: Routes = [
   },
   { 
     path: 'home/monitor', 
-    loadChildren: () => import('./home/monitor.module').then(m => m.MonitorPageModule)
+    loadChildren: () => import('./monitor/monitor.module').then(m => m.MonitorPageModule)
   },
   { 
     path: 'home/notification', 
-    loadChildren: () => import('./home/notification.module').then(m => m.NotificationPageModule)
+    loadChildren: () => import('./notification/notification.module').then(m => m.NotificationPageModule)
   },
   { 
     path: 'home/maintenance-order/:id/default', 
-    loadChildren: () => import('./home/maintenance-order/default/default.module').then(m => m.DefaultPageModule)
+    loadChildren: () => import('./default/default.module').then(m => m.DefaultPageModule)
   },
   { 
     path: 'home/maintenance-order/:id/list', 
-    loadChildren: () => import('./home/maintenance-order/list/list.module').then(m => m.ListPageModule)
+    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
   },
   { 
     path: 'home/maintenance-order/:id/route', 
-    loadChildren: () => import('./home/maintenance-order/route/route.module').then(m => m.RoutePageModule)
+    loadChildren: () => import('./route/route.module').then(m => m.RoutePageModule)
   }
+
+
 ];
 
 @NgModule({

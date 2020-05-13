@@ -1,21 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Order } from 'src/app/order/order';
-import { Events } from '@ionic/angular';
-import { DefaultIO } from 'src/app/io/defaultIO';
-import { ListIO } from 'src/app/io/listIO';
+import { Observable } from 'rxjs';
+import { EventEmitterService } from '../eventemitter/eventemitter.service';
 
 @Component({
-  selector: 'app-resume',
-  templateUrl: './resume.page.html',
-  styleUrls: ['./resume.page.scss'],
+  selector: 'app-defaultresume',
+  templateUrl: './defaultresume.page.html',
+  styleUrls: ['./defaultresume.page.scss'],
 })
-export class DefaultResumePage implements OnInit {
+export class DefaultResumePage implements OnInit, OnDestroy {
+  public order : any = undefined;
+
+  public subscribe : any;
   
   constructor() { 
+  }  
+
+  ngOnInit() {    
+    this.subscribe = EventEmitterService.get('defaultOrderData').subscribe((data) => {
+      this.order = data;
+
+      console.log(this.order);
+    });
   }
 
-  ngOnInit() {
-    
-  }
-
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
+  }  
+  
 }

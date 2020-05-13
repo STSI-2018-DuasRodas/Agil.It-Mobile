@@ -1,0 +1,23 @@
+<ion-header>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+    
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label color="secondary" position="floating">Digite sua senha:</ion-label>
+        <ion-input type="password" [(ngModel)]="assignaturePassword"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-checkbox slot="start" [(ngModel)]="assignatureVerificationChecked"></ion-checkbox>
+        <ion-label>Confirmar Assinatura?</ion-label>
+      </ion-item>
+      <div class="align-center p-top-6">
+        <agilit-button (click)="assineOm()" [disabled]="!assignatureVerificationChecked">Assinar</agilit-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

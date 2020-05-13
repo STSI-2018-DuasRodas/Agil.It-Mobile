@@ -62,4 +62,20 @@ export class AgilitUtils {
 
       return JSON.parse(JSON.stringify(obj));
   }
+
+  public static formatValues(priority) {
+    return AgilitUtils.getPriorities()[priority];
+  }
+
+  public static getPriorities() {
+    return {
+      default: 'PREVENTIVA',
+      list: 'LISTA',
+      route: 'ROTA',
+      low: "Baixa",
+      medium: "Média",
+      high: "Alta",
+      urgent: "Urgente",
+    }
+  }
 }
