@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ViewUtils } from 'src/app/utils/viewUtils';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 
@@ -7,7 +7,7 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
   templateUrl: './defaulthourworked.page.html',
   styleUrls: ['./defaulthourworked.page.scss'],
 })
-export class DefaultHourWorkedPage implements OnInit {
+export class DefaultHourWorkedPage implements OnInit, OnDestroy {
   public order : any = undefined;
   hoursAponted = [];  
   date        : string;
@@ -15,17 +15,21 @@ export class DefaultHourWorkedPage implements OnInit {
   finalHour   : string;
   total       : string;
   interval    : string;
+  public subscribe : any;
 
   constructor(private viewUtils : ViewUtils){
     this.initializingObject();
   }
 
   ngOnInit() {
-    EventEmitterService.get('defaultOrderData').subscribe((data) => {
+    this.subscribe = EventEmitterService.get('defaultOrderData').subscribe((data) => {
       this.order = data;
-      console.log(this.order);
     });
   }
+
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
+  }  
   
   confirmAppointments(){
     let hourAponted : any = {};

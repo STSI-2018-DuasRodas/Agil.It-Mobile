@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Order } from 'src/app/order/order';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 
@@ -7,20 +7,24 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
   templateUrl: './defaultassignature.page.html',
   styleUrls: ['./defaultassignature.page.scss'],
 })
-export class DefaultAssignaturePage implements OnInit {
+export class DefaultAssignaturePage implements OnInit, OnDestroy {
   public order : any = undefined;
 
   public assignaturePassword : string = '';
+  public subscribe : any;
 
   assignatureVerificationChecked : boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-    EventEmitterService.get('defaultOrderData').subscribe((data) => {
+    this.subscribe = EventEmitterService.get('defaultOrderData').subscribe((data) => {
       this.order = data;
-      console.log(this.order);
     });
+  }
+
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
   }
 
   assineOm(){

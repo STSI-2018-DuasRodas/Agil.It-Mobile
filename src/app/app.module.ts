@@ -35,11 +35,9 @@ library.add(fas, far, fab);
 @NgModule({
   declarations: [
     AppComponent,
-    PopoverComponent,
-    CadOperationComponent    
-
+    PopoverComponent
   ],
-  entryComponents: [PopoverComponent, CadOperationComponent],
+  entryComponents: [PopoverComponent],
   imports: [
     BrowserModule,
     HttpModule,

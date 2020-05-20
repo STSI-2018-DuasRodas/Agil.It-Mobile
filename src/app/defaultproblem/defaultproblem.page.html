@@ -3,7 +3,7 @@
 
 <ion-content>
   <div *ngIf="order != undefined">
-    <ion-card style="background-color: #E8E8E8;">
+    <ion-card>
       <ion-card-header>
         <ion-item-divider>
           <ion-card-title color="secondary">Problemas</ion-card-title>
@@ -35,14 +35,14 @@
         <div class="m-top-2">
           <ion-label class="font-size-small font-style-bold" color="primary" position="stacked">Informações do Sintoma</ion-label>
           <ion-item>
-            <ion-input class="font-size-small" disabled>{{order.defectSymptomNote}}</ion-input>
+            <ion-input class="font-size-small" disabled>{{order.defectSymptom.description}}</ion-input>
           </ion-item>
         </div>
   
         <div class="m-top-6">
           <ion-label class="font-size-small font-style-bold" color="primary" position="stacked">Componente Defeituoso</ion-label>
           <ion-item lines="none">
-            <ion-input class="font-size-small" disabled>{{order.orderEquipament[0].equipament.description}}</ion-input>
+            <ion-input class="font-size-small" disabled>{{order.orderEquipment[0].equipment.description}}</ion-input>
           </ion-item>
         </div>      
       </ion-card-content>

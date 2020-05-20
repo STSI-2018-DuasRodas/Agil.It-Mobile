@@ -35,7 +35,7 @@ export class ViewUtils {
       options = {
         message: message,
         duration : duration,
-        color : 'success',
+        color : 'secondary',
         icon: 'information-circle-outline'
       }
     } else {      

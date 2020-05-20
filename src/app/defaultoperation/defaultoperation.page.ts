@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { DefaultIO } from 'src/app/io/defaultIO';
 import { Order } from 'src/app/order/order';
 import { ModalController } from '@ionic/angular';
@@ -10,18 +10,25 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
   templateUrl: './defaultoperation.page.html',
   styleUrls: ['./defaultoperation.page.scss'],
 })
-export class DefaultOperationPage implements OnInit {
+export class DefaultOperationPage implements OnInit, OnDestroy {
   public order : any = undefined;  
 
-  constructor(public modalController: ModalController) {    
+  public subscribe : any;
+
+  constructor(public modalController: ModalController, private changeDetectorRef: ChangeDetectorRef) {    
   }
 
-  ngOnInit() {
-    EventEmitterService.get('defaultOrderData').subscribe((data) => {
-      this.order = data;
-      console.log(this.order);
+  ngOnInit() {    
+    this.subscribe = EventEmitterService.get('defaultOrderData').subscribe((data) => {
+      this.order = data;      
     });
+
+    EventEmitterService.get('requestOrderData').emit();
   }
+
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
+  }  
   
   expandedItem(item){
     item.expanded = !item.expanded;

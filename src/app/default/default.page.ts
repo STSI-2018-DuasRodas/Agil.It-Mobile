@@ -14,17 +14,26 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
   templateUrl: './default.page.html',
   styleUrls: ['./default.page.scss'],
 })
-export class DefaultPage implements OnInit{
+export class DefaultPage implements OnInit, OnDestroy{
   public tabs  : any = this.defineTabs();
   public order : any = this.createOrderObject();
 
   public currentPopover = null;
+  public requestOrderData : any;
   
   constructor(public activeRoute : ActivatedRoute, private menuCtrl : MenuController, public popoverController: PopoverController, private events : Events, private agilitUtils : AgilitUtils, private restOrder : RestOrder,  private viewUtils: ViewUtils) {    
   }
 
   async ngOnInit() {    
     await this.loadOrderById(this.activeRoute.snapshot.paramMap.get('id'));
+
+    this.requestOrderData = EventEmitterService.get('requestOrderData').subscribe(() => {
+      this.emitOrderEvent();
+    });
+  }
+
+  ngOnDestroy(){
+    this.requestOrderData.unsubscribe();
   }
 
   ionViewWillEnter(){
@@ -74,9 +83,9 @@ export class DefaultPage implements OnInit{
           return;
         }
                 
-        this.order = response;
-        EventEmitterService.get('defaultOrderData').emit(this.order);        
+        this.order = response;        
         this.loadOrderSuccess();
+        this.emitOrderEvent();
       }
     ).catch(
       error => {
@@ -84,6 +93,10 @@ export class DefaultPage implements OnInit{
         this.viewUtils.hideProgressBar();
       }
     );    
+  }
+
+  emitOrderEvent(){
+    EventEmitterService.get('defaultOrderData').emit(this.order);
   }
 
   loadOrderSuccess(){

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cadastrar Operação</ion-title>
+    <ion-title>Operação</ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="dismissModal()">
         <ion-icon slot="icon-only" name="close"></ion-icon>
@@ -9,10 +9,38 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label color="secondary" position="floating">Descrição da operação</ion-label>
-    <ion-input type="text"></ion-input>
-  </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label color="secondary" position="floating">Descrição da operação</ion-label>
+      <ion-input type="text" [(ngModel)]="operationData.description"></ion-input>
+    </ion-item>    
+
+    <ion-item>
+      <ion-label color="secondary" position="floating">Nº Oper.</ion-label>
+      <ion-input type="number" [(ngModel)]="operationData.operationNumber"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="secondary" position="floating">Tempo planejado</ion-label>
+      <ion-input type="time" disabled [(ngModel)]="operationData.formatedPlanningTime"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="secondary" position="floating">Tempo executado</ion-label>
+      <ion-input type="time" [(ngModel)]="operationData.formatedExecutedTime" (ionBlur)="executeTimeChange($event)"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="secondary" position="floating">Observação</ion-label>
+      <ion-textarea [(ngModel)]="operationData.note"></ion-textarea>
+    </ion-item>
+
+    <ion-item>      
+      <ion-label>Operação realizada</ion-label>
+      <ion-toggle [(ngModel)]="operationData.executed"></ion-toggle>      
+    </ion-item>
+  </ion-list>
+  
 </ion-content>
 
 <ion-footer>

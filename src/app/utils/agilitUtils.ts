@@ -78,4 +78,22 @@ export class AgilitUtils {
       urgent: "Urgente",
     }
   }
+
+  public static convertMinuteToHour(minute) {
+    let hours = (minute / 60);
+    let rhours = Math.floor(hours);
+    let minutes = (hours - rhours) * 60;
+    let rminutes = Math.round(minutes);
+        
+    const formatedHours = rhours.toString().padStart(2, '0');
+    const formatedMinutes = rminutes.toString().padStart(2, '0');
+
+    return formatedHours + ":" + formatedMinutes;
+  }
+
+  public static convertHourToMinutes(hour){
+    let [hours,minutes] = hour.split(":");
+    
+    return Number(minutes) + Number(hours) * 60;
+  }
 }

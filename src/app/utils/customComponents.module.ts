@@ -7,27 +7,32 @@ import { OrdercardComponent } from '../ordercard/ordercard.component';
 import { OrderlistComponent } from '../orderlist/orderlist.component';
 import { AgilitTimePipe } from '../pipe/time.pipe';
 import { AgilitDatePipe } from '../pipe/date.pipe';
+import { BrowserModule } from '@angular/platform-browser';
+import { CadOperationComponent } from '../cad-operation/cad-operation.component';
 @NgModule({
   imports:[
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    IonicModule.forRoot()
   ],
   declarations: [    
     AgilitButtonComponent,
     OrdercardComponent,
     OrderlistComponent,
     AgilitDatePipe, 
-    AgilitTimePipe
+    AgilitTimePipe,
+    CadOperationComponent
   ],
   exports: [
     AgilitButtonComponent,
     OrdercardComponent,
     OrderlistComponent,
     AgilitDatePipe, 
-    AgilitTimePipe
+    AgilitTimePipe,
+    CadOperationComponent
   ],
-  entryComponents: [
+  entryComponents: [CadOperationComponent
   ]
 })
 

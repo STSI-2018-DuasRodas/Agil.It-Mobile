@@ -8,18 +8,25 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
   templateUrl: './defaultproblem.page.html',
   styleUrls: ['./defaultproblem.page.scss'],
 })
-  export class DefaultProblemPage implements OnInit{
+  export class DefaultProblemPage implements OnInit, OnDestroy{
     public order : any = undefined;
+
+    public subscribe : any;
 
     constructor() {      
     }
 
     ngOnInit(){
-      EventEmitterService.get('defaultOrderData').subscribe((data) => {
+      this.subscribe = EventEmitterService.get('defaultOrderData').subscribe((data) => {
         this.order = data;        
       });
+
+      EventEmitterService.get('requestOrderData').emit();
     }
 
+    ngOnDestroy(){
+      this.subscribe.unsubscribe();
+    }
     
   }  
 

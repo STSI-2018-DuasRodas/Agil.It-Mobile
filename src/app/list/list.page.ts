@@ -14,18 +14,23 @@ import { ViewUtils } from '../utils/viewUtils';
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
 })
-export class ListPage implements OnInit {
-  public order : any = {};
+export class ListPage implements OnInit {  
+  public order : any = this.createOrderObject();
 
   public tabs : any = this.obterTabs();
 
   public currentPopover = null;
+  public requestOrderData : any;
 
   constructor(public activeRoute : ActivatedRoute, private menuCtrl : MenuController, private agilitUtils : AgilitUtils, public popoverController: PopoverController, private events : Events, private restOrder : RestOrder, private viewUtils : ViewUtils) {     
   }
 
   async ngOnInit() {
     await this.loadOrderById(this.activeRoute.snapshot.paramMap.get('id'));
+
+    this.requestOrderData = EventEmitterService.get('requestOrderData').subscribe(() => {
+      this.emitOrderEvent();
+    });
   }
 
   ionViewWillEnter(){
@@ -49,10 +54,11 @@ export class ListPage implements OnInit {
         if (AgilitUtils.isNullOrUndefined(response)){
           return;
         }
-                
+
         this.order = response;
-        EventEmitterService.get('listOrderData').emit(this.order);        
         this.loadOrderSuccess();
+
+        EventEmitterService.get('listOrderData').emit(this.order);                
       }
     ).catch(
       error => {
@@ -60,6 +66,10 @@ export class ListPage implements OnInit {
         this.viewUtils.hideProgressBar();
       }
     ); 
+  }
+  
+  emitOrderEvent(){
+    EventEmitterService.get('listOrderData').emit(this.order);
   }
 
   loadOrderSuccess(){
@@ -74,6 +84,21 @@ export class ListPage implements OnInit {
     this.order.orderType        = AgilitUtils.formatValues(this.order.orderLayout.orderLayout);
     this.order.priorityFormated = AgilitUtils.formatValues(this.order.priority);
     this.order.openDateFormated = new Date(this.order.openedDate).getDate() + '/' + new Date(this.order.openedDate).getMonth() + '/' + new Date(this.order.openedDate).getFullYear();
+
+    for (const equipament of this.order.orderEquipment) {
+      AgilitUtils.verifyProperty(equipament, 'operation_expanded', false);
+      for (const operation of equipament.orderOperation) {                
+        AgilitUtils.verifyProperty(operation, 'component_expanded', false);        
+      }        
+    }    
+  }
+
+  private createOrderObject(){
+    return {
+      orderNumber: '',
+      type       : '',
+      orderTypeId: ''
+    }
   }
 
   async presentPopover(ev: any) {
