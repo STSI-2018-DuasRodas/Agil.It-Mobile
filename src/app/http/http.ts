@@ -4,14 +4,23 @@ import { timeout, map } from 'rxjs/operators';
 
 @Injectable()
 export class HttpProvider {
-  public url : string;
+  public url : string = '';
   public token : string;
+  public isOnlineBuild : boolean = false;
 
   private TIMEOUT = 15000;
 
   constructor(private http: Http){
-    this.url = null;
+    this.url   = null;
     this.token = null;
+  }
+  
+  public getBaseUrl() : string{
+    if (this.isOnlineBuild){      
+      return 'http://0.tcp.ngrok.io:18528/api/v1/';
+    } else {
+      return 'http://localhost:4000/api/v1/';
+    }    
   }
 
   private prepareHeaders(contentType : boolean){

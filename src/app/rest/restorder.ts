@@ -4,26 +4,27 @@ import { HttpProvider } from '../http/http';
 
 @Injectable()
 export class RestOrder {
-  private restAction             = 'http://localhost:4000/api/v1/maintenance-orders';
-  private listMaintenerOrdersURL = 'http://localhost:4000/api/v1/mainteners';
-  private restUpdateOperation    = 'http://localhost:4000/api/v1/order-operations';
+  private restAction             = 'maintenance-orders';
+  private listMaintenerOrdersURL = 'mainteners';
+  private restUpdateOperation    = 'order-operations';
 
-  constructor(private http : HttpProvider){        
+  constructor(private http : HttpProvider){   
+    this.http = http;     
   }
 
   public list(){
-    this.http.url = `${this.restAction}`;
+    this.http.url = this.http.getBaseUrl() + `${this.restAction}`;
     return ProviderHelper.get(this.http);
       
   }
 
   public listMaintenerOrders(maintenerID){
-    this.http.url = `${this.listMaintenerOrdersURL + '/' + maintenerID + '/orders'}`;
+    this.http.url = this.http.getBaseUrl() + `${this.listMaintenerOrdersURL + '/' + maintenerID + '/orders'}`;
     return ProviderHelper.get(this.http);
   }
 
   public loadOrder(orderID){
-    this.http.url = `${this.restAction + '/' + orderID}`;
+    this.http.url = this.http.getBaseUrl() + `${this.restAction + '/' + orderID}`;
     return ProviderHelper.get(this.http);
   }
 
@@ -32,7 +33,7 @@ export class RestOrder {
   }
 
   public updateOperation(operation){
-    this.http.url = this.restUpdateOperation + '/' + operation.id;
+    this.http.url = this.http.getBaseUrl() + this.restUpdateOperation + '/' + operation.id;
     return ProviderHelper.put(this.http, operation);
   }
 }
