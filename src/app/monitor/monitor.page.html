@@ -36,14 +36,14 @@
   <div class="p-6"></div>
 
 
-  <div *ngIf="!listView">    
+  <div *ngIf="!listView" style="background-color: #e3e3e3;">    
     <ion-virtual-scroll [items]="rowList" approxItemHeight="320px">
       <div *virtualItem="let item; let itemBounds = bounds;">
         <ion-row>
-          <ion-col size="6">
-            <app-ordercard [data]="item[0]" (openOrder)="openSelectOrder($event)"></app-ordercard>
+          <ion-col size="12">
+            <app-ordercard [data]="item[0]" id="openorder" (openOrder)="openSelectOrder($event)"></app-ordercard>
           </ion-col>
-          <ion-col size="6" *ngIf="item[1]">
+          <ion-col size="12" *ngIf="item[1]">
             <app-ordercard [data]="item[1]" (openOrder)="openSelectOrder($event)"></app-ordercard>
           </ion-col>          
         </ion-row>
@@ -51,14 +51,14 @@
     </ion-virtual-scroll>
   </div>
 
-  <div *ngIf="listView">
+  <div *ngIf="listView" style="background-color: 	#e3e3e3;">
     <ion-toolbar slot="fixed">
       <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>  
     </ion-toolbar>      
-    <ion-virtual-scroll [items]="orders" approxItemHeight="320px">
-      <ion-card *virtualItem="let item; let itemBounds = bounds;">
-        <app-orderlist [data]="item" (openOrder)="openSelectOrder($event)"></app-orderlist>
-      </ion-card>
+    <ion-virtual-scroll [items]="orders" approxItemHeight="320px">      
+      <ion-item *virtualItem="let item; let itemBounds = bounds;">
+        <app-orderlist [data]="item" (openOrder)="openSelectOrder($event)" style="width: 100%;"></app-orderlist>
+      </ion-item>      
     </ion-virtual-scroll>
   </div>
 </ion-content>

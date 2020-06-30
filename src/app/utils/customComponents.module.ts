@@ -9,6 +9,7 @@ import { AgilitTimePipe } from '../pipe/time.pipe';
 import { AgilitDatePipe } from '../pipe/date.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { CadOperationComponent } from '../cad-operation/cad-operation.component';
+import { ChecklistComponent } from '../checklist/checklist.component';
 @NgModule({
   imports:[
     CommonModule,
@@ -22,7 +23,8 @@ import { CadOperationComponent } from '../cad-operation/cad-operation.component'
     OrderlistComponent,
     AgilitDatePipe, 
     AgilitTimePipe,
-    CadOperationComponent
+    CadOperationComponent,
+    ChecklistComponent
   ],
   exports: [
     AgilitButtonComponent,
@@ -30,10 +32,10 @@ import { CadOperationComponent } from '../cad-operation/cad-operation.component'
     OrderlistComponent,
     AgilitDatePipe, 
     AgilitTimePipe,
-    CadOperationComponent
+    CadOperationComponent,
+    ChecklistComponent
   ],
-  entryComponents: [CadOperationComponent
-  ]
+  entryComponents: [CadOperationComponent, ChecklistComponent]
 })
 
 export class CustomComponentsModule {

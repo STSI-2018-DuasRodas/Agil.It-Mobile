@@ -1,39 +1,38 @@
-<ion-card (click)="openSelectedOrder()">
-  <ion-card-header class="align-center p-left-0 p-right-0">
-    <ion-label class="font-style-bold font-size-small" color="dark">{{data.orderNumber}}</ion-label>
+<ion-card (click)="openSelectedOrder()" style="background-color: white; border-radius: 5%;" class="p-bottom-6">
+  <ion-card-header class="align-center p-left-0 p-right-0" style="border-bottom: 1px solid silver">
+    <ion-label class="font-style-bold font-size-medium" color="dark">{{data.orderNumber}}</ion-label>
+    <ion-icon *ngIf="data.priority == 'urgent'" class="icon-large-size p-top-2" name="bookmark" style="position: absolute; top: 0; right: 0;" color="danger"></ion-icon>
+    <ion-icon *ngIf="data.priority == 'high'"   class="icon-large-size p-top-2" name="bookmark" style="position: absolute; top: 0; right: 0;" color="warning"></ion-icon>
+    <ion-icon *ngIf="data.priority == 'medium'" class="icon-large-size p-top-2" name="bookmark" style="position: absolute; top: 0; right: 0;" color="medium"></ion-icon>
+    <ion-icon *ngIf="data.priority == 'low'"    class="icon-large-size p-top-2" name="bookmark" style="position: absolute; top: 0; right: 0;" color="light"></ion-icon>
+    <div class="align-center p-top-2">
+      <ion-label class="font-size-small font-style-bold" color="secondary">{{data.orderType}}</ion-label>  
+    </div>    
   </ion-card-header>
-  <ion-card-content class="p-left-0 p-right-0">
-    <div class="align-center">
-      <ion-row>
-        <ion-col size="10">
-          <ion-label class="font-size-medium font-to-upper font-style-bold" color="secondary">{{data.orderType}}</ion-label>
-        </ion-col>
-        <ion-col size="2" class="p-right-2">
-          <ion-icon *ngIf="data.priority == 'urgent'" class="icon-default-size" name="bookmark" color="primary"></ion-icon>
-          <ion-icon *ngIf="data.priority == 'high'"   class="icon-default-size" name="bookmark" color="warning"></ion-icon>
-          <ion-icon *ngIf="data.priority == 'medium'" class="icon-default-size" name="bookmark" color="medium"></ion-icon>
-          <ion-icon *ngIf="data.priority == 'low'"    class="icon-default-size" name="bookmark" color="light"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </div>
+  <ion-card-content class="p-left-0 p-right-0">    
+    
     <div class="align-left">
-      <ion-row>
-        <ion-col size="12">
-          <ion-label class="font-size-medium">
-            <ion-icon slot="start" name="hammer"></ion-icon>&nbsp;&nbsp;{{data.orderEquipment[0].equipment.description}}</ion-label>
+      <ion-row class="p-top-2">
+        <ion-col size="6" class="p-left-2">
+          <ion-label style="display: flex; align-items: center;" class="font-size-medium"><ion-icon slot="start" name="calendar" class="icon-default-size"></ion-icon>&nbsp;&nbsp;{{data.openDateFormated}}</ion-label>
         </ion-col>
-        <ion-col size="12">
-          <ion-label class="font-size-medium"><ion-icon slot="start" name="help-circle"></ion-icon>&nbsp;&nbsp;{{data.priorityFormated}}</ion-label>
-        </ion-col>
-        <ion-col size="12">
-          <ion-label class="font-size-medium"><ion-icon slot="start" name="alarm"></ion-icon>&nbsp;&nbsp;{{data.openDateFormated}}</ion-label>
+        <ion-col size="6" class="p-left-2">
+          <ion-label style="display: flex; align-items: center;" class="font-size-medium"><ion-icon slot="start" name="bookmark" class="icon-default-size"></ion-icon>&nbsp;&nbsp;{{data.priorityFormated}}</ion-label>
+        </ion-col>        
+      </ion-row>
+      <ion-row class="p-top-2">
+        <ion-col size="12" class="p-left-2">
+          <ion-label class="font-size-medium" style="display: flex; align-items: center;"><ion-icon slot="start" name="build" class="icon-default-size"></ion-icon>&nbsp;&nbsp;{{data.orderEquipment[0].equipment.description}}</ion-label>
         </ion-col>
       </ion-row>
-    </div>
-    <div class="align-center">
-      <agilit-button (click)="assumeOrder($event)" [size]="'small'">
-        <ion-icon slot="start" name="star"></ion-icon>Assumir
-      </agilit-button>
+      <ion-row class="p-top-2">
+        <ion-col size="6" class="p-left-2">
+          <ion-label class="font-size-medium" style="display: flex; align-items: center;"><ion-icon slot="start" name="information-circle-outline" class="icon-default-size"></ion-icon>&nbsp;&nbsp;{{data.orderStatusFormated}}</ion-label>
+        </ion-col>
+        <ion-col size="6" class="p-left-2">
+          <ion-label class="font-size-medium" style="display: flex; align-items: center;"><ion-icon slot="start" name="pin" class="icon-default-size"></ion-icon>&nbsp;&nbsp;localização</ion-label>
+        </ion-col>        
+      </ion-row>
     </div>
   </ion-card-content>
 </ion-card>

@@ -17,10 +17,6 @@ const routes: Routes = [
         loadChildren: () => import('../routeresume/routeresume.module').then(m => m.RouteResumePageModule)
       },
       { 
-        path: "components",
-        loadChildren: () => import('../routecomponent/routecomponent.module').then(m => m.RouteComponentPageModule)
-      },
-      { 
         path: "hourWorked",
         loadChildren: () => import('../routehourworked/routehourworked.module').then(m => m.RouteHourworkedPageModule)
       },

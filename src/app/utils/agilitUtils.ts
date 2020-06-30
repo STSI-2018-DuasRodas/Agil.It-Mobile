@@ -1,4 +1,26 @@
-import { DefaultIO } from '../io/defaultIO';
+export enum AgilitOrderStatus {
+  CREATED = 'created',
+  ASSUMED = 'assumed',
+  STARTED = 'started',
+  PAUSED = 'paused',
+  STOPPED = 'stopped',
+  CANCELED = 'canceled',
+  SIGNATURE_PENDING = 'signature-pending',
+  SIGNATURED = 'signatured',
+  FINISHED = 'finished'
+}
+
+export enum SignatureRole {
+  MAINTAINER = 'maintainer',
+  LEADER = 'leader',
+  ADMINISTRATOR = 'administrator'
+}
+
+export enum SignatureStatus {
+  NEW = 'new',
+  SIGNED = 'signed',
+  DENIED = 'denied'
+}
 
 export class AgilitUtils {
   constructor(){
@@ -69,13 +91,22 @@ export class AgilitUtils {
 
   public static getPriorities() {
     return {
-      default: 'PREVENTIVA',
-      list: 'LISTA',
-      route: 'ROTA',
-      low: "Baixa",
-      medium: "Média",
-      high: "Alta",
-      urgent: "Urgente",
+      default          : 'Preventiva',
+      list             : 'Lista',
+      route            : 'Rota',
+      low              : "Baixa",
+      medium           : "Média",
+      high             : "Alta",
+      urgent           : "Urgente",
+      created          : "Criada",
+      assumed          : "Assumida",
+      started          : "Iniciada",
+      paused           : "Pausada",
+      stopped          : 'Parada',
+      canceled         : 'Cancelada',
+      signature_pending: 'Assinatura pendente',      
+      signatured       : 'Assinatura',
+      finished         : 'Finalizada'
     }
   }
 
@@ -95,5 +126,21 @@ export class AgilitUtils {
     let [hours,minutes] = hour.split(":");
     
     return Number(minutes) + Number(hours) * 60;
+  }
+
+  public static getMaintenerByLoggedUser(maintenenceWorkers){
+    const userData : any = JSON.parse(window.localStorage.getItem("user"));
+
+    if (AgilitUtils.isNullOrUndefined(userData) || AgilitUtils.isNullOrUndefined(userData.data)){
+      return;
+    }
+
+    for (const maintener of maintenenceWorkers){
+      if (!AgilitUtils.equals(maintener.user.id, userData.data.id)){
+        continue;
+      }
+
+      return maintener;
+    }
   }
 }

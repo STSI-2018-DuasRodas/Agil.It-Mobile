@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title class=\"align-center\">Configurações</ion-title>\n    <ion-buttons slot=\"start\">\n      <ion-back-button defaultHref=\"home/monitor\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>  \n</ion-content>\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title class=\"align-center\">Configurações</ion-title>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"home/monitor\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>  \r\n  <ion-slides pager=\"true\" [options]=\"slideOpts\" style=\"height: 100%;\">\r\n    <ion-slide style=\"background-color: blue;\">\r\n      <h1>Slide 1</h1>\r\n    </ion-slide>\r\n    <ion-slide style=\"background-color: red;\">\r\n      <h1>Slide 2</h1>\r\n    </ion-slide>\r\n    <ion-slide style=\"background-color: green;\">\r\n      <h1>Slide 3</h1>\r\n    </ion-slide>\r\n  </ion-slides>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -102,6 +102,10 @@ var ConfigurationPage = /** @class */ (function () {
     function ConfigurationPage(menuCtrl, document) {
         this.menuCtrl = menuCtrl;
         this.document = document;
+        this.slideOpts = {
+            initialSlide: 1,
+            speed: 800,
+        };
     }
     ConfigurationPage.prototype.ngOnInit = function () {
     };

@@ -7,14 +7,16 @@
     <img class="logoDuasRodas" src="../../assets/img/logoDuasRodas.png">
     <ion-list>      
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
+        <!-- <ion-label position="floating">Email</ion-label> -->
         <ion-icon class="icon-default-size" slot="start" name="person" color="secondary"></ion-icon>
-        <ion-input type="text" [(ngModel)]="username"></ion-input>
+        <ion-input class="username" type="text" id="username" name="username" [(ngModel)]="username"></ion-input>
+        <!-- <input type="text" id="username" class="username"><br><br>         -->
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Senha</ion-label>
+        <!-- <ion-label position="floating">Senha</ion-label> -->
         <ion-icon class="icon-default-size" slot="start" name="key" color="secondary"></ion-icon>
-        <ion-input type="password" [(ngModel)]="password" autocomplete="off"></ion-input>
+        <ion-input class="password" type="password" id="password" name="password" [(ngModel)]="password" autocomplete="off"></ion-input>
+        <!-- <input type="text" id="password" class="password"><br><br> -->
       </ion-item>
     </ion-list>
     
@@ -26,7 +28,10 @@
     </div>
 
     <div class="mt-6">
-      <agilit-button [expand]="'block'" (click)="login()">Entrar<ion-icon slot="end" name="arrow-round-forward"></ion-icon></agilit-button>
+      <agilit-button [expand]="'block'" id="logon" class="logon" (click)="login()">Entrar<ion-icon slot="end" name="arrow-round-forward"></ion-icon></agilit-button>
+      <!-- <button type="button" class="logon" id="logon" name="logon" onclick="login()">Entrar</button> -->
+
+      <ion-label class="font-size-large">{{errorObject}}</ion-label>
     </div>    
   </ion-card>
 </ion-content>

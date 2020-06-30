@@ -8,16 +8,36 @@
     
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-label color="secondary" position="floating">Digite sua senha:</ion-label>
-        <ion-input type="password" [(ngModel)]="assignaturePassword"></ion-input>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-checkbox slot="start" [(ngModel)]="assignatureVerificationChecked"></ion-checkbox>
-        <ion-label>Confirmar Assinatura?</ion-label>
-      </ion-item>
-      <div class="align-center p-top-6">
-        <agilit-button (click)="assineOm()" [disabled]="!assignatureVerificationChecked">Assinar</agilit-button>
+      <div *ngIf="order.orderSignature != undefined && order.orderSignature.length == 0">
+        <ion-item>
+          <ion-label color="secondary" position="floating">Digite sua senha:</ion-label>
+          <ion-input type="password" [(ngModel)]="assignaturePassword"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" [(ngModel)]="assignatureVerificationChecked"></ion-checkbox>
+          <ion-label>Confirmar Assinatura?</ion-label>
+        </ion-item>
+        <div class="align-center p-top-6">
+          <agilit-button (click)="assineOm()" [disabled]="!assignatureVerificationChecked">Assinar</agilit-button>
+        </div>
+      </div>    
+      
+      <div *ngIf="order.orderSignature != undefined && order.orderSignature.length > 0">
+        <ion-card *ngFor="let item of order.orderSignature">
+          <ion-card-header>
+          
+          </ion-card-header>
+          <ion-card-content>
+            <div class="align-center">
+              <ion-label class="font-size-medium">Está OM ja está assinado</ion-label><br>              
+            </div>            
+            <div class="align-left">
+              <ion-label><strong>Manutentor: </strong>{{item.user.name}}</ion-label><br>
+              <ion-label><strong>Função: </strong>{{item.user.role}}</ion-label><br>
+              <ion-label><strong>Data de assinatura: </strong>{{item.user.createdAt}}</ion-label>
+            </div>
+          </ion-card-content>
+        </ion-card>        
       </div>
     </ion-card-content>
   </ion-card>

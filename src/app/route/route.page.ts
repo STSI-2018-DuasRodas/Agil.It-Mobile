@@ -36,10 +36,6 @@ export class RoutePage implements OnInit {
         icon : "clipboard"
       },
       {
-        route : "components",
-        icon : "build"
-      },
-      {
         route : "hourWorked",
         icon : "alarm"
       },

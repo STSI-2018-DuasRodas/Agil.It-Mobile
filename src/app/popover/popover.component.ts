@@ -36,6 +36,11 @@ export class PopoverComponent implements OnInit {
     this.popoverController.dismiss();
   }
 
+  public cancel(){
+    this.events.publish('cancel');
+    this.popoverController.dismiss();
+  }
+
   public delegate(){
     this.events.publish('delegate');
     this.popoverController.dismiss();

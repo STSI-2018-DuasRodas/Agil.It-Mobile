@@ -1,13 +1,22 @@
-<ion-list (click)="openSelectedOrder()">
-  <ion-row>
+<div (click)="openSelectedOrder()" class="m-bottom-4">
+  <div style="display: flex; justify-content: space-between;">
+    <ion-label class="font-size-medium p-top-4"><strong>OM: </strong>{{data.orderNumber}}</ion-label>
+    <ion-label class="font-size-medium p-top-4"><strong>Prioridade: </strong>{{data.priorityFormated}}</ion-label>        
+  </div>
+
+  <div>
+    <ion-label class="font-size-medium p-top-4"><strong>Equip.: </strong>{{data.orderEquipment[0].equipment.description}}</ion-label>
+    <ion-label class="font-size-medium p-top-4"><strong>Tipo: </strong>{{data.orderType}}</ion-label>
+  </div>
+  <!-- <ion-row>
     <ion-col class="align-center" size="4">
-      <ion-label class="font-size-mini">{{data.orderNumber}}</ion-label>
+      <ion-label class="font-size-mini">{{data.openDateFormated}}</ion-label>
     </ion-col>
-    <ion-col class="align-center" size="6">
-      <ion-label class="font-size-small">{{data.orderEquipment[0].equipment.description}}</ion-label>
+    <ion-col class="align-right" size="4">
+      <ion-label class="font-size-small">{{data.orderStatusFormated}}</ion-label>
     </ion-col>
-    <ion-col class="align-right" size="2">
-      <ion-label class="font-size-mini">{{data.priorityFormated}}</ion-label>
+    <ion-col class="align-right" size="4">
+      <ion-label class="font-size-mini">Localização</ion-label>
     </ion-col>
-  </ion-row>  
-</ion-list>
+  </ion-row> -->
+</div>

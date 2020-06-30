@@ -82,10 +82,12 @@ export class MonitorPage implements OnInit {
       AgilitUtils.verifyProperty(element, 'orderType', '');
       AgilitUtils.verifyProperty(element, 'priorityFormated', '');
       AgilitUtils.verifyProperty(element, 'openDateFormated', '');
+      AgilitUtils.verifyProperty(element, 'orderStatusFormated', '');
 
       element.orderType        = AgilitUtils.formatValues(element.orderLayout.orderLayout);
       element.priorityFormated = AgilitUtils.formatValues(element.priority);
       element.openDateFormated = new Date(element.openedDate).getDate() + '/' + new Date(element.openedDate).getMonth() + '/' + new Date(element.openedDate).getFullYear();
+      element.orderStatusFormated = AgilitUtils.formatValues(element.orderStatus);
     });    
   }
 
@@ -123,10 +125,12 @@ export class MonitorPage implements OnInit {
       AgilitUtils.verifyProperty(element, 'orderType', '');
       AgilitUtils.verifyProperty(element, 'priorityFormated', '');
       AgilitUtils.verifyProperty(element, 'openDateFormated', '');
+      AgilitUtils.verifyProperty(element, 'orderStatusFormated', '');
 
-      element.orderType        = AgilitUtils.formatValues(element.orderLayout.orderLayout);
-      element.priorityFormated = AgilitUtils.formatValues(element.priority);
-      element.openDateFormated = new Date(element.openedDate).getDate() + '/' + new Date(element.openedDate).getMonth() + '/' + new Date(element.openedDate).getFullYear();
+      element.orderType           = AgilitUtils.formatValues(element.orderLayout.orderLayout);
+      element.priorityFormated    = AgilitUtils.formatValues(element.priority);
+      element.openDateFormated    = new Date(element.openedDate).getDate() + '/' + new Date(element.openedDate).getMonth() + '/' + new Date(element.openedDate).getFullYear();
+      element.orderStatusFormated = AgilitUtils.formatValues(element.orderStatus);
     });
   }
 
@@ -171,19 +175,19 @@ export class MonitorPage implements OnInit {
       return;
     }
 
-    if (order.orderType == 'PREVENTIVA') {
+    if (order.orderType == 'Preventiva') {
       this.router.navigateByUrl('home/maintenance-order/' + order.id + '/default');
 
       return;
     }
 
-    if (order.orderType == 'LISTA') {
+    if (order.orderType == 'Lista') {
       this.router.navigateByUrl('home/maintenance-order/' + order.id + '/list');
 
       return;
     }
 
-    if (order.orderType == 'ROTA') {
+    if (order.orderType == 'Rota') {
       this.router.navigateByUrl('home/maintenance-order/' + order.id + '/route');
 
       return;

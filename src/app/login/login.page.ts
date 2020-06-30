@@ -4,6 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { LoginRest } from '../rest/loginRest';
 import { LoadingController } from '@ionic/angular';
 import { ViewUtils } from '../utils/viewUtils';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -13,10 +14,15 @@ import { ViewUtils } from '../utils/viewUtils';
 })
 export class LoginPage implements OnInit {
   public saveCreditional : boolean = true;
+  public errorObject : any;
 
-  constructor(private router: Router, private menuCtrl : MenuController, private loginRest : LoginRest, private viewUtils : ViewUtils) { }
+  constructor(private router: Router, private menuCtrl : MenuController, private loginRest : LoginRest, private viewUtils : ViewUtils) { 
+    
+  }
 
   ngOnInit() { 
+    // var btn = document.getElementById("logon");
+    // btn.addEventListener("click", (e:Event) => this.login());
   }
 
   public username : string = "julio";

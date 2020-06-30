@@ -21,6 +21,8 @@ export class DefaultResumePage implements OnInit, OnDestroy {
       this.order = data;
       console.log(this.order);
     });    
+    
+    EventEmitterService.get('requestOrderData').emit();
   }
 
   ngOnDestroy(){

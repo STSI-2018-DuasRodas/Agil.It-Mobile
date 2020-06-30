@@ -401,6 +401,34 @@ var findCheckedOption = function (el, tagName) {
 
 
 
+/***/ }),
+
+/***/ "./src/app/eventemitter/eventemitter.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/eventemitter/eventemitter.service.ts ***!
+  \******************************************************/
+/*! exports provided: EventEmitterService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventEmitterService", function() { return EventEmitterService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+var EventEmitterService = /** @class */ (function () {
+    function EventEmitterService() {
+    }
+    EventEmitterService.get = function (nomeEvento) {
+        if (!this.emitters[nomeEvento])
+            this.emitters[nomeEvento] = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        return this.emitters[nomeEvento];
+    };
+    EventEmitterService.emitters = {};
+    return EventEmitterService;
+}());
+
+
+
 /***/ })
 
 }]);
