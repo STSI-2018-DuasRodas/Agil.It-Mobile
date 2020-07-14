@@ -3,7 +3,7 @@
 
 <ion-content>  
   <div *ngIf="order != undefined">
-    <ion-card style="background-color: #E8E8E8;" *ngFor="let itemOperation of order.orderEquipment[0].orderOperation; let i = index">
+    <ion-card style="background-color: white;" *ngFor="let itemOperation of order.orderEquipment[0].orderOperation; let i = index">
       <ion-card-header (click)="expandedItem(itemOperation)">
         <ion-label class="font-size-medium">
           <ion-icon class="p-right-2 executed icon-default-size color-success" name="checkmark" *ngIf="itemOperation.executed"></ion-icon>

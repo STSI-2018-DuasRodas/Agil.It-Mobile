@@ -5,6 +5,7 @@ import { LoginRest } from '../rest/loginRest';
 import { LoadingController } from '@ionic/angular';
 import { ViewUtils } from '../utils/viewUtils';
 import { stringify } from 'querystring';
+import { EventEmitterService } from '../eventemitter/eventemitter.service';
 
 
 @Component({
@@ -66,13 +67,15 @@ export class LoginPage implements OnInit {
   }
 
   public loginRestSucess(response) : void{
-    let user = JSON.stringify(response);
-
     if (!response.success){
       this.viewUtils.showToast(response.error.message, 2000, false);
 
       return;
     }
+
+    EventEmitterService.get('requestUserInformation').emit(response.data);
+    
+    let user = JSON.stringify(response);
 
     window.localStorage.setItem("user", user);
     this.router.navigateByUrl('/home');

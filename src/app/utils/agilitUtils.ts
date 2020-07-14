@@ -91,22 +91,27 @@ export class AgilitUtils {
 
   public static getPriorities() {
     return {
-      default          : 'Preventiva',
-      list             : 'Lista',
-      route            : 'Rota',
-      low              : "Baixa",
-      medium           : "Média",
-      high             : "Alta",
-      urgent           : "Urgente",
-      created          : "Criada",
-      assumed          : "Assumida",
-      started          : "Iniciada",
-      paused           : "Pausada",
-      stopped          : 'Parada',
-      canceled         : 'Cancelada',
-      signature_pending: 'Assinatura pendente',      
-      signatured       : 'Assinatura',
-      finished         : 'Finalizada'
+      default           : 'Preventiva',
+      list              : 'Lista',
+      route             : 'Rota',
+      low               : "Baixa",
+      medium            : "Média",
+      high              : "Alta",
+      urgent            : "Urgente",
+      created           : "Criada",
+      assumed           : "Assumida",
+      started           : "Iniciada",
+      paused            : "Pausada",
+      stopped           : 'Parada',
+      canceled          : 'Cancelada',
+      signature_pending : 'Assinatura pendente',      
+      signatured        : 'Assinatura',
+      finished          : 'Finalizada',
+      maintainer        : 'Técnico',
+      administrator     : 'Administrador',
+      maintainer_leader : 'Líder de manutenção',
+      sector_leader     : 'Líder de setor',
+      integration       : 'Integração'
     }
   }
 

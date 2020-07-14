@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AgilitUtils } from '../utils/agilitUtils';
 import { Platform } from '@ionic/angular';
 import { RestOrder } from '../rest/restorder';
+import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
 
 @Component({
   selector: 'app-monitor',
@@ -23,7 +24,7 @@ export class MonitorPage implements OnInit {
   public showAllOrders: boolean = false;
   public listView: boolean = false;
 
-  public filter: string;
+  public filters: any = this.createFilterObject();
 
   constructor(private viewUtils: ViewUtils, private router: Router, private restOrder: RestOrder) { }
 
@@ -159,6 +160,17 @@ export class MonitorPage implements OnInit {
     }, 200);
   }
 
+  async openFilterModal(){
+    const modal = await this.viewUtils.openComponent(AgilitfilterComponent);
+    modal.onDidDismiss().then((result : any) => {
+      if (!result.data.dismissed || AgilitUtils.isNullOrUndefined(result.data.filters)){
+        return;
+      }
+      
+      this.filters = result.data.filters;
+    });
+  }
+
 
   public filterOm() {
     // this.filtredOrders = JSON.parse(JSON.stringify(this.originalOrders));
@@ -191,6 +203,16 @@ export class MonitorPage implements OnInit {
       this.router.navigateByUrl('home/maintenance-order/' + order.id + '/route');
 
       return;
+    }
+  }
+
+  createFilterObject(){
+    return {
+      initialDate: new Date(),
+      finalDate: new Date(),
+      status: '',
+      priority: '',
+      orderType: ''
     }
   }
 

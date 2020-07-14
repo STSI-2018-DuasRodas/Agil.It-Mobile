@@ -3,14 +3,14 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="order != undefined" style="background-color: 	#e3e3e3;">
+  <div *ngIf="order != undefined">
     <ion-row>
       <ion-col size="6">
         <ion-card style="background-color: white;">
           <ion-card-header>
             <ion-item-divider>
-              <ion-col size="3">
-                <fa-icon class="color-blue" icon="map-marker-alt" size="2x"></fa-icon>
+              <ion-col size="3">                
+                <ion-icon name="agilit-place" class="icon-default-size color-blue"></ion-icon>
               </ion-col>
               <ion-col size="9">
                 <ion-label>Localização</ion-label>
@@ -28,7 +28,7 @@
           <ion-card-header>
             <ion-item-divider>
               <ion-col size="3">
-                <fa-icon icon="hammer" size="2x"></fa-icon>
+                <ion-icon name="agilit-machine" class="icon-default-size"></ion-icon>
               </ion-col>
               <ion-col size="9">
                 <ion-label>Equip.</ion-label>
@@ -48,8 +48,8 @@
           <ion-col size="6">
             <div class="align-center">
               <ion-item-divider>
-                <ion-col size="2">
-                  <fa-icon class="color-yellow" icon="exclamation-triangle" size="2x"></fa-icon>
+                <ion-col size="2">                  
+                  <ion-icon name="agilit-exclamation" class="icon-default-size"></ion-icon>
                 </ion-col>
                 <ion-col size="10">
                   <ion-label>Causas</ion-label>
@@ -61,7 +61,7 @@
             <div class="align-center">
               <ion-item-divider>
                 <ion-col size="2">
-                  <fa-icon icon="frown" size="2x"></fa-icon>
+                  <ion-icon name="agilit-help" class="icon-default-size"></ion-icon>
                 </ion-col>
                 <ion-col size="10">
                   <ion-label>Sintoma</ion-label>

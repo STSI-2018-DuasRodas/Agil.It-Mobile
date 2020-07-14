@@ -25,6 +25,7 @@ import { DefaultPage } from './default/default.page';
 import { DefaultPageModule } from './default/default.module';
 import { AgilitDatePipe } from './pipe/date.pipe';
 import { AgilitTimePipe } from './pipe/time.pipe';
+import { AgilitfilterComponent } from './agilitfilter/agilitfilter.component';
 
 @NgModule({
   declarations: [

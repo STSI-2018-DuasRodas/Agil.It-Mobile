@@ -2,7 +2,7 @@
 </ion-header>
 
 <ion-content>  
-  <ion-card>
+  <ion-card style="background-color: white;">
     <ion-card-header>
     </ion-card-header>
     <ion-card-content>
@@ -53,7 +53,7 @@
   <ion-item-divider>
   </ion-item-divider>
 
-  <ion-card>
+  <ion-card style="background-color: white;">
     <ion-card-header>    
       <div class="align-center">
         <ion-row>
@@ -73,8 +73,8 @@
     <ion-card-content>
       <div *ngFor="let hourAponted of hoursAponted">
         <ion-label class="font-size-small font-style-bold color-black m-left-2">Data: {{hourAponted.Date | agilitdate}}</ion-label>                
-        <fa-icon icon="trash-alt" class="float-right" size="1x" (click)="deleteHourWorked(hourAponted)"></fa-icon>        
-        <fa-icon icon="pen" class="float-right p-right-2" (click)="editHourWorked(hourAponted)" size="1x"></fa-icon>  
+        <ion-icon name="agilit-delete" class="float-right icon-default-size" (click)="deleteHourWorked(hourAponted)"></ion-icon>
+        <ion-icon name="agilit-edit" class="float-right p-right-2 icon-default-size" (click)="editHourWorked(hourAponted)"></ion-icon>        
         <ion-row>
           <ion-col size="12">
             <ion-label class="font-size-small" color="secondary">Início: {{hourAponted.InitialHour | agilittime}}</ion-label>

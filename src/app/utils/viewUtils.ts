@@ -57,6 +57,20 @@ export class ViewUtils {
     toast.present();
   }
 
+  public async openComponent(componentToShow, dataToPass = undefined){
+    const popover = await this.popoverController.create({
+      component: componentToShow,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'data' : dataToPass
+      },
+      translucent: true
+    });
+
+    popover.present();
+    return await popover;
+  }
+
   public removeAccents(word: string) {
     let newWord = word.toLowerCase();
 

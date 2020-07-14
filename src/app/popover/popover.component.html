@@ -2,14 +2,14 @@
   <ion-item-divider>
     <ion-list-header class="font-size-medium font-style-bold">Lista de ações</ion-list-header>
   </ion-item-divider>
-  <ion-item (click)="assume()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="hand-point-up"></fa-icon>Assumir</ion-item>
-  <ion-item (click)="start()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="play-circle"></fa-icon>Iniciar</ion-item>
-  <ion-item (click)="pause()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="pause-circle"></fa-icon>Pausar</ion-item>
-  <ion-item (click)="cancel()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="trash"></fa-icon>Cancelar</ion-item>
-  <ion-item (click)="delegate()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="hand-point-right"></fa-icon>Delegar</ion-item>
-  <ion-item (click)="invite()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="user-friends"></fa-icon>Convidar</ion-item>
-  <ion-item (click)="requestParticipation()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="users"></fa-icon>Solicitar Participação</ion-item>
-  <ion-item (click)="equipamentStatus()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="info"></fa-icon>Status Equipamento</ion-item>
-  <ion-item lines="none" (click)="checkList()" button><fa-icon class="color-secondary icon-default-size p-right-6" icon="check-square"></fa-icon>Check-List</ion-item>
+  <ion-item (click)="assume()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-mouse-touch"></ion-icon>Assumir</ion-item>
+  <ion-item (click)="start()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-play-circle"></ion-icon>Iniciar</ion-item>
+  <ion-item (click)="pause()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-pause-circle"></ion-icon>Pausar</ion-item>
+  <ion-item (click)="cancel()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-cancel-circle"></ion-icon>Cancelar</ion-item>
+  <ion-item (click)="delegate()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-person-add"></ion-icon>Delegar</ion-item>
+  <ion-item (click)="invite()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-group-add"></ion-icon>Convidar</ion-item>
+  <ion-item (click)="requestParticipation()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-group-add"></ion-icon>Solicitar Participação</ion-item>
+  <ion-item (click)="equipamentStatus()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-exclamation"></ion-icon>Status Equipamento</ion-item>
+  <ion-item (click)="checkList()" button><ion-icon class="color-secondary icon-default-size p-right-6" name="agilit-checkbox"></ion-icon>Check-List</ion-item>
 </ion-list>
 <agilit-button [expand]="'block'" (click)="dismissPopover()">Fechar</agilit-button>

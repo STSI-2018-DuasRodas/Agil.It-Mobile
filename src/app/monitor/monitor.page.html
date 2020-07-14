@@ -4,15 +4,19 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-row>
-      <ion-col size="10" class="align-center">
+      <ion-col size="6" class="align-center">
         <ion-title>
-          Monitor de Ordens
+          Dashboard
         </ion-title>
+      </ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2" class="align-center" (click)="openFilterModal()">
+        <ion-icon name="agilit-filter" class="icon-default-size"></ion-icon>
       </ion-col>
       <ion-col size="2" class="align-center" (click)="changeVisualizationMode()">
         <ion-icon *ngIf="listView" name="grid" class="icon-default-size"></ion-icon>
-        <ion-icon *ngIf="!listView" name="options" class="icon-default-size"></ion-icon>
-      </ion-col>
+        <ion-icon *ngIf="!listView" name="options" class="icon-default-size"></ion-icon>      
+      </ion-col>      
     </ion-row>
   </ion-toolbar>
 </ion-header>
@@ -31,12 +35,13 @@
         <ion-label>MINHAS ORDENS</ion-label>
       </ion-segment-button>
     </ion-segment>
+    
   </ion-toolbar>
 
   <div class="p-6"></div>
 
 
-  <div *ngIf="!listView" style="background-color: #e3e3e3;">    
+  <div *ngIf="!listView" style="background-color: #e3e3e3;">
     <ion-virtual-scroll [items]="rowList" approxItemHeight="320px">
       <div *virtualItem="let item; let itemBounds = bounds;">
         <ion-row>

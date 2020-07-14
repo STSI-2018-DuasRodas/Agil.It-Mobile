@@ -277,3 +277,68 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+ion-icon {
+  &[name*="agilit-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+  }
+
+  &[name*="delete"] {
+    mask-image: url(./app/icons/agilit-delete.svg);
+  }
+
+  &[name*="edit"] {
+    mask-image: url(./app/icons/agilit-edit.svg);
+  }
+
+  &[name*="place"] {
+    mask-image: url(./app/icons/agilit-place.svg);
+  }
+
+  &[name*="machine"] {
+    mask-image: url(./app/icons/agilit-machine.svg);
+  }
+
+  &[name*="exclamation"] {
+    mask-image: url(./app/icons/agilit-exclamation.svg);
+  }
+
+  &[name*="help"] {
+    mask-image: url(./app/icons/agilit-help.svg);
+  }
+
+  &[name*="filter"] {
+    mask-image: url(./app/icons/agilit-filter.svg);
+  }
+
+  &[name*="mouse-touch"] {
+    mask-image: url(./app/icons/agilit-mouse-touch.svg);
+  }
+
+  &[name*="cancel-circle"] {
+    mask-image: url(./app/icons/agilit-cancel-circle.svg);
+  }
+
+  &[name*="pause-circle"] {
+    mask-image: url(./app/icons/agilit-pause-circle.svg);
+  }
+
+  &[name*="play-circle"] {
+    mask-image: url(./app/icons/agilit-play-circle.svg);
+  }
+
+  &[name*="person-add"] {
+    mask-image: url(./app/icons/agilit-person-add.svg);
+  }
+
+  &[name*="group-add"] {
+    mask-image: url(./app/icons/agilit-group-add.svg);
+  }
+
+  &[name*="checkbox"] {
+    mask-image: url(./app/icons/agilit-checkbox.svg);
+  }
+}

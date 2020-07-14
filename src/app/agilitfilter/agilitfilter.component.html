@@ -1,0 +1,65 @@
+<ion-list>
+  <ion-item-divider>
+    <ion-list-header class="font-size-medium font-style-bold">Filtros</ion-list-header>
+  </ion-item-divider>
+
+  <ion-item class="p-4">
+    <ion-label color="primary" position="stacked">Data inicial</ion-label>
+    <ion-input type="date" [(ngModel)]="filters.initialDate"></ion-input>
+  </ion-item>
+
+  <ion-item class="p-4">
+    <ion-label color="primary" position="stacked">Data final</ion-label>
+    <ion-input type="date" [(ngModel)]="filters.finalDate"></ion-input>
+  </ion-item>
+
+  <ion-item class="p-4">
+    <ion-label color="primary" position="stacked">Status</ion-label>    
+    <ion-select [(ngModel)]="filters.status">
+      <ion-select-option value="">Selecione...</ion-select-option>
+      <ion-select-option value="assumed">Assumida</ion-select-option>
+      <ion-select-option value="started">Iniciada</ion-select-option>
+      <ion-select-option value="paused">Pausada</ion-select-option>
+      <ion-select-option value="stopped">Parada</ion-select-option>
+      <ion-select-option value="canceled">Cancelada</ion-select-option>
+      <ion-select-option value="signature_pending">Assinatura pendente</ion-select-option>
+      <ion-select-option value="signatured">Assinada</ion-select-option>
+      <ion-select-option value="finished">Finalizada</ion-select-option>
+    </ion-select>
+    
+  </ion-item>
+
+  <ion-item class="p-4">
+    <ion-label color="primary" position="stacked">Prioridade</ion-label>
+    <ion-select [(ngModel)]="filters.priority">
+      <ion-select-option value="">Selecione...</ion-select-option>
+      <ion-select-option value="low">Baixa</ion-select-option>
+      <ion-select-option value="medium">Média</ion-select-option>
+      <ion-select-option value="high">Alta</ion-select-option>
+      <ion-select-option value="urgent">Urgente</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item class="p-4">
+    <ion-label color="primary" position="stacked">Prioridade</ion-label>
+    <ion-select [(ngModel)]="filters.orderType">
+      <ion-select-option value="">Selecione...</ion-select-option>
+      <ion-select-option value="default">Preventiva / Corretiva</ion-select-option>
+      <ion-select-option value="list">Lista</ion-select-option>
+      <ion-select-option value="route">Rota</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <div class="align-center">
+    <ion-row>
+      <ion-col size="6">
+        <agilit-button [size]="'block'" [color]="'secondary'" (click)="cancelFilters()">Cancelar</agilit-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <agilit-button [size]="'block'" (click)="confirmFilters()">Filtrar</agilit-button>
+      </ion-col>
+    </ion-row>
+  </div>
+  
+</ion-list>

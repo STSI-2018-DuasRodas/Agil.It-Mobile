@@ -10,7 +10,7 @@ import { ViewUtils } from '../utils/viewUtils';
   styleUrls: ['./cad-operation.component.scss'],
 })
 export class CadOperationComponent implements OnInit {
-  @Input() operationData : any;
+  @Input() operationData : any = this.createOperationData();
 
   constructor(navParams: NavParams, private modalCtrl : ModalController, private restOrder : RestOrder, private viewUtils : ViewUtils) { 
     
@@ -36,6 +36,18 @@ export class CadOperationComponent implements OnInit {
 
   executeTimeChange(){
     this.operationData.executeTime = AgilitUtils.convertHourToMinutes(this.operationData.formatedExecutedTime);
+  }
+
+  createOperationData(){
+    return {
+      description: '',
+      operationNumber: 0,
+      formatedPlanningTime: '',
+      formatedExecutedTime: '',
+      note: '',
+      executed: false,
+      orderComponent: []
+    }
   }
 
   async confirmOperation(){    
