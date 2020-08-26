@@ -13,7 +13,7 @@
       </ion-label>
       <br><ion-label name="orderStatus" class="font-size-medium">{{order.orderStatusFormated}}</ion-label>
 
-      <ion-icon style="float: right;" (click)="presentPopover()" class="icon-default-size m-right-2" name="settings"></ion-icon>
+      <ion-icon style="float: right;" (click)="presentPopover($event)" class="icon-default-size m-right-2" name="settings"></ion-icon>
     </div>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home/monitor"></ion-back-button>

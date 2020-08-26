@@ -6,6 +6,7 @@ import { LoadingController } from '@ionic/angular';
 import { ViewUtils } from '../utils/viewUtils';
 import { stringify } from 'querystring';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
+import { AgilitUtils } from '../utils/agilitUtils';
 
 
 @Component({
@@ -59,21 +60,28 @@ export class LoginPage implements OnInit {
       password : this.password
       }
       
-    await this.viewUtils.showProgressBar();
+    await this.viewUtils.showProgressBar();    
 
-    let response = await this.loginRest.login(obj);
-    this.loginRestSucess(response);
-    this.viewUtils.hideProgressBar();
+    this.loginRest.login(obj).then(
+      (response) => {      
+        this.viewUtils.hideProgressBar();
+
+        if (AgilitUtils.isNullOrUndefined(response)){
+          return;
+        }
+                
+        this.loginRestSucess(response);      
+    }).catch(
+      (error) => {
+        this.viewUtils.hideProgressBar();
+        this.viewUtils.showToast(error.error.message, 2000, false);
+    });
+
+    
   }
 
   public loginRestSucess(response) : void{
-    if (!response.success){
-      this.viewUtils.showToast(response.error.message, 2000, false);
-
-      return;
-    }
-
-    EventEmitterService.get('requestUserInformation').emit(response.data);
+    EventEmitterService.get('requestUserInformation').emit(response);
     
     let user = JSON.stringify(response);
 

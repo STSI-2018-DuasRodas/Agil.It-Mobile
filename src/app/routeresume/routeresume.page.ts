@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
-import { CadOperationComponent } from '../cad-operation/cad-operation.component';
+import { CadOperationComponent, CadOperationTypes } from '../cad-operation/cad-operation.component';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -29,15 +29,13 @@ export class RouteResumePage implements OnInit {
     item.operation_expanded = !item.operation_expanded;
   }
 
-  expandComponent(item){
-    this.presentModal(item);
-  }
-
-  async presentModal(data) {
+  async expandComponent(equipament, operation){
     const modal = await this.modalController.create({
       component: CadOperationComponent,
       componentProps: {
-        'operationData' : data
+        'operationData' : operation,
+        'orderEquipID'  : equipament.id,
+        'operationMoviment': CadOperationTypes.EDIT
       }
     });
     return await modal.present();

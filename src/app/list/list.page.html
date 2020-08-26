@@ -12,7 +12,7 @@
           <ion-icon class="icon-default-size" *ngIf="order.priority == 'low'"    name="bookmark" color="light"></ion-icon>
           <ion-label name="orderType" class="font-size-medium">{{order.orderType}}</ion-label>
 
-          <ion-icon style="float: right;" (click)="presentPopover()" class="icon-default-size m-right-2" name="settings"></ion-icon>
+          <ion-icon style="float: right;" (click)="presentPopover($event)" class="icon-default-size m-right-2" name="settings"></ion-icon>
         </div>                  
       </div>
     </div>

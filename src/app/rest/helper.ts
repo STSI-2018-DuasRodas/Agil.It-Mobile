@@ -48,11 +48,6 @@ export class ProviderHelper {
     if (body.success == false){
       throw new Error(body.error);
     }
-
-    if (body.data.success == false){
-      throw new Error(body.data.error);
-    }
-    
   }
 
   public static get(http: HttpProvider) {

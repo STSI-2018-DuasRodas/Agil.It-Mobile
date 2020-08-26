@@ -44,7 +44,7 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
         continue;
       }
 
-      if (!AgilitUtils.equals(userData.data.id, maintener.user.id)){
+      if (!AgilitUtils.equals(userData.id, maintener.user.id)){
         continue;
       }
 

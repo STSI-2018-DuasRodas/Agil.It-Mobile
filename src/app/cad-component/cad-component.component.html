@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Componente</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">  
+  <ion-searchbar style="white-space: pre-line !important;" debounce="500" (ionChange)="loadProductsByDescription()" [(ngModel)]="filter" placeholder="Componente"></ion-searchbar>  
+  
+  <ion-list style="max-height: 10rem; overflow: scroll;">
+    <ion-item *ngFor="let item of products" (click)="componentSelected(item)">
+      <ion-label text-wrap>{{item.description}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label color="secondary" position="floating">Quantidade</ion-label>
+      <ion-input type="number" [(ngModel)]="componentData.quantity"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <div class="align-center">
+    <agilit-button (click)="confirmComponent()">Confirmar</agilit-button>
+  </div>
+</ion-footer>

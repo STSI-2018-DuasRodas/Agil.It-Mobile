@@ -58,7 +58,7 @@
 
   <div *ngIf="listView" style="background-color: 	#e3e3e3;">
     <ion-toolbar slot="fixed">
-      <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's" [(ngModel)]="filter"></ion-searchbar>  
+      <ion-searchbar animated search-icon="search" (ionChange)="filterOm()" placeholder="Filtrar OM's"></ion-searchbar>  
     </ion-toolbar>      
     <ion-virtual-scroll [items]="orders" approxItemHeight="320px">      
       <ion-item *virtualItem="let item; let itemBounds = bounds;">

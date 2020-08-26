@@ -95,11 +95,11 @@ export class MonitorPage implements OnInit {
   private async loadMaintenerOrderList() {    
     const maintenerID = JSON.parse(window.localStorage.getItem("user"));
 
-    if (maintenerID.data == undefined || maintenerID.data.id == undefined){
+    if (maintenerID == undefined || maintenerID.id == undefined){
       return;
     }
         
-    await this.restOrder.listMaintenerOrders(maintenerID.data.id).then(
+    await this.restOrder.listMaintenerOrders(maintenerID.id).then(
       (response : any) => {   
         this.viewUtils.hideProgressBar();
         

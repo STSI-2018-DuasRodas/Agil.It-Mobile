@@ -9,6 +9,8 @@ export class RestOrder {
   private listMaintenerOrdersURL = 'mainteners';
   private restUpdateOperation    = 'order-operations';
   private restAssignature        = 'order-signatures';
+  private restItem               = 'items'           ;
+  private restComponents         = 'order-components';
 
   constructor(private http : HttpProvider){   
     this.http = http;     
@@ -40,6 +42,11 @@ export class RestOrder {
     return ProviderHelper.put(this.http, operation);
   }
 
+  public createOperation(operation){
+    this.http.url = this.http.getBaseUrl() + this.restUpdateOperation;
+    return ProviderHelper.post(this.http, operation);
+  }
+
   public orderActions(orderID : number, agilitOrderStatus : AgilitOrderStatus){
     const orderStatus = {
       orderStatus: agilitOrderStatus
@@ -55,7 +62,17 @@ export class RestOrder {
   }
 
   public deleteHourWorkedTime(hourWorked){
-    this.http.url = this.http.getBaseUrl() + this.restAction + '/' + hourWorked.maintenanceWorker + '/worked-times' + hourWorked.id;
+    this.http.url = this.http.getBaseUrl() + 'worked-times/' + hourWorked.id;
     return ProviderHelper.delete(this.http);
+  }
+
+  public createComponent(component){
+    this.http.url = this.http.getBaseUrl() + this.restComponents;
+    return ProviderHelper.post(this.http, component);
+  }
+
+  public listProducts(description){
+    this.http.url = this.http.getBaseUrl() + this.restItem + '?description=like(' + description + ')';
+    return ProviderHelper.get(this.http);
   }
 }

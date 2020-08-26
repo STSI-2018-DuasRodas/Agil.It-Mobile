@@ -116,6 +116,10 @@ export class AgilitUtils {
   }
 
   public static convertMinuteToHour(minute) {
+    if (AgilitUtils.isNullOrUndefined(minute) || (typeof minute != 'number') || Number.isNaN(minute)){
+      return '';
+    }
+
     let hours = (minute / 60);
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
@@ -136,12 +140,12 @@ export class AgilitUtils {
   public static getMaintenerByLoggedUser(maintenenceWorkers){
     const userData : any = JSON.parse(window.localStorage.getItem("user"));
 
-    if (AgilitUtils.isNullOrUndefined(userData) || AgilitUtils.isNullOrUndefined(userData.data)){
+    if (AgilitUtils.isNullOrUndefined(userData) || AgilitUtils.isNullOrUndefined(userData)){
       return;
     }
 
     for (const maintener of maintenenceWorkers){
-      if (!AgilitUtils.equals(maintener.user.id, userData.data.id)){
+      if (!AgilitUtils.equals(maintener.user.id, userData.id)){
         continue;
       }
 

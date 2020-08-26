@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CadOperationComponent } from '../cad-operation/cad-operation.component';
 import { ChecklistComponent } from '../checklist/checklist.component';
 import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
+import { CadComponentComponent } from '../cad-component/cad-component.component';
 @NgModule({
   imports:[
     CommonModule,
@@ -25,6 +26,7 @@ import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
     AgilitDatePipe, 
     AgilitTimePipe,
     CadOperationComponent,
+    CadComponentComponent,
     ChecklistComponent,
     AgilitfilterComponent
   ],
@@ -35,11 +37,13 @@ import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
     AgilitDatePipe, 
     AgilitTimePipe,
     CadOperationComponent,
+    CadComponentComponent,
     ChecklistComponent,
     AgilitfilterComponent
   ],
   entryComponents: [
-    CadOperationComponent, 
+    CadOperationComponent,
+    CadComponentComponent,
     ChecklistComponent, 
     AgilitfilterComponent
   ]

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, DoCheck, ChangeDetectorRef } from '@angul
 import { DefaultIO } from 'src/app/io/defaultIO';
 import { Order } from 'src/app/order/order';
 import { ModalController } from '@ionic/angular';
-import { CadOperationComponent } from 'src/app/cad-operation/cad-operation.component';
+import { CadOperationComponent, CadOperationTypes } from 'src/app/cad-operation/cad-operation.component';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { RestOrder } from '../rest/restorder';
 import { ViewUtils } from '../utils/viewUtils';
@@ -42,7 +42,11 @@ export class DefaultOperationPage implements OnInit, OnDestroy {
 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: CadOperationComponent
+      component: CadOperationComponent,
+      componentProps: {
+        'orderEquipID'  : this.order.orderEquipment[0].id,
+        'operationMoviment': CadOperationTypes.INSERT
+      }
     });
     return await modal.present();
   }
