@@ -4,6 +4,16 @@ import { RestOrder } from '../rest/restorder';
 import { Injectable } from '@angular/core';
 import { ChecklistComponent } from '../checklist/checklist.component';
 
+export enum AlertOptions {
+  CONFIRM = 'CONFIRM',
+  CANCEL  = 'CANCEL'
+}
+
+export enum AlertType {
+  ALERT         = 'ALERT',
+  ALERT_CONFIRM = 'ALERT_CONFIRM'
+}
+
 @Injectable()
 export class ViewUtils {
   public progressBar: any;
@@ -55,6 +65,58 @@ export class ViewUtils {
     let toast = await this.toastController.create(options);
     
     toast.present();
+  }
+
+  public async openAlert(options: any, callback: {(data)} = null){
+    AgilitUtils.verifyProperty(options, 'header', 'Atenção');
+    AgilitUtils.verifyProperty(options, 'message', '');
+    AgilitUtils.verifyProperty(options, 'type', AlertType.ALERT);
+    AgilitUtils.verifyProperty(options, 'cancelText', 'Cancelar');
+    AgilitUtils.verifyProperty(options, 'confirmText', 'Confirmar');
+
+    let alert: any;
+
+    if (options.type === AlertType.ALERT_CONFIRM){
+      alert = await this.alertController.create({
+        header: options.header,
+        message: options.message,
+        buttons: [
+          {
+            text: options.cancelText,
+            role: AlertOptions.CANCEL
+          }, {
+            text: options.confirmText,
+            role: AlertOptions.CONFIRM
+          }
+        ]
+      });
+    }
+
+    if (options.type === AlertType.ALERT){
+      alert = await this.alertController.create({
+        cssClass: 'alert-wrapper',
+        header: options.header,
+        message: options.message,
+        buttons: ['OK']
+      });
+    }
+
+    alert.onDidDismiss().then(async (data) => {
+      if (AgilitUtils.isNullOrUndefined(data) || AgilitUtils.isNullOrUndefined(data.role)) {
+        return;
+      }
+
+      if (AgilitUtils.equals(data.role, 'backdrop') || AgilitUtils.equals(data.role, AlertOptions.CANCEL)){
+        return;
+      }
+
+      if (!AgilitUtils.isNullOrUndefined(callback)){
+        callback(data);
+      }
+    });
+
+    await alert.present();
+    return alert;
   }
 
   public async openComponent(componentToShow, dataToPass = undefined){

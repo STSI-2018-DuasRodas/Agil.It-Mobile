@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { AgilitUtils } from '../utils/agilitUtils';
 import { RestOrder } from '../rest/restorder';
-import { ViewUtils } from '../utils/viewUtils';
+import { ViewUtils, AlertType } from '../utils/viewUtils';
 import { CadComponentComponent } from '../cad-component/cad-component.component';
 
 export enum CadOperationTypes{
@@ -20,17 +20,22 @@ export class CadOperationComponent implements OnInit {
   @Input() orderEquipID  : number;
   @Input() operationMoviment : CadOperationTypes;
 
+  executedToggle : boolean = false;
+
   constructor(private modalCtrl : ModalController, private restOrder : RestOrder, private viewUtils : ViewUtils, private modalController : ModalController) { 
     
   }
 
   ngOnInit() {
     this.fieldsConfiguration();
+    this.executedToggle = this.operationData.executed;
   }
 
   fieldsConfiguration(){
     AgilitUtils.verifyProperty(this.operationData, 'formatedPlanningTime', '');
     AgilitUtils.verifyProperty(this.operationData, 'formatedExecutedTime', '');
+    AgilitUtils.verifyProperty(this.operationData, 'orderEquipment', {});
+    AgilitUtils.verifyProperty(this.operationData.orderEquipment, 'id', 0);
 
     this.operationData.formatedPlanningTime = AgilitUtils.convertMinuteToHour(this.operationData.planningTime);
     this.operationData.formatedExecutedTime = AgilitUtils.convertMinuteToHour(this.operationData.executeTime);
@@ -65,8 +70,30 @@ export class CadOperationComponent implements OnInit {
     }
   }
 
-  async confirmOperation(){    
+  async deleteComponent(index, component){
+    if (AgilitUtils.isNullOrUndefined(component) || !component.canBeDeleted){
+      return;
+    }
+
+    await this.viewUtils.openAlert({header: 'Atenção', message: 'Deseja realmente deletar este componente?', type: AlertType.ALERT_CONFIRM}, async (data) => {
+      await this.viewUtils.showProgressBar();    
+      await this.restOrder.deleteComponent(component.id).then(
+        (response: any) => {
+          this.viewUtils.hideProgressBar();
+          this.operationData.orderComponent.splice(index, 1);
+        }
+      ).catch(
+        error => {
+          this.viewUtils.showToast('Algo de errado aconteceu!', 2000, false);        
+          this.viewUtils.hideProgressBar();
+        }
+      );
+    });    
+  }
+
+  async confirmOperation(){        
     this.operationData.orderEquipment.id = this.orderEquipID;
+    this.operationData.executed          = this.executedToggle;
 
     if (this.operationMoviment == CadOperationTypes.EDIT){
       this.updateOperation();

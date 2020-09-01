@@ -127,6 +127,9 @@ export class DefaultPage implements OnInit, OnDestroy{
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
+      componentProps: {
+        data: this.order
+      },
       event: ev,
       id : 'popover',
       translucent: true
@@ -144,8 +147,8 @@ export class DefaultPage implements OnInit, OnDestroy{
       this.unSubscribeMethods();
     });
 
-      this.events.subscribe('start', () => {
-        this.presentAlertConfirm('Iniciar!', 'Você deseja dar início a esta Ordem de Manutenção?', AgilitOrderStatus.STARTED);
+    this.events.subscribe('start', () => {
+      this.presentAlertConfirm('Iniciar!', 'Você deseja dar início a esta Ordem de Manutenção?', AgilitOrderStatus.STARTED);             
       this.unSubscribeMethods();
     });
   
@@ -180,17 +183,31 @@ export class DefaultPage implements OnInit, OnDestroy{
     });
 
     this.events.subscribe('checkList', () => {
-      this.presentCheckListModal();
+      this.presentCheckListModal(false);
       this.unSubscribeMethods();
     });
 
   }  
 
-  async presentCheckListModal() {
+  async presentCheckListModal(action = true) {
     const modal = await this.modalController.create({
-      component: ChecklistComponent
+      component: ChecklistComponent,
+      componentProps: {
+        orderId: this.order.id
+      }
     });
-    return await modal.present();
+    
+    modal.onDidDismiss().then((data) => {
+      if(!data.data.dismissed){
+        return;
+      }
+
+      if (action){
+        this.changeStatus(AgilitOrderStatus.STARTED);
+      }      
+    });
+
+    await modal.present();
   }
 
   async presentAlertConfirm(messageHeader : string, messageBody : string, agilitOrderStatus : AgilitOrderStatus) {
@@ -204,10 +221,10 @@ export class DefaultPage implements OnInit, OnDestroy{
           role: 'cancel',
           cssClass: '',
           handler: (blah) => {
-            // Ao clicar em não
           }
         }, {
           text: 'Confirmar',
+          role: 'confirm',
           handler: () => {
             this.maintenanceOrderActions(agilitOrderStatus);
           }
@@ -219,6 +236,14 @@ export class DefaultPage implements OnInit, OnDestroy{
   }
 
   maintenanceOrderActions(agilitOrderStatus : AgilitOrderStatus){
+    if (agilitOrderStatus == AgilitOrderStatus.STARTED){
+      this.presentCheckListModal();
+    } else {
+      this.changeStatus(agilitOrderStatus);
+    }
+  }
+
+  changeStatus(agilitOrderStatus : AgilitOrderStatus){
     this.restOrder.orderActions(this.order.id, agilitOrderStatus);
     this.order.orderStatus = agilitOrderStatus;
 

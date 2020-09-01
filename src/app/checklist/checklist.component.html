@@ -12,13 +12,13 @@
   <ion-list>
     <ion-item *ngFor="let item of checkLists">
       <ion-label>{{item.description}}</ion-label>
-      <ion-checkbox slot="end" [(ngModel)]="item.isChecked"></ion-checkbox>
+      <ion-checkbox slot="end" [(ngModel)]="item.checked"></ion-checkbox>
     </ion-item>
   </ion-list>
 </ion-content>
 
 <ion-footer>
   <div class="align-center">
-    <agilit-button (click)="dismissModal()">Confirmar</agilit-button>
+    <agilit-button [disabled]="!validateParams()" (click)="confirmChecklist()">Confirmar</agilit-button>
   </div>
 </ion-footer>

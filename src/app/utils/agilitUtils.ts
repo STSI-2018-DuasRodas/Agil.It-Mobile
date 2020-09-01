@@ -104,7 +104,7 @@ export class AgilitUtils {
       paused            : "Pausada",
       stopped           : 'Parada',
       canceled          : 'Cancelada',
-      signature_pending : 'Assinatura pendente',      
+      'signature-pending' : 'Assinatura pendente',      
       signatured        : 'Assinatura',
       finished          : 'Finalizada',
       maintainer        : 'Técnico',
@@ -151,5 +151,48 @@ export class AgilitUtils {
 
       return maintener;
     }
+  }
+  private static validateParameterValue(value){
+    if (AgilitUtils.isNullOrUndefined(value)){
+      return false;
+    }
+
+    if (value == ''){
+      return false;
+    }
+
+    if (value instanceof Object && !(value instanceof Array) && (!value.from || !value.to)){
+      return false;
+    }
+    
+    return true;
+  }
+
+  public static createRestParamsFilters(filter){
+    let parameters = '';
+    const entries = Object.entries(filter);
+    for (const [key, value] of entries){
+      if (!AgilitUtils.validateParameterValue(value)) {
+        continue;
+      }
+
+      if (!parameters){
+        parameters = '?';  
+      } else {
+        parameters += '&';
+      }
+
+      parameters += key + '=' + this.getParameterValue(value);
+    }
+
+    return parameters;
+  }
+
+  private static getParameterValue(value){
+    if (value instanceof Array) return 'in(' + value.join(",") + ')';
+    
+    if (value instanceof Object && value.from && value.to) return 'between(' + value.from + ',' + value.to + ')';
+
+    return value;
   }
 }

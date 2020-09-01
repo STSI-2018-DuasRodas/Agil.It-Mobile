@@ -36,6 +36,18 @@ export class DefaultOperationPage implements OnInit, OnDestroy {
     item.expanded = !item.expanded;
   }
 
+  async editOperation(itemOperation){
+    const modal = await this.modalController.create({
+      component: CadOperationComponent,
+      componentProps: {
+        'operationData' : itemOperation,
+        'orderEquipID'  : this.order.orderEquipment[0].id,
+        'operationMoviment': CadOperationTypes.EDIT
+      }
+    });
+    return await modal.present();
+  }
+
   addOperation(){
     this.presentModal();
   }

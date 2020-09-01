@@ -5,6 +5,7 @@ import { AgilitUtils } from '../utils/agilitUtils';
 import { Platform } from '@ionic/angular';
 import { RestOrder } from '../rest/restorder';
 import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-monitor',
@@ -12,7 +13,6 @@ import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
   styleUrls: ['./monitor.page.scss'],
 })
 export class MonitorPage implements OnInit {
-  public originalAllOrders: any = [];
   public allOrders: any = [];
 
   public orders   : any = [];
@@ -58,9 +58,11 @@ export class MonitorPage implements OnInit {
   private async loadOrderList() {
     await this.viewUtils.showProgressBar();
 
-    this.restOrder.list().then(
+    this.allOrders = [];
+
+    this.restOrder.list(this.filters).then(
       (response: any) => {
-        if (response.length == 0) {
+        if (response.length == 0) {          
           return;
         }
 
@@ -75,9 +77,7 @@ export class MonitorPage implements OnInit {
   }
 
   private loadOrderListSucess(response) {
-    this.originalAllOrders = response;
-
-    this.allOrders = AgilitUtils.copy(this.originalAllOrders);    
+    this.allOrders = AgilitUtils.copy(response);    
 
     this.allOrders.forEach(element => {
       AgilitUtils.verifyProperty(element, 'orderType', '');
@@ -87,7 +87,7 @@ export class MonitorPage implements OnInit {
 
       element.orderType        = AgilitUtils.formatValues(element.orderLayout.orderLayout);
       element.priorityFormated = AgilitUtils.formatValues(element.priority);
-      element.openDateFormated = new Date(element.openedDate).getDate() + '/' + new Date(element.openedDate).getMonth() + '/' + new Date(element.openedDate).getFullYear();
+      element.openDateFormated = DateHelper.formatDate(element.openedDate);
       element.orderStatusFormated = AgilitUtils.formatValues(element.orderStatus);
     });    
   }
@@ -98,12 +98,14 @@ export class MonitorPage implements OnInit {
     if (maintenerID == undefined || maintenerID.id == undefined){
       return;
     }
-        
-    await this.restOrder.listMaintenerOrders(maintenerID.id).then(
+
+    this.maintenerOrders = [];
+
+    await this.restOrder.listMaintenerOrders(maintenerID.id, this.filters).then(
       (response : any) => {   
-        this.viewUtils.hideProgressBar();
-        
+        this.viewUtils.hideProgressBar();        
         if (response.length == 0){
+          
           return;
         }
 
@@ -130,7 +132,7 @@ export class MonitorPage implements OnInit {
 
       element.orderType           = AgilitUtils.formatValues(element.orderLayout.orderLayout);
       element.priorityFormated    = AgilitUtils.formatValues(element.priority);
-      element.openDateFormated    = new Date(element.openedDate).getDate() + '/' + new Date(element.openedDate).getMonth() + '/' + new Date(element.openedDate).getFullYear();
+      element.openDateFormated    = DateHelper.formatDate(element.openedDate);
       element.orderStatusFormated = AgilitUtils.formatValues(element.orderStatus);
     });
   }
@@ -162,12 +164,19 @@ export class MonitorPage implements OnInit {
 
   async openFilterModal(){
     const modal = await this.viewUtils.openComponent(AgilitfilterComponent);
-    modal.onDidDismiss().then((result : any) => {
-      if (!result.data.dismissed || AgilitUtils.isNullOrUndefined(result.data.filters)){
+    modal.onDidDismiss().then(async (result : any) => {
+      if (AgilitUtils.equals(result.role, 'backdrop') || !result.data.dismissed){
         return;
       }
       
       this.filters = result.data.filters;
+      this.orders  = [];
+      this.rowList = [];
+
+      await this.loadOrderList();
+      await this.loadMaintenerOrderList();
+      this.orders = this.maintenerOrders;   
+      this.prepareRowList();
     });
   }
 
@@ -208,8 +217,8 @@ export class MonitorPage implements OnInit {
 
   createFilterObject(){
     return {
-      initialDate: new Date(),
-      finalDate: new Date(),
+      initialDate: '',
+      finalDate: '',
       status: '',
       priority: '',
       orderType: ''
