@@ -9,6 +9,7 @@ import { RestOrder } from 'src/app/rest/restorder';
 import { ViewUtils } from 'src/app/utils/viewUtils';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { ChecklistComponent } from '../checklist/checklist.component';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-default',
@@ -113,7 +114,7 @@ export class DefaultPage implements OnInit, OnDestroy{
     this.order.orderType           = AgilitUtils.formatValues(this.order.orderLayout.orderLayout);
     this.order.priorityFormated    = AgilitUtils.formatValues(this.order.priority);
     this.order.orderStatusFormated = AgilitUtils.formatValues(this.order.orderStatus);
-    this.order.openDateFormated    = new Date(this.order.openedDate).getDate() + '/' + new Date(this.order.openedDate).getMonth() + '/' + new Date(this.order.openedDate).getFullYear();    
+    this.order.openDateFormated    = DateHelper.formatDate(this.order.openedDate);
   }
 
   private createOrderObject(){

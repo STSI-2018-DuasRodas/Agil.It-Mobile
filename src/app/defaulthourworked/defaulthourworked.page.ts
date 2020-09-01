@@ -56,26 +56,12 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
         hourAponted.InitialHour = new Date(workedtime.startedWork);
         hourAponted.FinalHour   = new Date(workedtime.finishedWork);
         hourAponted.Interval    = AgilitUtils.convertMinuteToHour(workedtime.intervalTime);
+        hourAponted.deleted     = workedtime.deleted;
   
         this.hoursAponted.push(hourAponted);
       }      
     }    
   }
-  
-  // confirmAppointments(){
-  //   let hourAponted : any = {};
-  //   hourAponted.Date        = new Date(this.date);
-  //   hourAponted.InitialHour = new Date(this.initialHour);
-  //   hourAponted.FinalHour   = new Date(this.finalHour);
-  //   hourAponted.Interval    = new Date(this.interval);
-
-  //   this.date        = '';
-  //   this.initialHour = '';
-  //   this.finalHour   = '';
-  //   this.interval    = '';
-
-  //   this.hoursAponted.push(hourAponted);
-  // }
 
   async confirmAppointments(){
     let hourAponted : any = {};
@@ -137,7 +123,7 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
     this.hoursAponted.push(hourAponted);
   }
 
-  async deleteHourWorked(item){
+  async deleteHourWorked(item, index){
     const userLogged = AgilitUtils.getMaintenerByLoggedUser(this.order.maintenanceWorker);
 
     if (AgilitUtils.isNullOrUndefined(userLogged)){
@@ -157,6 +143,22 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
         if (AgilitUtils.isNullOrUndefined(response)){
           return;
         }        
+
+        const hoursApontedIndex = this.hoursAponted.findIndex((element) => element.Id == response.id);
+
+        if (hoursApontedIndex == -1){
+          return;
+        }
+
+        this.hoursAponted.splice(hoursApontedIndex, 1);
+
+        const maintenerIndex = this.order.maintenanceWorker.findIndex((element) => element.id == userLogged.id);
+
+        if (maintenerIndex == -1 || this.order.maintenanceWorker[maintenerIndex].workedTime.length < index){
+          return;
+        }
+        
+        this.order.maintenanceWorker[maintenerIndex].workedTime.splice(index, 1);
       }
     ).catch(
       error => {

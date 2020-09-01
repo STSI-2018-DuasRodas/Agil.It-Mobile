@@ -59,7 +59,7 @@ export class RestOrder {
   }
 
   public createHourWorkedTime(hourWorked){
-    this.http.url = this.http.getBaseUrl() + this.restAction + '/' + hourWorked.maintenanceWorker + '/worked-times';
+    this.http.url = this.http.getBaseUrl() + 'worked-times';
     return ProviderHelper.post(this.http, hourWorked);
   }
 
