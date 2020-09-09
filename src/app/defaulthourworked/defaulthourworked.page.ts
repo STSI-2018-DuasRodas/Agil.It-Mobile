@@ -3,6 +3,7 @@ import { ViewUtils } from 'src/app/utils/viewUtils';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { RestOrder } from '../rest/restorder';
 import { AgilitUtils } from '../utils/agilitUtils';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-defaulthourworked',
@@ -12,6 +13,8 @@ import { AgilitUtils } from '../utils/agilitUtils';
 export class DefaultHourWorkedPage implements OnInit, OnDestroy {
   public order : any = undefined;
   hoursAponted = [];  
+  id          : string;
+  description : string;
   date        : string;
   initialHour : string;
   finalHour   : string;
@@ -52,11 +55,12 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
         let hourAponted : any = {};
 
         hourAponted.Id          = workedtime.id;
-        hourAponted.Date        = new Date(workedtime.createdAt);
+        hourAponted.Date        = new Date(workedtime.startedWork);
         hourAponted.InitialHour = new Date(workedtime.startedWork);
         hourAponted.FinalHour   = new Date(workedtime.finishedWork);
         hourAponted.Interval    = AgilitUtils.convertMinuteToHour(workedtime.intervalTime);
         hourAponted.deleted     = workedtime.deleted;
+        hourAponted.description = workedtime.description;
   
         this.hoursAponted.push(hourAponted);
       }      
@@ -64,14 +68,34 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
   }
 
   async confirmAppointments(){
-    let hourAponted : any = {};
-    hourAponted.Date        = new Date(this.date);
-    hourAponted.InitialHour = new Date(this.initialHour);
-    hourAponted.FinalHour   = new Date(this.finalHour);
-    hourAponted.Interval    = new Date(this.interval);
+    const workedTime = {
+      id          : this.id,
+      description : this.description,
+      startedWork : DateHelper.serverFormatDate(this.date + ' ' + this.initialHour),
+      finishedWork: DateHelper.serverFormatDate(this.date + ' ' + this.finalHour),
+      intervalTime: AgilitUtils.convertHourToMinutes(this.interval)
+    }
 
-    hourAponted.Interval = AgilitUtils.convertHourToMinutes(hourAponted.Interval.getHours() + ':' + hourAponted.Interval.getMinutes());
+    await this.viewUtils.showProgressBar();
+    await this.restOrder.updateHourWorkedTime(workedTime).then(
+      (response: any) => {
+        this.viewUtils.hideProgressBar();
 
+        if (AgilitUtils.isNullOrUndefined(response)){
+          return;
+        }
+
+        // this.loadHourWorked();
+      }
+    ).catch(
+      error => {
+        console.log('Error');
+        this.viewUtils.hideProgressBar();
+      }
+    );    
+  }
+
+  async newAppointments(){
     const userLogged = AgilitUtils.getMaintenerByLoggedUser(this.order.maintenanceWorker);
 
     if (AgilitUtils.isNullOrUndefined(userLogged)){
@@ -82,10 +106,10 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
       maintenanceWorker: {
         id: userLogged.id
       },
-      description : "Trabalhado na manutenção das 7:24 até às 7:24.",
-      startedWork : hourAponted.InitialHour.toISOString(),
-      finishedWork: hourAponted.FinalHour.toISOString(),
-      intervalTime: hourAponted.Interval
+      description : this.description,
+      startedWork : DateHelper.serverFormatDate(this.date + ' ' + this.initialHour),
+      finishedWork: DateHelper.serverFormatDate(this.date + ' ' + this.finalHour),
+      intervalTime: AgilitUtils.convertHourToMinutes(this.interval)
     }
 
     await this.viewUtils.showProgressBar();
@@ -110,15 +134,17 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
   createHourWorkedTimeSuccess(response){
     let hourAponted : any = {};
     hourAponted.Id          = response.id;
-    hourAponted.Date        = new Date(response.createdAt);
+    hourAponted.Date        = new Date(response.startedWork);
     hourAponted.InitialHour = new Date(response.startedWork);
     hourAponted.FinalHour   = new Date(response.finishedWork);
     hourAponted.Interval    = AgilitUtils.convertMinuteToHour(response.intervalTime);
+    hourAponted.description = response.description;
 
     this.date        = '';
     this.initialHour = '';
     this.finalHour   = '';
     this.interval    = '';
+    this.description = '';
 
     this.hoursAponted.push(hourAponted);
   }
@@ -169,10 +195,12 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
   }
 
   editHourWorked(item){    
-    this.date = item.Date.getMonth() + '-' + item.Date.getDate() + '-' + item.Date.getFullYear();    
+    this.id          = item.Id;
+    this.date        = item.Date.getFullYear() + '-' + ("0" + Number(item.Date.getMonth() + 1).toString()).slice(-2) + '-' + ("0" + item.Date.getDate()).slice(-2);
     this.initialHour = ("0" + item.InitialHour.getHours()).slice(-2) + ':' + ("0" + item.InitialHour.getMinutes()).slice(-2);    
     this.finalHour   = ("0" + item.FinalHour.getHours()).slice(-2) + ':' + ("0" + item.FinalHour.getMinutes()).slice(-2);;    
     this.interval    = item.Interval;
+    this.description = item.description;
   }
 
   public jsDateToPascal(date : Date) : string {

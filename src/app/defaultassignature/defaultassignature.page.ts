@@ -4,6 +4,7 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { RestOrder } from '../rest/restorder';
 import { ViewUtils } from '../utils/viewUtils';
 import { AgilitUtils, SignatureRole, SignatureStatus } from '../utils/agilitUtils';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-defaultassignature',
@@ -23,6 +24,11 @@ export class DefaultAssignaturePage implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscribe = EventEmitterService.get('defaultOrderData').subscribe((data) => {
       this.order = data;
+
+      for (const orderSignature of this.order.orderSignature){
+        AgilitUtils.verifyProperty(orderSignature, 'createdAtFormatted', DateHelper.formatDate(orderSignature.createdAt));
+      }      
+      
       console.log(this.order);
     });
 
@@ -43,7 +49,7 @@ export class DefaultAssignaturePage implements OnInit, OnDestroy {
     
     let orderAssignature = {
       user: {
-        id: userData.data.id
+        id: userData.id
       },
       maintenanceOrder: {
         id: this.order.id

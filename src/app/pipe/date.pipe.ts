@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DateHelper } from '../utils/Date';
 
 @Pipe({name: 'agilitdate'})
 export class AgilitDatePipe implements PipeTransform {
@@ -6,12 +7,6 @@ export class AgilitDatePipe implements PipeTransform {
   }
 
   transform(value : Date): string {
-    let date = `${value.getDate()}`;
-    
-    if (value.getDate().toString().length == 1){
-      date = `0${value.getDate()}`;
-    }
-
-    return `${date}/${value.getMonth() + 1}/${value.getFullYear()}`;
+    return DateHelper.formatDate(value);
   }
 }

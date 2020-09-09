@@ -24,9 +24,26 @@ export class DateHelper {
     return `${day}/${month}/${year} às ${hour}h${minutes}`;
   }
 
-  public static getDate(date){
+  public static getDate(date, utc = false) : Date{
     if (typeof date == "object") return date;
     
+    if (utc){
+      return new Date(date + ' UTC');
+    }
+
     return new Date(date);
+    
+  }
+
+  public static getTimezoneDiff(){
+    let hours = '';
+    let minutes = '';
+
+    ([hours, minutes] = String(new Date().getTimezoneOffset() / 60).split('.'));
+    return '-' + StringHelper.JustifyLeft(hours||0, 2, 0) + ':' + StringHelper.JustifyLeft(minutes||0, 2, 0);
+  }
+
+  public static serverFormatDate(date : Date | string){
+    return DateHelper.getDate(date, true).toISOString().replace(/[TZ]/g, ' ');
   }
 }

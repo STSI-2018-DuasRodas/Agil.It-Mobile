@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { CadOperationComponent, CadOperationTypes } from '../cad-operation/cad-operation.component';
 import { ModalController } from '@ionic/angular';
+import { ViewUtils } from '../utils/viewUtils';
+import { RestOrder } from '../rest/restorder';
+import { AgilitUtils } from '../utils/agilitUtils';
 
 @Component({
   selector: 'app-routeresume',
@@ -13,7 +16,7 @@ export class RouteResumePage implements OnInit {
 
   public subscribe : any;
 
-  constructor(public modalController: ModalController) { }
+  constructor(public modalController: ModalController, private viewUtils : ViewUtils, private restOrder : RestOrder) { }
 
   ngOnInit() {
     this.subscribe = EventEmitterService.get('routeOrderData').subscribe((data) => {
@@ -39,6 +42,42 @@ export class RouteResumePage implements OnInit {
       }
     });
     return await modal.present();
+  }
+
+  async addOperation(){
+    const modal = await this.modalController.create({
+      component: CadOperationComponent,
+      componentProps: {
+        'operationMoviment': CadOperationTypes.INSERT,
+        'orderEquipments' : this.order.orderEquipment
+      }
+    });
+    
+    await modal.present();
+
+    modal.onDidDismiss().then(() => {
+      this.reloadOrder();
+    });
+  }
+
+  async reloadOrder(){
+    await this.viewUtils.showProgressBar();
+    await this.restOrder.loadOrder(this.order.id).then(
+      (response: any) => {
+        this.viewUtils.hideProgressBar();
+
+        if (AgilitUtils.isNullOrUndefined(response)){
+          return;
+        }
+
+        this.order = response;
+      }
+    ).catch(
+      error => {
+        console.log('Error');
+        this.viewUtils.hideProgressBar();
+      }
+    ); 
   }
 
 }

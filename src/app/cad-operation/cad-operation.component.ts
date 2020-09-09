@@ -16,9 +16,12 @@ export enum CadOperationTypes{
   styleUrls: ['./cad-operation.component.scss'],
 })
 export class CadOperationComponent implements OnInit {
-  @Input() operationData : any = this.createOperationData();
-  @Input() orderEquipID  : number;
+  @Input() operationData     : any = this.createOperationData();
+  @Input() orderEquipID      : number;
   @Input() operationMoviment : CadOperationTypes;
+  @Input() orderEquipments   : any = undefined;
+
+  public orderEquipmentSelect : any;
 
   executedToggle : boolean = false;
 

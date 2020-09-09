@@ -341,4 +341,8 @@ ion-icon {
   &[name*="checkbox"] {
     mask-image: url(./app/icons/agilit-checkbox.svg);
   }
+
+  &[name*="clear"] {
+    mask-image: url(./app/icons/agilit-clear.svg);
+  }
 }

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { RouteHourworkedPage } from './routehourworked.page';
+import { CustomComponentsModule } from '../utils/customComponents.module';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    CustomComponentsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [RouteHourworkedPage]

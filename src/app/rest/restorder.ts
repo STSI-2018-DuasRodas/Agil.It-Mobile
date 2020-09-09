@@ -63,6 +63,11 @@ export class RestOrder {
     return ProviderHelper.post(this.http, hourWorked);
   }
 
+  public updateHourWorkedTime(hourWorked){
+    this.http.url = this.http.getBaseUrl() + 'worked-times/' + hourWorked.id;
+    return ProviderHelper.put(this.http, hourWorked);
+  }
+
   public deleteHourWorkedTime(hourWorked){
     this.http.url = this.http.getBaseUrl() + 'worked-times/' + hourWorked.id;
     return ProviderHelper.delete(this.http);

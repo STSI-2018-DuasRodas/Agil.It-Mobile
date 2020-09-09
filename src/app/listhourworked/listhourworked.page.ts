@@ -16,6 +16,8 @@ export class ListHourworkedPage implements OnInit {
   public total       : string;
   public interval    : string;
 
+  public subscribe : any;
+
   constructor(private viewUtils : ViewUtils){
   }
 

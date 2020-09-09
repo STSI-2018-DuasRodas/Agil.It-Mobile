@@ -168,8 +168,13 @@ export class MonitorPage implements OnInit {
       if (AgilitUtils.equals(result.role, 'backdrop') || !result.data.dismissed){
         return;
       }
+
+      if (result.data.dismissed && AgilitUtils.isNullOrUndefined(result.data.filters)){
+        this.filters = this.createFilterObject()
+      } else {
+        this.filters = result.data.filters;
+      }      
       
-      this.filters = result.data.filters;
       this.orders  = [];
       this.rowList = [];
 

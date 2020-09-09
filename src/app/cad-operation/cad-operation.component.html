@@ -10,6 +10,14 @@
 </ion-header>
 <ion-content class="ion-padding">
   <ion-list>
+
+    <ion-item class="p-4" *ngIf="orderEquipments != undefined">
+      <ion-label color="primary" position="stacked">Equipamento</ion-label>
+      <ion-select [(ngModel)]="orderEquipID">
+        <ion-select-option style="white-space: pre-line !important;" [value]="orderEquipment.id" *ngFor="let orderEquipment of orderEquipments">{{orderEquipment.equipment.description}}</ion-select-option>
+      </ion-select>
+    </ion-item>    
+
     <ion-item>
       <ion-label color="secondary" position="floating">Descrição da operação</ion-label>
       <ion-input type="text" [(ngModel)]="operationData.description"></ion-input>

@@ -108,12 +108,16 @@ export class AgilitfilterComponent implements OnInit {
     this.popoverController.dismiss({'dismissed': true, filters: filtersToResult});
   }
 
+  clearFilter(){
+
+  }
+
   cancelFilters(){
     this.popoverController.dismiss({'dismissed': false});
   }
 
   clearFilters(){
-
+    this.popoverController.dismiss({'dismissed': true, filters: undefined});
   }
 
 }
