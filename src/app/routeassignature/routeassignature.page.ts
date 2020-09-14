@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { RestOrder } from '../rest/restorder';
 import { ViewUtils } from '../utils/viewUtils';
-import { AgilitUtils } from '../utils/agilitUtils';
+import { AgilitUtils, SignatureRole, SignatureStatus } from '../utils/agilitUtils';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-routeassignature',
@@ -12,33 +13,46 @@ import { AgilitUtils } from '../utils/agilitUtils';
 export class RouteAssignaturePage implements OnInit {
   public order : any = undefined;
 
+  public subscribe : any;
   public assignaturePassword : string = '';
 
-  assignatureVerificationChecked : boolean = false;
+  public assignatureVerificationChecked : boolean = false;
 
   constructor(private viewUtils : ViewUtils, private restOrder : RestOrder) { }
 
   ngOnInit() {
-    EventEmitterService.get('routeOrderData').subscribe((data) => {
+    this.subscribe = EventEmitterService.get('routeOrderData').subscribe((data) => {
       this.order = data;
-      console.log(this.order);
+
+      for (const orderSignature of this.order.orderSignature){
+        AgilitUtils.verifyProperty(orderSignature, 'createdAtFormatted', DateHelper.formatDate(orderSignature.createdAt));
+      }      
     });
+
+    EventEmitterService.get('requestOrderData').emit();
+  }
+
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
   }
 
   async assineOm(){
     if (this.assignaturePassword != window.localStorage.getItem("password")){
+      this.viewUtils.showToast('Senha incorreta!', 2000, false);
       return;
     }
 
+    const userData : any = JSON.parse(window.localStorage.getItem("user"));
+    
     let orderAssignature = {
       user: {
-        id: 3
+        id: userData.id
       },
       maintenanceOrder: {
         id: this.order.id
       },
-        signatureRole: "maintainer",
-        signatureStatus: "new"
+        signatureRole: SignatureRole.MAINTAINER,
+        signatureStatus: SignatureStatus.NEW
     }
 
     await this.viewUtils.showProgressBar();
@@ -48,7 +62,10 @@ export class RouteAssignaturePage implements OnInit {
 
         if (AgilitUtils.isNullOrUndefined(response)){
           return;
-        }        
+        }
+        this.order.orderSignature.push(response);
+
+        this.viewUtils.showToast('Assinatura realizada com sucesso!');
       }
     ).catch(
       error => {

@@ -11,19 +11,19 @@ import { DateHelper } from '../utils/Date';
   styleUrls: ['./defaulthourworked.page.scss'],
 })
 export class DefaultHourWorkedPage implements OnInit, OnDestroy {
-  public order : any = undefined;
-  hoursAponted = [];  
-  id          : string;
-  description : string;
-  date        : string;
-  initialHour : string;
-  finalHour   : string;
-  total       : string;
-  interval    : string;
-  public subscribe : any;
+  public order        : any     = undefined;
+  public hoursAponted : any     = [];  
+  public index        : number;
+  public id           : string;
+  public description  : string;
+  public date         : string;
+  public initialHour  : string;
+  public finalHour    : string;
+  public total        : string;
+  public interval     : string;
+  public subscribe    : any;
 
   constructor(private viewUtils : ViewUtils, private restOrder : RestOrder){
-    this.initializingObject();
   }
 
   ngOnInit() {
@@ -67,7 +67,36 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
     }    
   }
 
+  private validateFields() : boolean{
+    if (AgilitUtils.isNullOrUndefined(this.id) || this.id == ""){
+      return false;
+    }
+
+    if (AgilitUtils.isNullOrUndefined(this.description) || this.description == ""){
+      return false;
+    }
+
+    if (AgilitUtils.isNullOrUndefined(this.date) || this.date == ""){
+      return false;
+    }
+
+    if (AgilitUtils.isNullOrUndefined(this.initialHour) || AgilitUtils.isNullOrUndefined(this.finalHour) || this.initialHour == "" || this.finalHour == ""){
+      return false;
+    }
+
+    if (AgilitUtils.isNullOrUndefined(this.interval) || this.interval == ""){
+      return false;
+    }
+
+    return true;
+  }
+
   async confirmAppointments(){
+    if (!this.validateFields()){
+      await this.viewUtils.openAlert({header: 'Atenção', message: 'Há campos que não foram preenchidos corretamente!'});
+      return;
+    }
+    
     const workedTime = {
       id          : this.id,
       description : this.description,
@@ -85,7 +114,8 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
           return;
         }
 
-        // this.loadHourWorked();
+        this.createHourWorkedTimeSuccess(response, true);
+        this.id = "";
       }
     ).catch(
       error => {
@@ -131,7 +161,7 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
     );    
   }
 
-  createHourWorkedTimeSuccess(response){
+  createHourWorkedTimeSuccess(response, edit = false){
     let hourAponted : any = {};
     hourAponted.Id          = response.id;
     hourAponted.Date        = new Date(response.startedWork);
@@ -145,7 +175,11 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
     this.finalHour   = '';
     this.interval    = '';
     this.description = '';
-
+    
+    if (edit){
+      this.hoursAponted[this.index] = hourAponted;
+      return;
+    }
     this.hoursAponted.push(hourAponted);
   }
 
@@ -194,7 +228,8 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
     );   
   }
 
-  editHourWorked(item){    
+  editHourWorked(item, index){
+    this.index       = index;
     this.id          = item.Id;
     this.date        = item.Date.getFullYear() + '-' + ("0" + Number(item.Date.getMonth() + 1).toString()).slice(-2) + '-' + ("0" + item.Date.getDate()).slice(-2);
     this.initialHour = ("0" + item.InitialHour.getHours()).slice(-2) + ':' + ("0" + item.InitialHour.getMinutes()).slice(-2);    
@@ -212,8 +247,5 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
     }
 
     return ("0" + date.getDate()).slice(-2) + '-' + ("0" + Number(date.getMonth() + 1).toString()).slice(-2) + '-' + date.getFullYear().toString()    
-  }
-
-  initializingObject(){
   }
 }

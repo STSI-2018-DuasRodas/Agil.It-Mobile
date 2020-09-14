@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ListIO } from 'src/app/io/listIO';
 import { AgilitUtils } from 'src/app/utils/agilitUtils';
 import { PopoverController, Events, MenuController } from '@ionic/angular';
@@ -14,7 +14,7 @@ import { ViewUtils } from '../utils/viewUtils';
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
 })
-export class ListPage implements OnInit {  
+export class ListPage implements OnInit, OnDestroy {  
   public order : any = this.createOrderObject();
 
   public tabs : any = this.obterTabs();
@@ -31,6 +31,10 @@ export class ListPage implements OnInit {
     this.requestOrderData = EventEmitterService.get('requestOrderData').subscribe(() => {
       this.emitOrderEvent();
     });
+  }
+
+  ngOnDestroy(){
+    this.requestOrderData.unsubscribe();
   }
 
   ionViewWillEnter(){

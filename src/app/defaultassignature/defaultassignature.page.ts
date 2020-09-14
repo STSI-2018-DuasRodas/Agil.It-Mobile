@@ -17,7 +17,7 @@ export class DefaultAssignaturePage implements OnInit, OnDestroy {
   public assignaturePassword : string = '';
   public subscribe : any;
 
-  assignatureVerificationChecked : boolean = false;
+  public assignatureVerificationChecked : boolean = false;
 
   constructor(private viewUtils : ViewUtils, private restOrder : RestOrder) { }
 
@@ -27,9 +27,7 @@ export class DefaultAssignaturePage implements OnInit, OnDestroy {
 
       for (const orderSignature of this.order.orderSignature){
         AgilitUtils.verifyProperty(orderSignature, 'createdAtFormatted', DateHelper.formatDate(orderSignature.createdAt));
-      }      
-      
-      console.log(this.order);
+      }
     });
 
     EventEmitterService.get('requestOrderData').emit();

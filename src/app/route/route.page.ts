@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ViewUtils } from '../utils/viewUtils';
 import { RestOrder } from '../rest/restorder';
 import { AgilitUtils } from '../utils/agilitUtils';
@@ -12,7 +12,7 @@ import { PopoverController, Events } from '@ionic/angular';
   templateUrl: './route.page.html',
   styleUrls: ['./route.page.scss'],
 })
-export class RoutePage implements OnInit {  
+export class RoutePage implements OnInit, OnDestroy {  
   public order : any = this.createOrderObject();
   public requestOrderData : any;
   public currentPopover = null;
@@ -25,6 +25,10 @@ export class RoutePage implements OnInit {
     this.requestOrderData = EventEmitterService.get('requestOrderData').subscribe(() => {
       this.emitOrderEvent();
     });
+  }
+
+  ngOnDestroy(){
+    this.requestOrderData.unsubscribe();
   }
 
   public tabs : any = this.obterTabs();
