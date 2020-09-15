@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DefaultHourWorkedPage } from './defaulthourworked.page';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { AgilitButtonComponent } from 'src/app/agilit-button/agilit-button.component';
 import { CustomComponentsModule } from 'src/app/utils/customComponents.module';
 import { AgilitDatePipe } from 'src/app/pipe/date.pipe';
@@ -25,8 +24,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     CustomComponentsModule,
-    RouterModule.forChild(routes),
-    FontAwesomeModule
+    RouterModule.forChild(routes)
   ],
   declarations: [DefaultHourWorkedPage]
 })
