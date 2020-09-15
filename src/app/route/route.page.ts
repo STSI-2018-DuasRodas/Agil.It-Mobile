@@ -5,7 +5,8 @@ import { AgilitUtils } from '../utils/agilitUtils';
 import { ActivatedRoute } from '@angular/router';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { PopoverComponent } from '../popover/popover.component';
-import { PopoverController, Events } from '@ionic/angular';
+import { PopoverController, Events, MenuController } from '@ionic/angular';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-route',
@@ -17,7 +18,7 @@ export class RoutePage implements OnInit, OnDestroy {
   public requestOrderData : any;
   public currentPopover = null;
 
-  constructor(public activeRoute : ActivatedRoute, private viewUtils : ViewUtils, private restOrder : RestOrder, public popoverController: PopoverController, private events : Events) { }
+  constructor(private menuCtrl : MenuController, public activeRoute : ActivatedRoute, private viewUtils : ViewUtils, private restOrder : RestOrder, public popoverController: PopoverController, private events : Events) { }
 
   async ngOnInit() {
     await this.loadOrderById(this.activeRoute.snapshot.paramMap.get('id'));
@@ -29,6 +30,14 @@ export class RoutePage implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.requestOrderData.unsubscribe();
+  }
+
+  ionViewWillEnter(){
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewWillLeave(){
+    this.menuCtrl.enable(true);
   }
 
   public tabs : any = this.obterTabs();
@@ -73,7 +82,11 @@ export class RoutePage implements OnInit, OnDestroy {
         console.log('Error');
         this.viewUtils.hideProgressBar();
       }
-    );    
+    );  
+  }
+
+  public emitOrderEvent(){
+    EventEmitterService.get('routeOrderData').emit(this.order);
   }
 
   public loadOrderSuccess(){
@@ -82,17 +95,15 @@ export class RoutePage implements OnInit, OnDestroy {
     }  
     
     AgilitUtils.verifyProperty(this.order, 'orderType', '');
+    AgilitUtils.verifyProperty(this.order, 'orderStatusFormated', '');
     AgilitUtils.verifyProperty(this.order, 'priorityFormated', '');
     AgilitUtils.verifyProperty(this.order, 'openDateFormated', '');
 
-    this.order.orderType        = AgilitUtils.formatValues(this.order.orderLayout.orderLayout);
-    this.order.priorityFormated = AgilitUtils.formatValues(this.order.priority);
-    this.order.openDateFormated = new Date(this.order.openedDate).getDate() + '/' + new Date(this.order.openedDate).getMonth() + '/' + new Date(this.order.openedDate).getFullYear();    
-  }
-
-  public emitOrderEvent(){
-    EventEmitterService.get('routeOrderData').emit(this.order);
-  }
+    this.order.orderType           = AgilitUtils.formatValues(this.order.orderLayout.orderLayout);
+    this.order.priorityFormated    = AgilitUtils.formatValues(this.order.priority);
+    this.order.orderStatusFormated = AgilitUtils.formatValues(this.order.orderStatus);
+    this.order.openDateFormated    = DateHelper.formatDate(this.order.openedDate);
+  }  
 
   private createOrderObject(){
     return {

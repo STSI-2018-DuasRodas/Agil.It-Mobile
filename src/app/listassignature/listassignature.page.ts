@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { RestOrder } from '../rest/restorder';
 import { ViewUtils } from '../utils/viewUtils';
-import { AgilitUtils } from '../utils/agilitUtils';
+import { AgilitOrderStatus, AgilitUtils, SignatureRole, SignatureStatus } from '../utils/agilitUtils';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-listassignature',
@@ -13,34 +14,65 @@ export class ListAssignaturePage implements OnInit {
   public order : any = undefined;
 
   public assignaturePassword : string = '';
+  public subscribe : any;
 
-  assignatureVerificationChecked : boolean = false;
+  public assignatureVerificationChecked : boolean = false;
 
   constructor(private viewUtils : ViewUtils, private restOrder : RestOrder) { }
 
   ngOnInit() {
-    EventEmitterService.get('listOrderData').subscribe((data) => {
+    this.subscribe = EventEmitterService.get('listOrderData').subscribe((data) => {
       this.order = data;
-      console.log(this.order);
+
+      for (const orderSignature of this.order.orderSignature){
+        AgilitUtils.verifyProperty(orderSignature, 'createdAtFormatted', DateHelper.formatDate(orderSignature.createdAt));
+      }
     });
 
     EventEmitterService.get('requestOrderData').emit();
   }
 
+  ngOnDestroy(){
+    this.subscribe.unsubscribe();
+  }
+
   async assineOm(){
-    if (this.assignaturePassword != window.localStorage.getItem("password")){
+    if (this.order.orderStatus == AgilitOrderStatus.SIGNATURED){
+      this.viewUtils.showToast('OM já está assinada!', 2000, false);
       return;
     }
 
+    if (this.order.orderStatus == AgilitOrderStatus.FINISHED){
+      this.viewUtils.showToast('OM já está finalizada!', 2000, false);
+      return;
+    }
+
+    if (this.order.orderStatus == AgilitOrderStatus.CANCELED){
+      this.viewUtils.showToast('OM está cancelada!', 2000, false);
+      return;
+    }
+
+    if (this.assignaturePassword != window.localStorage.getItem("password")){
+      this.viewUtils.showToast('Senha incorreta!', 2000, false);
+      return;
+    }
+
+    if (this.assignaturePassword != window.localStorage.getItem("password")){
+      this.viewUtils.showToast('Senha incorreta!', 2000, false);
+      return;
+    }
+
+    const userData : any = JSON.parse(window.localStorage.getItem("user"));
+    
     let orderAssignature = {
       user: {
-        id: 3
+        id: userData.id
       },
       maintenanceOrder: {
         id: this.order.id
       },
-        signatureRole: "maintainer",
-        signatureStatus: "new"
+        signatureRole: SignatureRole.MAINTAINER,
+        signatureStatus: SignatureStatus.NEW
     }
 
     await this.viewUtils.showProgressBar();
@@ -50,7 +82,10 @@ export class ListAssignaturePage implements OnInit {
 
         if (AgilitUtils.isNullOrUndefined(response)){
           return;
-        }        
+        }
+        this.order.orderSignature.push(response);
+
+        this.viewUtils.showToast('Assinatura realizada com sucesso!');
       }
     ).catch(
       error => {

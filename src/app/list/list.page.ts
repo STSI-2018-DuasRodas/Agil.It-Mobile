@@ -8,6 +8,7 @@ import { Order } from 'src/app/order/order';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { RestOrder } from '../rest/restorder';
 import { ViewUtils } from '../utils/viewUtils';
+import { DateHelper } from '../utils/Date';
 
 @Component({
   selector: 'app-list',
@@ -82,12 +83,14 @@ export class ListPage implements OnInit, OnDestroy {
     }  
     
     AgilitUtils.verifyProperty(this.order, 'orderType', '');
+    AgilitUtils.verifyProperty(this.order, 'orderStatusFormated', '');
     AgilitUtils.verifyProperty(this.order, 'priorityFormated', '');
     AgilitUtils.verifyProperty(this.order, 'openDateFormated', '');
 
-    this.order.orderType        = AgilitUtils.formatValues(this.order.orderLayout.orderLayout);
-    this.order.priorityFormated = AgilitUtils.formatValues(this.order.priority);
-    this.order.openDateFormated = new Date(this.order.openedDate).getDate() + '/' + new Date(this.order.openedDate).getMonth() + '/' + new Date(this.order.openedDate).getFullYear();
+    this.order.orderType           = AgilitUtils.formatValues(this.order.orderLayout.orderLayout);
+    this.order.priorityFormated    = AgilitUtils.formatValues(this.order.priority);
+    this.order.orderStatusFormated = AgilitUtils.formatValues(this.order.orderStatus);
+    this.order.openDateFormated    = DateHelper.formatDate(this.order.openedDate);
 
     for (const equipament of this.order.orderEquipment) {
       AgilitUtils.verifyProperty(equipament, 'operation_expanded', false);

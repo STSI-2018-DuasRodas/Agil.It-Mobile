@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ViewUtils } from '../utils/viewUtils';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { AgilitUtils } from '../utils/agilitUtils';
 import { DateHelper } from '../utils/Date';
 import { RestOrder } from '../rest/restorder';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-listhourworked',
@@ -11,6 +12,8 @@ import { RestOrder } from '../rest/restorder';
   styleUrls: ['./listhourworked.page.scss'],
 })
 export class ListHourworkedPage implements OnInit, OnDestroy {
+  @ViewChild(IonContent, { static: false }) content: IonContent;
+  
   public order        : any     = undefined;
   public hoursAponted : any     = [];  
   public index        : number;
@@ -67,7 +70,7 @@ export class ListHourworkedPage implements OnInit, OnDestroy {
     }    
   }
 
-  private validateFields() : boolean{
+  public validateFields() : boolean{
     if (AgilitUtils.isNullOrUndefined(this.id) || this.id == ""){
       return false;
     }
@@ -228,7 +231,13 @@ export class ListHourworkedPage implements OnInit, OnDestroy {
     );   
   }
 
+  ScrollToTop() {
+    this.content.scrollToTop(200);
+  }
+
   editHourWorked(item, index){
+    this.ScrollToTop();
+
     this.index       = index;
     this.id          = item.Id;
     this.date        = item.Date.getFullYear() + '-' + ("0" + Number(item.Date.getMonth() + 1).toString()).slice(-2) + '-' + ("0" + item.Date.getDate()).slice(-2);

@@ -4,6 +4,7 @@ import { RestOrder } from '../rest/restorder';
 import { ViewUtils } from '../utils/viewUtils';
 import { AgilitUtils, SignatureRole, SignatureStatus } from '../utils/agilitUtils';
 import { DateHelper } from '../utils/Date';
+import { AgilitOrderStatus } from '../utils/agilitUtils';
 
 @Component({
   selector: 'app-routeassignature',
@@ -37,6 +38,21 @@ export class RouteAssignaturePage implements OnInit {
   }
 
   async assineOm(){
+    if (this.order.orderStatus == AgilitOrderStatus.SIGNATURED){
+      this.viewUtils.showToast('OM já está assinada!', 2000, false);
+      return;
+    }
+
+    if (this.order.orderStatus == AgilitOrderStatus.FINISHED){
+      this.viewUtils.showToast('OM já está finalizada!', 2000, false);
+      return;
+    }
+
+    if (this.order.orderStatus == AgilitOrderStatus.CANCELED){
+      this.viewUtils.showToast('OM está cancelada!', 2000, false);
+      return;
+    }
+
     if (this.assignaturePassword != window.localStorage.getItem("password")){
       this.viewUtils.showToast('Senha incorreta!', 2000, false);
       return;

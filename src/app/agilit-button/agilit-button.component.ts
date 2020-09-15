@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Injectable } from '@angular/core';
+import { Component, OnInit, Input, Injectable, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'agilit-button',
@@ -11,9 +11,18 @@ export class AgilitButtonComponent implements OnInit {
   @Input()  size     : string  = "default";
   @Input()  expand   : string  = "";
   @Input()  disabled : boolean = false;
+  @Output() onClick  : any = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit() {}
+
+  onButtonClick(){
+    if (this.disabled){
+      return;
+    }
+
+    this.onClick.emit();
+  }
 
 }

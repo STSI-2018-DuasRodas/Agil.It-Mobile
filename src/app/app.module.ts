@@ -19,13 +19,7 @@ import { ViewUtils } from './utils/viewUtils';
 import { PopoverComponent } from './popover/popover.component';
 import { CustomComponentsModule } from './utils/customComponents.module';
 import { AgilitUtils } from './utils/agilitUtils';
-import { CadOperationComponent } from './cad-operation/cad-operation.component';
 import { RestOrder } from './rest/restorder';
-import { DefaultPage } from './default/default.page';
-import { DefaultPageModule } from './default/default.module';
-import { AgilitDatePipe } from './pipe/date.pipe';
-import { AgilitTimePipe } from './pipe/time.pipe';
-import { AgilitfilterComponent } from './agilitfilter/agilitfilter.component';
 
 @NgModule({
   declarations: [

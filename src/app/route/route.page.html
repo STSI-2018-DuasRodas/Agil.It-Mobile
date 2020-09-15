@@ -1,20 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <div>
-      <div class="align-center">
-        <ion-title>{{order.orderNumber}}</ion-title>
-      </div>
-      <div>
-        <div class="align-center">
-          <ion-icon class="icon-default-size" *ngIf="order.priority == 'urgent'" name="bookmark" color="primary"></ion-icon>
-          <ion-icon class="icon-default-size" *ngIf="order.priority == 'high'"   name="bookmark" color="warning"></ion-icon>
-          <ion-icon class="icon-default-size" *ngIf="order.priority == 'medium'" name="bookmark" color="medium"></ion-icon>
-          <ion-icon class="icon-default-size" *ngIf="order.priority == 'low'"    name="bookmark" color="light"></ion-icon>
-          <ion-label name="orderType" class="font-size-medium">{{order.orderType}}</ion-label>
+  <ion-toolbar>    
+    <div class="align-center">
+      <ion-title class="font-size-large p-top-2">{{order.orderNumber}}</ion-title>
+    </div>    
+    <div class="align-center">      
+      <ion-label name="orderType" class="font-size-medium">
+        <ion-icon class="icon-default-size" *ngIf="order.priority == 'urgent'" name="bookmark" color="primary"></ion-icon>
+        <ion-icon class="icon-default-size" *ngIf="order.priority == 'high'"   name="bookmark" color="warning"></ion-icon>
+        <ion-icon class="icon-default-size" *ngIf="order.priority == 'medium'" name="bookmark" color="medium"></ion-icon>
+        <ion-icon class="icon-default-size" *ngIf="order.priority == 'low'"    name="bookmark" color="light"></ion-icon>
+        {{order.orderType}}
+      </ion-label>
+      <br><ion-label name="orderStatus" class="font-size-medium">{{order.orderStatusFormated}}</ion-label>
 
-          <ion-icon style="float: right;" (click)="presentPopover($event)" class="icon-default-size m-right-2" name="settings"></ion-icon>
-        </div>                  
-      </div>
+      <ion-icon style="float: right;" (click)="presentPopover($event)" class="icon-default-size m-right-2" name="settings"></ion-icon>
     </div>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home/monitor"></ion-back-button>
