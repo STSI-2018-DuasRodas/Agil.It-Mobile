@@ -7,11 +7,12 @@
     </ion-card-header>
     <ion-card-content>
       <div >
-        <ion-row>
-          <ion-item>
-            <ion-label color="primary" position="stacked">Descrição do apontamento</ion-label>
-            <ion-input [(ngModel)]="description"></ion-input>
-          </ion-item>
+        <ion-item>
+          <ion-label color="primary" position="stacked">Descrição do apontamento</ion-label>
+          <ion-textarea #focus [(ngModel)]="description"></ion-textarea>
+        </ion-item>
+
+        <ion-row>          
           <ion-col size="6" class="align-center">
             <ion-item>
               <ion-label color="primary" position="stacked">Data do apontamento</ion-label>

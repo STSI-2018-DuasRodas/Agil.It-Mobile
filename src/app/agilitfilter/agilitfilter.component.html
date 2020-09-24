@@ -18,7 +18,7 @@
   
       <ion-list style="max-height: 10rem; overflow: scroll;">
         <ion-item *ngFor="let item of equipments" (click)="equipmentSelected(item)">
-          <ion-label text-wrap>{{item.description}}</ion-label>
+          <ion-label>{{item.description}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-item>

@@ -78,13 +78,23 @@ export class RestOrder {
     return ProviderHelper.post(this.http, component);
   }
 
+  public updateComponent(component){
+    this.http.url = this.http.getBaseUrl() + this.restComponents + '/' + component.id;
+    return ProviderHelper.put(this.http, component);
+  }
+
   public deleteComponent(componentID){
     this.http.url = this.http.getBaseUrl() + this.restComponents + '/' + componentID;
     return ProviderHelper.delete(this.http);
   }
 
-  public listProducts(description){
+  public listProductsByDescription(description){
     this.http.url = this.http.getBaseUrl() + this.restItem + '?description=like(' + description + ')';
+    return ProviderHelper.get(this.http);
+  }
+
+  public listProductsByIntegrationId(integrationId){
+    this.http.url = this.http.getBaseUrl() + this.restItem + '?integrationID=like(' + integrationId + ')';
     return ProviderHelper.get(this.http);
   }
 

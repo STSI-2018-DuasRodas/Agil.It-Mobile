@@ -4,7 +4,7 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { RestOrder } from '../rest/restorder';
 import { AgilitUtils } from '../utils/agilitUtils';
 import { DateHelper } from '../utils/Date';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonTextarea } from '@ionic/angular';
 
 @Component({
   selector: 'app-defaulthourworked',
@@ -13,6 +13,8 @@ import { IonContent } from '@ionic/angular';
 })
 export class DefaultHourWorkedPage implements OnInit, OnDestroy {
   @ViewChild(IonContent, { static: false }) content: IonContent;
+
+  @ViewChild('focus', { static: false })  inputElement: IonTextarea;
 
   public order        : any     = undefined;
   public hoursAponted : any     = [];  
@@ -128,6 +130,10 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
     );    
   }
 
+  cancelAppointments(){
+    
+  }
+
   async newAppointments(){
     const userLogged = AgilitUtils.getMaintenerByLoggedUser(this.order.maintenanceWorker);
 
@@ -233,6 +239,7 @@ export class DefaultHourWorkedPage implements OnInit, OnDestroy {
 
   ScrollToTop() {
     this.content.scrollToTop(200);
+    this.inputElement.setFocus();
   }
 
   editHourWorked(item, index){

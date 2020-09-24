@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { ViewUtils } from '../utils/viewUtils';
 import { RestOrder } from '../rest/restorder';
 import { AgilitUtils } from '../utils/agilitUtils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-routeresume',
@@ -16,7 +17,7 @@ export class RouteResumePage implements OnInit {
 
   public subscribe : any;
 
-  constructor(public modalController: ModalController, private viewUtils : ViewUtils, private restOrder : RestOrder) { }
+  constructor(public modalController: ModalController, private viewUtils : ViewUtils, private restOrder : RestOrder, private router: Router) { }
 
   ngOnInit() {
     this.subscribe = EventEmitterService.get('routeOrderData').subscribe((data) => {
@@ -32,12 +33,12 @@ export class RouteResumePage implements OnInit {
     item.operation_expanded = !item.operation_expanded;
   }
 
-  async expandComponent(equipament, operation){
+  async expandComponent(operation, orderEquipment){
     const modal = await this.modalController.create({
       component: CadOperationComponent,
       componentProps: {
         'operationData' : operation,
-        'orderEquipID'  : equipament.id,
+        'orderEquipID'  : orderEquipment.id,
         'operationMoviment': CadOperationTypes.EDIT
       }
     });
@@ -79,5 +80,4 @@ export class RouteResumePage implements OnInit {
       }
     ); 
   }
-
 }

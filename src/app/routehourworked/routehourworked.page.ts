@@ -4,7 +4,7 @@ import { RestOrder } from '../rest/restorder';
 import { AgilitUtils } from '../utils/agilitUtils';
 import { DateHelper } from '../utils/Date';
 import { ViewUtils } from '../utils/viewUtils';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonTextarea } from '@ionic/angular';
 
 @Component({
   selector: 'app-routehourworked',
@@ -13,6 +13,7 @@ import { IonContent } from '@ionic/angular';
 })
 export class RouteHourworkedPage implements OnInit {
   @ViewChild(IonContent, { static: false }) content: IonContent;
+  @ViewChild('focus', { static: false })  inputElement: IonTextarea;
 
   public order        : any     = undefined;
   public hoursAponted : any     = [];  
@@ -232,11 +233,12 @@ export class RouteHourworkedPage implements OnInit {
 
   ScrollToTop() {
     this.content.scrollToTop(200);
+    this.inputElement.setFocus();
   }
 
   editHourWorked(item, index){
     this.ScrollToTop();
-    
+
     this.index       = index;
     this.id          = item.Id;
     this.date        = item.Date.getFullYear() + '-' + ("0" + Number(item.Date.getMonth() + 1).toString()).slice(-2) + '-' + ("0" + item.Date.getDate()).slice(-2);

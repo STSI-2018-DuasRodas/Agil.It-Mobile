@@ -116,6 +116,9 @@ export class RoutePage implements OnInit, OnDestroy {
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
+      componentProps: {
+        data: this.order
+      },
       event: ev,
       id : 'popover',
       translucent: true

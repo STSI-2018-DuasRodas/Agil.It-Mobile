@@ -69,6 +69,15 @@ export class AgilitUtils {
       return Array.isArray(param);
   }
 
+  public static formatNumber(value: number, places: number = 2, symbol: string = ''): string {
+    if (!value) {
+      value = 0;
+    }
+
+    let number = value.toFixed(places).replace(',', 'p').replace('.', ',').replace('p', '.');
+    return symbol + number;
+  }
+
   public static isEmptyArray(param : any) : boolean{
       if (!AgilitUtils.isArray(param)){
           return true;

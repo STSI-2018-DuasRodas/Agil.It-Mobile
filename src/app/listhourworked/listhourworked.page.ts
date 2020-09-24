@@ -4,7 +4,7 @@ import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { AgilitUtils } from '../utils/agilitUtils';
 import { DateHelper } from '../utils/Date';
 import { RestOrder } from '../rest/restorder';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonTextarea } from '@ionic/angular';
 
 @Component({
   selector: 'app-listhourworked',
@@ -13,6 +13,8 @@ import { IonContent } from '@ionic/angular';
 })
 export class ListHourworkedPage implements OnInit, OnDestroy {
   @ViewChild(IonContent, { static: false }) content: IonContent;
+
+  @ViewChild('focus', { static: false })  inputElement: IonTextarea;
   
   public order        : any     = undefined;
   public hoursAponted : any     = [];  
@@ -233,6 +235,7 @@ export class ListHourworkedPage implements OnInit, OnDestroy {
 
   ScrollToTop() {
     this.content.scrollToTop(200);
+    this.inputElement.setFocus();
   }
 
   editHourWorked(item, index){

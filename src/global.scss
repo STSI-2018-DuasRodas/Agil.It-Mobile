@@ -146,6 +146,10 @@
   font-size: 10.5vw;
 }
 
+.icon-xlarge-size{
+  font-size: 12.5vw;
+}
+
 .m-top-2{
   margin-top: 2%;
 }
@@ -344,5 +348,45 @@ ion-icon {
 
   &[name*="clear"] {
     mask-image: url(./app/icons/agilit-clear.svg);
+  }
+
+  &[name*="build"] {
+    mask-image: url(./app/icons/agilit-build.svg);
+  }
+
+  &[name*="chevron_right"] {
+    mask-image: url(./app/icons/agilit-chevron_right.svg);
+  }
+
+  &[name*="expand_more"] {
+    mask-image: url(./app/icons/agilit-expand_more.svg);
+  }  
+
+  &[name*="open-new"] {
+    mask-image: url(./app/icons/agilit-open_in_new.svg);
+  }  
+
+  &[name*="article"] {
+    mask-image: url(./app/icons/agilit-article.svg);
+  }
+
+  &[name*="unfold_more"] {
+    mask-image: url(./app/icons/agilit-unfold_more.svg);
+  }
+
+  &[name*="more_time"] {
+    mask-image: url(./app/icons/agilit-more_time.svg);
+  }
+
+  &[name*="access_time"] {
+    mask-image: url(./app/icons/agilit-access_time.svg);
+  }
+
+  &[name*="notes"] {
+    mask-image: url(./app/icons/agilit-notes.svg);
+  }
+
+  &[name*="remove"] {
+    mask-image: url(./app/icons/agilit-remove.svg);
   }
 }

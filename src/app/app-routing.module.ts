@@ -39,8 +39,6 @@ const routes: Routes = [
     path: 'home/maintenance-order/:id/route', 
     loadChildren: () => import('./route/route.module').then(m => m.RoutePageModule)
   }
-
-
 ];
 
 @NgModule({

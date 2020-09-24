@@ -48,7 +48,8 @@ export class CadOperationComponent implements OnInit {
     const modal = await this.modalController.create({
       component: CadComponentComponent,
       componentProps: {
-        'operationData': this.operationData
+        'operationData': this.operationData,
+        'editing': false
       }
     });
     return await modal.present();
@@ -73,7 +74,9 @@ export class CadOperationComponent implements OnInit {
     }
   }
 
-  async deleteComponent(index, component){
+  async deleteComponent(index, component, event){
+    event.stopPropagation();
+
     if (AgilitUtils.isNullOrUndefined(component) || !component.canBeDeleted){
       return;
     }
@@ -138,6 +141,18 @@ export class CadOperationComponent implements OnInit {
         this.viewUtils.hideProgressBar();
       }
     );
+  }
+
+  async openComponent(component){
+    const modal = await this.modalController.create({
+      component: CadComponentComponent,
+      componentProps: {
+        'operationData': this.operationData,
+        'component': component,
+        'editing': true
+      }
+    });
+    return await modal.present();
   }
 
   dismissModal() {

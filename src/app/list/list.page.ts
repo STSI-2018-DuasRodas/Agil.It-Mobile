@@ -108,9 +108,32 @@ export class ListPage implements OnInit, OnDestroy {
     }
   }
 
+  defineColor(){
+    if (this.order.priority == 'urgent'){
+      return 'primary';
+    }
+
+    if (this.order.priority == 'high'){
+      return 'warning';
+    }
+
+    if (this.order.priority == 'medium'){
+      return 'medium';
+    }
+
+    if (this.order.priority == 'low'){
+      return 'light';
+    }
+
+    return 'secondary'
+  }
+
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
+      componentProps: {
+        data: this.order
+      },
       event: ev,
       id : 'popover',
       translucent: true
