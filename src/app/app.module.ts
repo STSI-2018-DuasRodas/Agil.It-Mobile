@@ -21,6 +21,7 @@ import { CustomComponentsModule } from './utils/customComponents.module';
 import { AgilitUtils } from './utils/agilitUtils';
 import { RestOrder } from './rest/restorder';
 import { AgilitActionUtils } from './utils/AgilitActionUtils';
+import { RestNotification } from './rest/restnotification';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AgilitActionUtils } from './utils/AgilitActionUtils';
     ViewUtils,
     LoginRest,
     RestOrder,
+    RestNotification,
     AgilitActionUtils,
     AgilitUtils,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

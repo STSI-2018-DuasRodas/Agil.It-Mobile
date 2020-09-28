@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RestNotification } from '../rest/restnotification';
+import { AgilitUtils } from '../utils/agilitUtils';
+import { ViewUtils } from '../utils/viewUtils';
 
 @Component({
   selector: 'app-notification',
@@ -6,41 +9,39 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notification.page.scss'],
 })
 export class NotificationPage implements OnInit {
-  public notifications : any = this.createNotificationObject();
+  public notifications : any;
   
-  constructor() { }
+  constructor(private restNotification : RestNotification, private viewUtils : ViewUtils) { }
 
   ngOnInit() {
+    this.loadNotifications();
   }
 
-  createNotificationObject(){
-    return [
-      {
-        title       : 'Reabertura',
-        description : 'Sua ordem de manutenção 0007356/DGF45 foi reaberta.',
-        data        : 'Hoje 18:23',
-        icon        : 'refresh'
-      },
-      {
-        title       : 'Concluída',
-        description : 'Sua ordem de manutenção 0007356/DWS20 foi concluída com sucesso.',
-        data        : 'Hoje 14:24',
-        icon        : 'checkmark'
-      },
-      {
-        title       : 'Parada',
-        description : 'Sua ordem de manutenção 0007356/DWS20 esta parada.',
-        data        : 'Hoje 11:41',
-        icon        : 'hand'
-      },
-      {
-        title       : 'Convite',
-        description : 'Marcelo te convidou para resolver a ordem 462512/DW45.',
-        data        : 'Hoje 10:20',
-        icon        : 'people'
+  async loadNotifications(){
+    this.viewUtils.showProgressBar();
+    await this.restNotification.getUserNotification().then(
+      (response: any) => {
+        this.viewUtils.hideProgressBar();
+
+        if (AgilitUtils.isNullOrUndefined(response)){
+          return;
+        }
+
+        this.loadNotificationsSuccess(response);                       
       }
-    ]
-
+    ).catch(
+      error => {
+        console.log('Error');
+        this.viewUtils.hideProgressBar();
+      }
+    );    
   }
 
+  loadNotificationsSuccess(response){
+    this.notifications = response; 
+
+    for (const notification of this.notifications) {      
+      notification.icon = "checkmark";
+    }
+  }
 }
