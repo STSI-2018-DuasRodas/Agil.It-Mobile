@@ -18,7 +18,7 @@
             </ion-item-divider>
           </ion-card-header>      
           <ion-card-content class="align-center">
-            {{order.orderEquipment[0].installationArea.description}}
+            {{order?.orderEquipment[0]?.installationArea?.description}}
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -36,7 +36,7 @@
             </ion-item-divider>
           </ion-card-header>
           <ion-card-content class="align-center">
-            {{order.orderEquipment[0].equipment.description}}
+            {{order?.orderEquipment[0]?.equipment?.description}}
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -76,12 +76,12 @@
         <ion-row>
           <ion-col size="6">
             <div class="align-center">
-              {{order.orderEquipment[0].defectOrigin.description}}
+              {{order?.orderEquipment[0]?.defectOrigin?.description}}
             </div>
           </ion-col>
           <ion-col size="6">
             <div class="align-center">
-              {{order.orderEquipment[0].defectSymptom.description}}
+              {{order?.orderEquipment[0]?.defectSymptom?.description}}
             </div>
           </ion-col>
         </ion-row>
@@ -94,7 +94,7 @@
           <ion-label class="font-size-large">Horário de Abertura</ion-label>
         </ion-col>
         <ion-col size="12">
-          <ion-label class="font-size-large">{{order.openDateFormated}}</ion-label>
+          <ion-label class="font-size-large">{{order?.openDateFormated}}</ion-label>
         </ion-col>
       </ion-row>
     </div>
@@ -106,7 +106,7 @@
         </ion-item-divider>
       </ion-card-header>      
       <ion-card-content class="align-center" *ngFor="let workers of order.maintenanceWorker">
-        <ion-label *ngIf="workers.isMain" class="font-size-medium">{{workers.user.name}}</ion-label>
+        <ion-label *ngIf="workers.isMain" class="font-size-medium">{{workers?.user?.name}}</ion-label>
       </ion-card-content>
     </ion-card>
     
@@ -117,7 +117,7 @@
         </ion-item-divider>
       </ion-card-header>      
       <ion-card-content class="align-center">
-        <ion-label class="font-size-medium">{{order.orderEquipment[0].installationArea.description}}</ion-label>
+        <ion-label class="font-size-medium">{{order?.workCenter?.description}}</ion-label>
       </ion-card-content>
     </ion-card>
   </div>    
