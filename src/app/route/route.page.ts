@@ -1,12 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ViewUtils } from '../utils/viewUtils';
 import { RestOrder } from '../rest/restorder';
-import { AgilitUtils } from '../utils/agilitUtils';
+import { AgilitOrderStatus, AgilitUtils } from '../utils/agilitUtils';
 import { ActivatedRoute } from '@angular/router';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { PopoverComponent } from '../popover/popover.component';
-import { PopoverController, Events, MenuController } from '@ionic/angular';
+import { PopoverController, Events, MenuController, ModalController, AlertController } from '@ionic/angular';
 import { DateHelper } from '../utils/Date';
+import { ChecklistComponent } from '../checklist/checklist.component';
+import { AgilitActionUtils } from '../utils/AgilitActionUtils';
 
 @Component({
   selector: 'app-route',
@@ -18,7 +20,7 @@ export class RoutePage implements OnInit, OnDestroy {
   public requestOrderData : any;
   public currentPopover = null;
 
-  constructor(private menuCtrl : MenuController, public activeRoute : ActivatedRoute, private viewUtils : ViewUtils, private restOrder : RestOrder, public popoverController: PopoverController, private events : Events) { }
+  constructor(private agilitActionUtils : AgilitActionUtils, private alertController : AlertController, private modalController : ModalController, private menuCtrl : MenuController, public activeRoute : ActivatedRoute, private viewUtils : ViewUtils, private restOrder : RestOrder, public popoverController: PopoverController, private events : Events, private changeDetectorRef: ChangeDetectorRef) { }
 
   async ngOnInit() {
     await this.loadOrderById(this.activeRoute.snapshot.paramMap.get('id'));
@@ -132,47 +134,111 @@ export class RoutePage implements OnInit, OnDestroy {
 
   private subscribeMethods(){
     this.events.subscribe('assume', () => {
-      console.log("Assumir");
+      this.presentAlertConfirm('Assumir!', 'Você deseja assumir esta Ordem de Manutenção?', AgilitOrderStatus.ASSUMED);
       this.unSubscribeMethods();
     });
 
       this.events.subscribe('start', () => {
-      console.log("Inicar");
-      this.unSubscribeMethods();
+        this.presentAlertConfirm('Iniciar!', 'Você deseja dar início a esta Ordem de Manutenção?', AgilitOrderStatus.STARTED);             
+        this.unSubscribeMethods();
     });
   
     this.events.subscribe('pause', () => {
-      console.log("Pausar");
+      this.presentAlertConfirm('Pausar!', 'Você deseja pausar esta Ordem de Manutenção?', AgilitOrderStatus.PAUSED);
       this.unSubscribeMethods();
     });
   
     this.events.subscribe('delegate', () => {
-      console.log("Delegar");
+      this.presentAlertConfirm('Delegar!', 'Você deseja delegar esta Ordem de Manutenção?', AgilitOrderStatus.DELEGATE);
       this.unSubscribeMethods();
     });
   
     this.events.subscribe('invite', () => {
-      console.log("Convidar");
+      // this.presentAlertConfirm('Convidar!', 'Você deseja convidar alguém?', AgilitOrderStatus.INVITE);
       this.unSubscribeMethods();
     });
   
     this.events.subscribe('requestParticipation', () => {
-      console.log("Solicitar Participação");
+      // this.presentAlertConfirm('Convidar!', 'Você deseja convidar alguém?', AgilitOrderStatus.INVITE);
       this.unSubscribeMethods();
     });
 
-    this.events.subscribe('equipamentStatus', () => {
-      console.log("status do equipamento");
+    this.events.subscribe('cancel', () => {
+      this.presentAlertConfirm('Cancelar!', 'Você deseja cancelar esta Ordem de Manutenção?', AgilitOrderStatus.CANCELED);
       this.unSubscribeMethods();
     });
 
     this.events.subscribe('checkList', () => {
-      console.log("CheckList");
+      this.presentCheckListModal(false);
       this.unSubscribeMethods();
     });
 
   }  
 
+  async presentCheckListModal(action = true) {
+    const modal = await this.modalController.create({
+      component: ChecklistComponent,
+      componentProps: {
+        orderId: this.order.id
+      }
+    });
+    
+    modal.onDidDismiss().then((data) => {
+      if(!data.data.dismissed){
+        return;
+      }
+
+      if (action){
+        this.maintenanceOrderActions(AgilitOrderStatus.STARTED);
+      }      
+    });
+
+    await modal.present();
+  }
+  
+  async presentAlertConfirm(messageHeader : string, messageBody : string, agilitOrderStatus : AgilitOrderStatus) {
+    const alert = await this.alertController.create({
+      cssClass: '',
+      header: messageHeader,
+      message: messageBody,
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: '',
+          handler: (blah) => {            
+          }
+        }, {
+          text: 'Confirmar',
+          role: 'confirm',
+          handler: () => {
+            if (agilitOrderStatus == AgilitOrderStatus.STARTED){
+              this.presentCheckListModal();
+              return;   
+            }
+            
+            this.maintenanceOrderActions(agilitOrderStatus);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async maintenanceOrderActions(agilitOrderStatus : AgilitOrderStatus){
+    try {
+      const response : any = await this.agilitActionUtils.changeStatus(this.order.id, agilitOrderStatus);
+
+      this.order.orderStatus         = response.status;
+      this.order.orderStatusFormated = AgilitUtils.formatValues(response.status);
+
+      this.changeDetectorRef.detectChanges();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   public unSubscribeMethods(){
     this.events.unsubscribe('assume');
     this.events.unsubscribe('start');

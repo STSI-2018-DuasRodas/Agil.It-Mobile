@@ -105,11 +105,6 @@ export class PopoverComponent implements OnInit {
     this.popoverController.dismiss();
   }
 
-  public equipamentStatus(){
-    this.events.publish('equipamentStatus');
-    this.popoverController.dismiss();
-  }
-
   public checkList(){
     this.events.publish('checkList');
     this.popoverController.dismiss();

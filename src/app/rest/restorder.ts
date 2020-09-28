@@ -50,11 +50,17 @@ export class RestOrder {
   }
 
   public orderActions(orderID : number, agilitOrderStatus : AgilitOrderStatus){
-    const orderStatus = {
-      orderStatus: agilitOrderStatus
+    const orderStatus : any = {
+      orderStatus: agilitOrderStatus        
     }
 
-    this.http.url = this.http.getBaseUrl() + this.restAction + '/' + orderID;
+    if (agilitOrderStatus == AgilitOrderStatus.ASSUMED){
+      let userInfo : any = JSON.parse(window.localStorage.getItem("user"));
+
+      orderStatus.userId = userInfo.id;
+    }    
+
+    this.http.url = this.http.getBaseUrl() + this.restAction + '/' + orderID + '/status';
     return ProviderHelper.put(this.http, orderStatus);
   }
 

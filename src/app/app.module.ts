@@ -20,6 +20,7 @@ import { PopoverComponent } from './popover/popover.component';
 import { CustomComponentsModule } from './utils/customComponents.module';
 import { AgilitUtils } from './utils/agilitUtils';
 import { RestOrder } from './rest/restorder';
+import { AgilitActionUtils } from './utils/AgilitActionUtils';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { RestOrder } from './rest/restorder';
     ViewUtils,
     LoginRest,
     RestOrder,
+    AgilitActionUtils,
     AgilitUtils,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

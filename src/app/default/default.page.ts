@@ -10,6 +10,7 @@ import { ViewUtils } from 'src/app/utils/viewUtils';
 import { EventEmitterService } from '../eventemitter/eventemitter.service';
 import { ChecklistComponent } from '../checklist/checklist.component';
 import { DateHelper } from '../utils/Date';
+import { AgilitActionUtils } from '../utils/AgilitActionUtils';
 
 @Component({
   selector: 'app-default',
@@ -23,7 +24,7 @@ export class DefaultPage implements OnInit, OnDestroy{
   public currentPopover = null;
   public requestOrderData : any;
   
-  constructor(public activeRoute : ActivatedRoute, private menuCtrl : MenuController, public popoverController: PopoverController, private events : Events, private agilitUtils : AgilitUtils, private restOrder : RestOrder,  private viewUtils: ViewUtils, public modalController: ModalController, public alertController: AlertController, private changeDetectorRef: ChangeDetectorRef) {    
+  constructor(private agilitActionUtils : AgilitActionUtils, public activeRoute : ActivatedRoute, private menuCtrl : MenuController, public popoverController: PopoverController, private events : Events, private agilitUtils : AgilitUtils, private restOrder : RestOrder,  private viewUtils: ViewUtils, public modalController: ModalController, public alertController: AlertController, private changeDetectorRef: ChangeDetectorRef) {    
   }
 
   async ngOnInit() {    
@@ -159,27 +160,22 @@ export class DefaultPage implements OnInit, OnDestroy{
     });
   
     this.events.subscribe('delegate', () => {
-      console.log("Delegar");
+      this.presentAlertConfirm('Delegar!', 'Você deseja delegar esta Ordem de Manutenção?', AgilitOrderStatus.DELEGATE);
       this.unSubscribeMethods();
     });
   
     this.events.subscribe('invite', () => {
-      console.log("Convidar");
+      // this.presentAlertConfirm('Convidar!', 'Você deseja convidar alguém?', AgilitOrderStatus.INVITE);
+      this.unSubscribeMethods();
+    });
+
+    this.events.subscribe('requestParticipation', () => {
+      // this.presentAlertConfirm('Convidar!', 'Você deseja convidar alguém?', AgilitOrderStatus.INVITE);
       this.unSubscribeMethods();
     });
 
     this.events.subscribe('cancel', () => {
       this.presentAlertConfirm('Cancelar!', 'Você deseja cancelar esta Ordem de Manutenção?', AgilitOrderStatus.CANCELED);
-      this.unSubscribeMethods();
-    });
-  
-    this.events.subscribe('requestParticipation', () => {
-      console.log("Solicitar Participação");
-      this.unSubscribeMethods();
-    });
-
-    this.events.subscribe('equipamentStatus', () => {
-      console.log("status do equipamento");
       this.unSubscribeMethods();
     });
 
@@ -204,7 +200,7 @@ export class DefaultPage implements OnInit, OnDestroy{
       }
 
       if (action){
-        this.changeStatus(AgilitOrderStatus.STARTED);
+        this.maintenanceOrderActions(AgilitOrderStatus.STARTED);
       }      
     });
 
@@ -221,12 +217,17 @@ export class DefaultPage implements OnInit, OnDestroy{
           text: 'Não',
           role: 'cancel',
           cssClass: '',
-          handler: (blah) => {
+          handler: (blah) => {            
           }
         }, {
           text: 'Confirmar',
           role: 'confirm',
           handler: () => {
+            if (agilitOrderStatus == AgilitOrderStatus.STARTED){
+              this.presentCheckListModal();
+              return;   
+            }
+            
             this.maintenanceOrderActions(agilitOrderStatus);
           }
         }
@@ -236,20 +237,17 @@ export class DefaultPage implements OnInit, OnDestroy{
     await alert.present();
   }
 
-  maintenanceOrderActions(agilitOrderStatus : AgilitOrderStatus){
-    if (agilitOrderStatus == AgilitOrderStatus.STARTED){
-      this.presentCheckListModal();
-    } else {
-      this.changeStatus(agilitOrderStatus);
+  async maintenanceOrderActions(agilitOrderStatus : AgilitOrderStatus){
+    try {
+      const response : any = await this.agilitActionUtils.changeStatus(this.order.id, agilitOrderStatus);
+
+      this.order.orderStatus         = response.status;
+      this.order.orderStatusFormated = AgilitUtils.formatValues(response.status);
+
+      this.changeDetectorRef.detectChanges();
+    } catch (error) {
+      console.error(error);
     }
-  }
-
-  changeStatus(agilitOrderStatus : AgilitOrderStatus){
-    this.restOrder.orderActions(this.order.id, agilitOrderStatus);
-    this.order.orderStatus = agilitOrderStatus;
-
-    this.order.orderStatusFormated = AgilitUtils.formatValues(this.order.orderStatus);
-    this.changeDetectorRef.detectChanges();
   }
 
   public unSubscribeMethods(){

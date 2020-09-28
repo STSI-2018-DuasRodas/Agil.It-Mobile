@@ -7,7 +7,9 @@ export enum AgilitOrderStatus {
   CANCELED = 'canceled',
   SIGNATURE_PENDING = 'signature-pending',
   SIGNATURED = 'signatured',
-  FINISHED = 'finished'
+  FINISHED = 'finished',
+  DELEGATE = 'delegate',
+  INVITE  = 'invite'
 }
 
 export enum SignatureRole {
@@ -107,7 +109,7 @@ export class AgilitUtils {
       medium            : "Média",
       high              : "Alta",
       urgent            : "Urgente",
-      created           : "Criada",
+      created           : "Aberta",
       assumed           : "Assumida",
       started           : "Iniciada",
       paused            : "Pausada",

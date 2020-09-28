@@ -36,6 +36,7 @@
     <ion-item class="p-4">
       <ion-label color="primary" position="stacked">Status</ion-label>    
       <ion-select [(ngModel)]="filters.orderStatus" multiple="true">
+        <ion-select-option value="created">Aberta</ion-select-option>
         <ion-select-option value="assumed">Assumida</ion-select-option>
         <ion-select-option value="started">Iniciada</ion-select-option>
         <ion-select-option value="paused">Pausada</ion-select-option>
