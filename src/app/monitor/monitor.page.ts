@@ -6,6 +6,8 @@ import { Platform } from '@ionic/angular';
 import { RestOrder } from '../rest/restorder';
 import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
 import { DateHelper } from '../utils/Date';
+import { AgilitStorageTypes, AgilitStorageUtils } from '../utils/AgilitStorageUtils';
+import { EventEmitterService } from '../eventemitter/eventemitter.service';
 
 @Component({
   selector: 'app-monitor',
@@ -26,7 +28,9 @@ export class MonitorPage implements OnInit {
 
   public filters: any = this.createFilterObject();
 
-  constructor(private viewUtils: ViewUtils, private router: Router, private restOrder: RestOrder) { }
+  constructor(private viewUtils: ViewUtils, private router: Router, private restOrder: RestOrder) { 
+    EventEmitterService.get('requestUserInformation').emit();
+  }
 
   async ngOnInit() {
     await this.loadOrderList();
@@ -93,7 +97,8 @@ export class MonitorPage implements OnInit {
   }
 
   private async loadMaintenerOrderList() {    
-    const maintenerID = JSON.parse(window.localStorage.getItem("user"));
+
+    const maintenerID = AgilitStorageUtils.getDataJSON(AgilitStorageTypes.USERDATA);
 
     if (maintenerID == undefined || maintenerID.id == undefined){
       return;

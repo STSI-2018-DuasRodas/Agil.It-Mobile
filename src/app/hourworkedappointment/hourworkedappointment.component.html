@@ -1,0 +1,57 @@
+<ion-card style="background-color: white;">
+  <ion-card-content>
+    <div >
+      <ion-item>
+        <ion-label color="primary" position="stacked">Descrição do apontamento</ion-label>
+        <ion-textarea #focus [(ngModel)]="description"></ion-textarea>
+      </ion-item>
+
+      <ion-row>          
+        <ion-col size="12" class="align-center">
+          <ion-item>
+            <ion-label color="primary" position="stacked">Data do apontamento</ion-label>
+            <ion-input type="date" [(ngModel)]="date"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="align-center">
+          <ion-item>
+            <ion-label color="primary" position="stacked">Tempo de intervalo</ion-label>
+            <ion-input type="time" [(ngModel)]="interval"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="align-center">
+          <ion-item>
+            <ion-label color="primary" position="stacked">Hora Inicial</ion-label>
+            <ion-input type="time" [(ngModel)]="initialHour"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="align-center">
+          <ion-item>
+            <ion-label color="primary" position="stacked">Hora Final</ion-label>
+            <ion-input type="time" [(ngModel)]="finalHour"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      
+      <div class="align-center">
+        <ion-row>
+          <ion-col size="6">
+            <agilit-button [size]="'block'" [color]="'secondary'" (click)="close()">Cancelar</agilit-button>
+          </ion-col>
+          <ion-col size="6">
+            <agilit-button [size]="'block'" (click)="confirmAppointments()">Confirmar</agilit-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>        
+  </ion-card-content>
+</ion-card>

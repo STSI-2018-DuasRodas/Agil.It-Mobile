@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { ProviderHelper } from './helper';
 import { HttpProvider } from '../http/http';
 import { AgilitOrderStatus, AgilitUtils } from '../utils/agilitUtils';
+import { AgilitStorageTypes, AgilitStorageUtils } from '../utils/AgilitStorageUtils';
 
 @Injectable()
 export class RestOrder {
   private restAction             = 'maintenance-orders';
   private listMaintenerOrdersURL = 'mainteners';
   private restUpdateOperation    = 'order-operations';
-  private restAssignature        = 'order-signatures';
+  private restAssignature        = 'signatures';
   private restItem               = 'items'           ;
   private restComponents         = 'order-components';
   private restOMType             = 'order-layouts'   ;
@@ -34,9 +35,13 @@ export class RestOrder {
     return ProviderHelper.get(this.http);
   }
 
-  public orderAssignature(orderAssignature){
-    this.http.url = this.http.getBaseUrl() + this.restAssignature;
-    return ProviderHelper.post(this.http, orderAssignature);
+  public orderAssignature(orderID, userID){
+    let obj = {
+      userId : userID
+    }
+
+    this.http.url = this.http.getBaseUrl() + this.restAction + '/' + orderID + '/' + this.restAssignature;
+    return ProviderHelper.post(this.http, obj);
   }
 
   public updateOperation(operation){
@@ -55,7 +60,7 @@ export class RestOrder {
     }
 
     if (agilitOrderStatus == AgilitOrderStatus.ASSUMED){
-      let userInfo : any = JSON.parse(window.localStorage.getItem("user"));
+      let userInfo : any = AgilitStorageUtils.getDataJSON(AgilitStorageTypes.USERDATA);
 
       orderStatus.userId = userInfo.id;
     }    

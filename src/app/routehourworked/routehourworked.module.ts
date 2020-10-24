@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { RouteHourworkedPage } from './routehourworked.page';
 import { CustomComponentsModule } from '../utils/customComponents.module';
+import { HourworkedComponent } from '../hourworked/hourworked.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,8 @@ const routes: Routes = [
     CustomComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [RouteHourworkedPage]
+  declarations: [
+    RouteHourworkedPage
+  ]
 })
 export class RouteHourworkedPageModule {}

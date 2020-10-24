@@ -1,4 +1,5 @@
 import { HttpProvider } from '../http/http';
+import { AgilitStorageTypes, AgilitStorageUtils } from '../utils/AgilitStorageUtils';
 import { AgilitUtils } from '../utils/agilitUtils';
 import { ProviderHelper } from './helper';
 
@@ -11,7 +12,7 @@ export class RestNotification {
   } 
 
   public getUserNotification(){
-    let userInfo : any = JSON.parse(window.localStorage.getItem("user"));
+    let userInfo : any = AgilitStorageUtils.getDataJSON(AgilitStorageTypes.USERDATA)
 
     if (AgilitUtils.isNullOrUndefined(userInfo) || userInfo.id == ''){
       return;

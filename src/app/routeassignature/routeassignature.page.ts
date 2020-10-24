@@ -5,6 +5,7 @@ import { ViewUtils } from '../utils/viewUtils';
 import { AgilitUtils, SignatureRole, SignatureStatus } from '../utils/agilitUtils';
 import { DateHelper } from '../utils/Date';
 import { AgilitOrderStatus } from '../utils/agilitUtils';
+import { AgilitActionUtils } from '../utils/AgilitActionUtils';
 
 @Component({
   selector: 'app-routeassignature',
@@ -19,7 +20,7 @@ export class RouteAssignaturePage implements OnInit {
 
   public assignatureVerificationChecked : boolean = false;
 
-  constructor(private viewUtils : ViewUtils, private restOrder : RestOrder) { }
+  constructor(private viewUtils : ViewUtils, private agilitActionUtils : AgilitActionUtils) { }
 
   ngOnInit() {
     this.subscribe = EventEmitterService.get('routeOrderData').subscribe((data) => {
@@ -37,58 +38,15 @@ export class RouteAssignaturePage implements OnInit {
     this.subscribe.unsubscribe();
   }
 
-  async assineOm(){
-    if (this.order.orderStatus == AgilitOrderStatus.SIGNATURED){
-      this.viewUtils.showToast('OM já está assinada!', 2000, false);
-      return;
-    }
-
-    if (this.order.orderStatus == AgilitOrderStatus.FINISHED){
-      this.viewUtils.showToast('OM já está finalizada!', 2000, false);
-      return;
-    }
-
-    if (this.order.orderStatus == AgilitOrderStatus.CANCELED){
-      this.viewUtils.showToast('OM está cancelada!', 2000, false);
-      return;
-    }
-
-    if (this.assignaturePassword != window.localStorage.getItem("password")){
-      this.viewUtils.showToast('Senha incorreta!', 2000, false);
-      return;
-    }
-
-    const userData : any = JSON.parse(window.localStorage.getItem("user"));
-    
-    let orderAssignature = {
-      user: {
-        id: userData.id
-      },
-      maintenanceOrder: {
-        id: this.order.id
-      },
-        signatureRole: SignatureRole.MAINTAINER,
-        signatureStatus: SignatureStatus.NEW
-    }
-
-    await this.viewUtils.showProgressBar();
-    await this.restOrder.orderAssignature(orderAssignature).then(
-      (response: any) => {
-        this.viewUtils.hideProgressBar();
-
-        if (AgilitUtils.isNullOrUndefined(response)){
-          return;
-        }
-        this.order.orderSignature.push(response);
-
-        this.viewUtils.showToast('Assinatura realizada com sucesso!');
-      }
-    ).catch(
-      error => {
-        console.log('Error');
-        this.viewUtils.hideProgressBar();
-      }
-    );   
+  assineOm(){
+    this.agilitActionUtils.signOrder(this.order, this.assignaturePassword).then((response) => {
+      this.viewUtils.hideProgressBar();
+      this.order.orderSignature.push(response);
+      this.viewUtils.showToast('Assinatura realizada com sucesso!');
+    }).catch((error) => {
+      this.viewUtils.hideProgressBar();
+      this.viewUtils.showToast(error, 2000, false);
+    });
   }
 
 }

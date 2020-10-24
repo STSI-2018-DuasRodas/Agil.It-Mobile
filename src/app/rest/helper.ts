@@ -1,4 +1,5 @@
 import { HttpProvider } from '../http/http';
+import { AgilitStorageTypes, AgilitStorageUtils } from '../utils/AgilitStorageUtils';
 
 export class ProviderHelper {
 
@@ -19,7 +20,7 @@ export class ProviderHelper {
   }
 
   public static setToken(token) {
-    window.localStorage.setItem("token", token);
+    AgilitStorageUtils.setData(AgilitStorageTypes.TOKEN, token);    
   }
 
   public static updateToken(response) {

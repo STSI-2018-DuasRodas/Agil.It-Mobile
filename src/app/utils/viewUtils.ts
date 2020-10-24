@@ -122,7 +122,8 @@ export class ViewUtils {
   public async openComponent(componentToShow, dataToPass = undefined){
     const popover = await this.popoverController.create({
       component: componentToShow,
-      cssClass: 'my-custom-class',
+      cssClass: 'popover-style',
+      backdropDismiss: false,
       componentProps: {
         'data' : dataToPass
       },

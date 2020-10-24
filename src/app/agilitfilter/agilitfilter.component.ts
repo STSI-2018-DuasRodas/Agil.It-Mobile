@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
-import { AgilitUtils } from '../utils/agilitUtils';
+import { AgilitTodayDateTypes, AgilitUtils } from '../utils/agilitUtils';
 import { RestOrder } from '../rest/restorder';
 import { ViewUtils } from '../utils/viewUtils';
 
@@ -22,7 +22,6 @@ export class AgilitfilterComponent implements OnInit {
 
   ngOnInit() {
     this.loadOMTypes();
-    console.log(this.data);
   }
 
   async loadOMTypes(){
@@ -54,8 +53,8 @@ export class AgilitfilterComponent implements OnInit {
     return {
       orderNumber: '',
       orderEquipment: '',
-      initialDate: '',
-      finalDate: '',
+      initialDate: AgilitUtils.getTodayDate(AgilitTodayDateTypes["YY/MM/DD"]),
+      finalDate: AgilitUtils.getTodayDate(AgilitTodayDateTypes["YY/MM/DD"]),
       orderStatus: [],
       priority: [],
       orderType: []

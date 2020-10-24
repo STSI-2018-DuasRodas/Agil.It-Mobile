@@ -14,6 +14,8 @@ import { AgilitfilterComponent } from '../agilitfilter/agilitfilter.component';
 import { CadComponentComponent } from '../cad-component/cad-component.component';
 import { InputNumber } from '../directive/inputnumber';
 import { VpCurrencyPipe } from '../pipe/currency.pipe';
+import { HourworkedComponent } from '../hourworked/hourworked.component';
+import { HourworkedappointmentComponent } from '../hourworkedappointment/hourworkedappointment.component';
 @NgModule({
   imports:[
     CommonModule,
@@ -29,6 +31,8 @@ import { VpCurrencyPipe } from '../pipe/currency.pipe';
     AgilitTimePipe,
     CadOperationComponent,
     CadComponentComponent,
+    HourworkedComponent,
+    HourworkedappointmentComponent,
     ChecklistComponent,
     AgilitfilterComponent,
     InputNumber,
@@ -42,6 +46,8 @@ import { VpCurrencyPipe } from '../pipe/currency.pipe';
     AgilitTimePipe,
     CadOperationComponent,
     CadComponentComponent,
+    HourworkedComponent,
+    HourworkedappointmentComponent,
     ChecklistComponent,
     AgilitfilterComponent,
     VpCurrencyPipe
@@ -49,6 +55,8 @@ import { VpCurrencyPipe } from '../pipe/currency.pipe';
   entryComponents: [
     CadOperationComponent,
     CadComponentComponent,
+    HourworkedComponent,
+    HourworkedappointmentComponent,
     ChecklistComponent, 
     AgilitfilterComponent
   ]

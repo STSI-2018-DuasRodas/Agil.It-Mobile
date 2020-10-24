@@ -282,6 +282,10 @@
   transform: translateY(-50%);
 }
 
+.popover-style {
+	--width: 20rem;
+}
+
 ion-icon {
   &[name*="agilit-"] {
     mask-size: contain;

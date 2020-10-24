@@ -1,3 +1,14 @@
+import { AgilitStorageTypes, AgilitStorageUtils } from './AgilitStorageUtils';
+
+export enum AgilitTodayDateTypes {
+  'YY/MM/DD',
+  'YY/MM/DD/HH/MM',
+  'YY/MM/DD/HH/MM/SS',
+  'DD/MM/YY',
+  'DD/MM/YY/HH/MM',
+  'DD/MM/YY/HH/MM/SS',
+}
+
 export enum AgilitOrderStatus {
   CREATED = 'created',
   ASSUMED = 'assumed',
@@ -19,7 +30,7 @@ export enum SignatureRole {
 }
 
 export enum SignatureStatus {
-  NEW = 'new',
+  NEW    = 'new',
   SIGNED = 'signed',
   DENIED = 'denied'
 }
@@ -149,7 +160,7 @@ export class AgilitUtils {
   }
 
   public static getMaintenerByLoggedUser(maintenenceWorkers){
-    const userData : any = JSON.parse(window.localStorage.getItem("user"));
+    const userData : any = AgilitStorageUtils.getDataJSON(AgilitStorageTypes.USERDATA);
 
     if (AgilitUtils.isNullOrUndefined(userData) || AgilitUtils.isNullOrUndefined(userData)){
       return;
@@ -205,5 +216,31 @@ export class AgilitUtils {
     if (value instanceof Object && value.from && value.to) return 'between(' + value.from + ',' + value.to + ')';
 
     return value;
+  }
+
+  public static getTodayDate(agilitTodayDateTypes : AgilitTodayDateTypes, delimiter : string = '-'){
+    if (agilitTodayDateTypes == AgilitTodayDateTypes["YY/MM/DD"]){
+      return new Date().getFullYear().toString() + delimiter + ("0" + Number(new Date().getMonth() + 1).toString()).slice(-2) + delimiter + ("0" + new Date().getDate()).slice(-2);
+    }
+    
+    if (agilitTodayDateTypes == AgilitTodayDateTypes["YY/MM/DD/HH/MM"]){
+      return new Date().getFullYear().toString() + delimiter + ("0" + Number(new Date().getMonth() + 1).toString()).slice(-2) + delimiter + ("0" + new Date().getDate()).slice(-2) + ' - ' + new Date().getHours() + ':' + new Date().getMinutes();
+    }
+
+    if (agilitTodayDateTypes == AgilitTodayDateTypes["YY/MM/DD/HH/MM/SS"]){
+      return new Date().getFullYear().toString() + delimiter + ("0" + Number(new Date().getMonth() + 1).toString()).slice(-2) + delimiter + ("0" + new Date().getDate()).slice(-2) + ' - ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
+    }
+
+    if (agilitTodayDateTypes == AgilitTodayDateTypes["DD/MM/YY"]){
+      return ("0" + new Date().getDate()).slice(-2) + delimiter + ("0" + Number(new Date().getMonth() + 1).toString()).slice(-2) + delimiter + new Date().getFullYear().toString();
+    }
+
+    if (agilitTodayDateTypes == AgilitTodayDateTypes["DD/MM/YY/HH/MM"]){
+      return ("0" + new Date().getDate()).slice(-2) + delimiter + ("0" + Number(new Date().getMonth() + 1).toString()).slice(-2) + delimiter + new Date().getFullYear().toString() + ' - ' + new Date().getHours() + ':' + new Date().getMinutes();
+    }
+
+    if (agilitTodayDateTypes == AgilitTodayDateTypes["DD/MM/YY/HH/MM/SS"]){
+      return ("0" + new Date().getDate()).slice(-2) + delimiter + ("0" + Number(new Date().getMonth() + 1).toString()).slice(-2) + delimiter + new Date().getFullYear().toString() + ' - ' + new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds();
+    }
   }
 }

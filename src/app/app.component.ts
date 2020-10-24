@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { EventEmitterService } from './eventemitter/eventemitter.service';
 import { AgilitUtils } from './utils/agilitUtils';
+import { AgilitStorageTypes, AgilitStorageUtils } from './utils/AgilitStorageUtils';
 
 @Component({
   selector: 'app-root',
@@ -49,15 +50,16 @@ export class AppComponent {
   constructor(private platform: Platform, private splashScreen: SplashScreen, private statusBar: StatusBar) {
     this.initializeApp();
 
-    const userInformation = EventEmitterService.get('requestUserInformation').subscribe((data) => {
-      if (AgilitUtils.isNullOrUndefined(data)){
+    const userInformation = EventEmitterService.get('requestUserInformation').subscribe(() => {
+      let userdata  = AgilitStorageUtils.getDataJSON(AgilitStorageTypes.USERDATA);
+
+      if (AgilitUtils.isNullOrUndefined(userdata)){
         return;
       }
       
-      this.userData = data;
+      this.userData = userdata;
       AgilitUtils.verifyProperty(this.userData, 'roleFormatted', AgilitUtils.formatValues(this.userData.role)); 
       userInformation.unsubscribe();
-      console.log(this.userData);
     });
   }
 
