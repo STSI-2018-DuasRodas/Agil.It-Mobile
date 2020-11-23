@@ -40,7 +40,10 @@ export class ListAssignaturePage implements OnInit {
   assineOm(){
     this.agilitActionUtils.signOrder(this.order, this.assignaturePassword).then((response) => {
       this.viewUtils.hideProgressBar();
-      this.order.orderSignature.push(response);
+
+      AgilitUtils.verifyProperty(response.signature, 'createdAtFormatted', DateHelper.formatDate(response.signature.createdAt));
+      
+      this.order.orderSignature.push(response.signature);
       this.viewUtils.showToast('Assinatura realizada com sucesso!');
     }).catch((error) => {
       this.viewUtils.hideProgressBar();

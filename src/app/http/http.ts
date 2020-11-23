@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response} from '@angular/http';
 import { timeout, map } from 'rxjs/operators';
+import { AgilitStorageTypes, AgilitStorageUtils } from '../utils/AgilitStorageUtils';
 
 @Injectable()
 export class HttpProvider {
@@ -19,7 +20,7 @@ export class HttpProvider {
     if (this.isOnlineBuild){      
       return 'http://0.tcp.ngrok.io:18528/api/v1/';
     } else {
-      return 'http://localhost:4000/api/v1/';
+      return 'http://192.168.0.16:4000/api/v1/';
     }    
   }
 
@@ -35,8 +36,7 @@ export class HttpProvider {
       this.token = null;
     }
     
-    headers.append('token', window.localStorage.getItem("token"));    
-
+    headers.append('token', AgilitStorageUtils.getData(AgilitStorageTypes.TOKEN));
     return headers;
   }
 
