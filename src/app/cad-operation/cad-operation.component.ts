@@ -24,6 +24,7 @@ export class CadOperationComponent implements OnInit {
   public orderEquipmentSelect : any;
 
   executedToggle : boolean = false;
+  isDisapproved  : boolean = false;
 
   constructor(private modalCtrl : ModalController, private restOrder : RestOrder, private viewUtils : ViewUtils, private modalController : ModalController) { 
     
@@ -32,6 +33,7 @@ export class CadOperationComponent implements OnInit {
   ngOnInit() {
     this.fieldsConfiguration();
     this.executedToggle = this.operationData.executed;
+    this.isDisapproved  = this.operationData.isDisapproved;
   }
 
   fieldsConfiguration(){
@@ -98,8 +100,9 @@ export class CadOperationComponent implements OnInit {
   }
 
   async confirmOperation(){        
-    this.operationData.orderEquipment.id = this.orderEquipID;
+    this.operationData.orderEquipment.id = this.orderEquipID  ;
     this.operationData.executed          = this.executedToggle;
+    this.operationData.isDisapproved     = this.isDisapproved ;
 
     if (this.operationMoviment == CadOperationTypes.EDIT){
       this.updateOperation();

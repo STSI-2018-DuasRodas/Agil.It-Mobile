@@ -31,7 +31,7 @@ export class AgilitActionUtils {
           return;
         }
         
-        await this.restOrder.orderAssignature(order.id, user.id).then(
+        await this.restOrder.orderAssignature(order.id, user.id, assignaturePassword).then(
           (response: any) => {
             if (AgilitUtils.isNullOrUndefined(response)){
               return;

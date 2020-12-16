@@ -35,9 +35,10 @@ export class RestOrder {
     return ProviderHelper.get(this.http);
   }
 
-  public orderAssignature(orderID, userID){
+  public orderAssignature(orderID, userID, userPassword){
     let obj = {
-      userId : userID
+      userId : userID,
+      password: userPassword
     }
 
     this.http.url = this.http.getBaseUrl() + this.restAction + '/' + orderID + '/' + this.restAssignature;
